@@ -1,0 +1,225 @@
+[
+    {
+        "id": "SSD_SERVICE_ID_sd_WXZiq2I8x631405c",
+        "type": "tab",
+        "createdDate": "2023-04-29T04:09:17.885Z",
+        "label": "User_Api",
+        "disabled": false,
+        "info": "",
+        "functionSeq": 0,
+        "generateNext": true,
+        "serviceName": "User_Api",
+        "relativeParentPath": "Service/User"
+    },
+    {
+        "id": "sd_ED0F60t0bIXdD0YV",
+        "type": "HttpIn",
+        "z": "SSD_SERVICE_ID_sd_WXZiq2I8x631405c",
+        "viewType": "server",
+        "nodeType": "start",
+        "name": "AddUser_HttpIn",
+        "path": "/user",
+        "uploadpath": "",
+        "summary": "Add User",
+        "description": "Add new User",
+        "method": "post",
+        "sequenceId": "",
+        "consumes": "",
+        "produces": "",
+        "filetype": "path",
+        "acceptFileUpload": false,
+        "useDataModel": false,
+        "dataModelIsArray": false,
+        "erd": "",
+        "erdName": "",
+        "entity": "",
+        "ref": "",
+        "editableListData": {
+            "responses": [],
+            "params": [
+                {
+                    "key": "User",
+                    "desc": "User details",
+                    "type": "body",
+                    "required": true,
+                    "rowId": "sd_IRq4UDqw5gyi1hWV",
+                    "valid": true
+                }
+            ],
+            "produces": [],
+            "consumes": [
+                {
+                    "key": "application/json",
+                    "rowId": "sd_obyy7A7MjDjhb6uv",
+                    "valid": true
+                }
+            ]
+        },
+        "inputs": 0,
+        "outputs": 1,
+        "validateRequestUsingSwaggerDocs": false,
+        "category": "HTTP",
+        "x": 165,
+        "y": 80,
+        "wires": [
+            [
+                "sd_WLxx3sc8A5KqgJIJ"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "uploadpath": {
+                "type": "str",
+                "value": "",
+                "nullable": "true",
+                "nullableValue": "",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "User_Api",
+        "functionName": "sd_ED0F60t0bIXdD0YV"
+    },
+    {
+        "id": "sd_WLxx3sc8A5KqgJIJ",
+        "type": "CallService",
+        "z": "SSD_SERVICE_ID_sd_WXZiq2I8x631405c",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "outputs": 1,
+        "isValidNode": true,
+        "noerr": 0,
+        "service": {
+            "id": "SSD_SERVICE_ID_sd_FeG0qZROkPmuLu7e",
+            "type": "tab",
+            "createdDate": "2023-04-29T03:50:38.841Z",
+            "label": "User_Service",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_nYzhCI9A8MSWdi84",
+            "flowName": "addUser_Start"
+        },
+        "inputVariables": [],
+        "bhVariables": [],
+        "outputMapping": [],
+        "callService": "./User_Service",
+        "startName": "addUser_Start",
+        "inputParams": [
+            "bh"
+        ],
+        "accept_bh": true,
+        "functionName": "sd_WLxx3sc8A5KqgJIJ",
+        "category": "General",
+        "x": 320,
+        "y": 80,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "User_Api",
+        "generated": true
+    },
+    {
+        "id": "sd_8PGnMcln7NqjVSas",
+        "type": "HttpIn",
+        "z": "SSD_SERVICE_ID_sd_WXZiq2I8x631405c",
+        "viewType": "server",
+        "nodeType": "start",
+        "name": "GetUser_HttpIn",
+        "path": "/user",
+        "uploadpath": "",
+        "summary": "Get User",
+        "description": "Fatch user document using id",
+        "method": "get",
+        "sequenceId": "",
+        "consumes": "",
+        "produces": "",
+        "filetype": "path",
+        "acceptFileUpload": false,
+        "useDataModel": false,
+        "dataModelIsArray": false,
+        "erd": "",
+        "erdName": "",
+        "entity": "",
+        "ref": "",
+        "editableListData": {
+            "responses": [],
+            "params": [],
+            "produces": [],
+            "consumes": []
+        },
+        "inputs": 0,
+        "outputs": 1,
+        "validateRequestUsingSwaggerDocs": false,
+        "category": "HTTP",
+        "x": 165,
+        "y": 220,
+        "wires": [
+            [
+                "sd_07Svj1HF42SezWbs"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "uploadpath": {
+                "type": "str",
+                "value": "",
+                "nullable": "true",
+                "nullableValue": "",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "User_Api",
+        "functionName": "sd_8PGnMcln7NqjVSas"
+    },
+    {
+        "id": "sd_07Svj1HF42SezWbs",
+        "type": "CallService",
+        "z": "SSD_SERVICE_ID_sd_WXZiq2I8x631405c",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "outputs": 1,
+        "isValidNode": true,
+        "noerr": 0,
+        "service": {
+            "id": "SSD_SERVICE_ID_sd_FeG0qZROkPmuLu7e",
+            "type": "tab",
+            "createdDate": "2023-04-29T03:50:38.841Z",
+            "label": "User_Service",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_UDBzxtYuhIyRMDmE",
+            "flowName": "getUser_start"
+        },
+        "inputVariables": [],
+        "bhVariables": [],
+        "outputMapping": [],
+        "callService": "./User_Service",
+        "startName": "getUser_start",
+        "inputParams": [
+            "bh"
+        ],
+        "accept_bh": true,
+        "functionName": "sd_07Svj1HF42SezWbs",
+        "category": "General",
+        "x": 320,
+        "y": 220,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "User_Api",
+        "generated": true
+    }
+]

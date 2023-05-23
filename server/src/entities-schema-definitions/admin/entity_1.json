@@ -1,0 +1,45 @@
+{
+    "name": "entity_1",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "description": "",
+    "type": "object",
+    "id": "_EN_3x39ao2y1a",
+    "y": 134,
+    "properties": {
+        "email": {
+            "name": "email",
+            "format": "",
+            "type": "string",
+            "description": "",
+            "default": "",
+            "__n__metadata__": {
+                "id": "_Att_visbo0l0rh",
+                "nullable": false,
+                "constraints": {}
+            }
+        },
+        "password": {
+            "name": "password",
+            "format": "",
+            "type": "string",
+            "description": "",
+            "default": "",
+            "__n__metadata__": {
+                "id": "_Att_r5uh6x03i2",
+                "subCategoryType": null,
+                "nullable": false
+            }
+        }
+    },
+    "required": [
+        "password"
+    ],
+    "value": "",
+    "x": 394,
+    "userList": {
+        "SSD_SERVICE_ID_sd_FRvfiH6V1AZoTDKz": [
+            "sd_WvTtcLmyz5vSco93",
+            "sd_YEE43TSIvTwb4Dml"
+        ]
+    }
+}

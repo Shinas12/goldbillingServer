@@ -1,0 +1,47 @@
+{
+    "name": "salesmanlogin",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "description": "",
+    "type": "object",
+    "id": "_EN_f7leu7hlyc",
+    "y": 56,
+    "properties": {
+        "email": {
+            "name": "email",
+            "format": "",
+            "type": "string",
+            "description": "",
+            "default": "",
+            "__n__metadata__": {
+                "id": "_Att_9yd8e236xj",
+                "nullable": false
+            }
+        },
+        "password": {
+            "name": "password",
+            "format": "",
+            "type": "string",
+            "description": "",
+            "default": "",
+            "__n__metadata__": {
+                "id": "_Att_yco8urpaz9",
+                "subCategoryType": null,
+                "nullable": false
+            }
+        }
+    },
+    "required": [
+        "password"
+    ],
+    "value": "",
+    "x": 781,
+    "userList": {
+        "SSD_SERVICE_ID_sd_qZQcYEnf1JwBZT4K": [
+            "sd_RU6mm5FfNmqBRRbb",
+            "sd_bAOsmsogPKRQEzE2"
+        ],
+        "SSD_SERVICE_ID_sd_FRvfiH6V1AZoTDKz": [
+            "sd_NRZEeQO57WTd1ewU"
+        ]
+    }
+}

@@ -1,0 +1,13 @@
+{
+    "displayName": "GoldBillingServer",
+    "appName": "goldbillingserver",
+    "description": "Apis",
+    "lastModified": "2023-04-27T09:32:27.740Z",
+    "imgSourcePath": "",
+    "version": "1.0.0",
+    "appType": "apiOnly",
+    "templateName": "blank",
+    "createDate": "2023-04-27T09:32:26.745Z",
+    "analyticsId": "9b583bb1-3843-b3f5-4dac-1547188aa21e",
+    "createdStudioVersion": "9.1.2"
+}

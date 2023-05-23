@@ -1,0 +1,424 @@
+[
+    {
+        "id": "SSD_SERVICE_ID_sd_rFjTuCN6ChFSAixy",
+        "type": "tab",
+        "createdDate": "2023-04-27T14:17:19.572Z",
+        "label": "Product_Api",
+        "disabled": false,
+        "info": "",
+        "functionSeq": 0,
+        "generateNext": true,
+        "serviceName": "Product_Api",
+        "relativeParentPath": "Service/product"
+    },
+    {
+        "id": "sd_0DIMsFYXIQFtuDzV",
+        "type": "HttpIn",
+        "z": "SSD_SERVICE_ID_sd_rFjTuCN6ChFSAixy",
+        "viewType": "server",
+        "nodeType": "start",
+        "name": "AddProduct",
+        "path": "/product",
+        "uploadpath": "",
+        "summary": "Add Product",
+        "description": "This Api is for add Product.",
+        "method": "post",
+        "sequenceId": "",
+        "consumes": "",
+        "produces": "",
+        "filetype": "path",
+        "acceptFileUpload": false,
+        "useDataModel": false,
+        "dataModelIsArray": false,
+        "erd": "",
+        "erdName": "",
+        "entity": "",
+        "ref": "",
+        "editableListData": {
+            "responses": [],
+            "params": [],
+            "produces": [],
+            "consumes": []
+        },
+        "inputs": 0,
+        "outputs": 1,
+        "validateRequestUsingSwaggerDocs": false,
+        "category": "HTTP",
+        "x": 160,
+        "y": 80,
+        "wires": [
+            [
+                "sd_m9utGfc3iHexvzkG"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "uploadpath": {
+                "type": "str",
+                "value": "",
+                "nullable": "true",
+                "nullableValue": "",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "Product_Api",
+        "functionName": "sd_0DIMsFYXIQFtuDzV"
+    },
+    {
+        "id": "sd_m9utGfc3iHexvzkG",
+        "type": "CallService",
+        "z": "SSD_SERVICE_ID_sd_rFjTuCN6ChFSAixy",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "AddProduct_call",
+        "outputs": 1,
+        "isValidNode": true,
+        "noerr": 0,
+        "service": {
+            "id": "SSD_SERVICE_ID_sd_NhyriMJXPMVob3jo",
+            "type": "tab",
+            "createdDate": "2023-04-27T14:17:35.347Z",
+            "label": "Product_Service",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_7CRGTCYHhXUEL41V",
+            "flowName": "addProduct_Start"
+        },
+        "inputVariables": [],
+        "bhVariables": [],
+        "outputMapping": [],
+        "callService": "./Product_Service",
+        "startName": "addProduct_Start",
+        "inputParams": [
+            "bh"
+        ],
+        "accept_bh": true,
+        "functionName": "addProduct_call",
+        "category": "General",
+        "x": 300,
+        "y": 80,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Product_Api",
+        "generated": true
+    },
+    {
+        "id": "sd_o6BZAvbeMZalJMCc",
+        "type": "HttpIn",
+        "z": "SSD_SERVICE_ID_sd_rFjTuCN6ChFSAixy",
+        "viewType": "server",
+        "nodeType": "start",
+        "name": "getProduct",
+        "path": "/product",
+        "uploadpath": "",
+        "summary": "Get Product",
+        "description": "This api is using for fatch product details using id",
+        "method": "get",
+        "sequenceId": "",
+        "consumes": "",
+        "produces": "",
+        "filetype": "path",
+        "acceptFileUpload": false,
+        "useDataModel": false,
+        "dataModelIsArray": false,
+        "erd": "",
+        "erdName": "",
+        "entity": "",
+        "ref": "",
+        "editableListData": {
+            "responses": [],
+            "params": [
+                {
+                    "key": "id",
+                    "desc": "document _id",
+                    "type": "query",
+                    "required": true,
+                    "rowId": "sd_CYkESQXkhiCiKBPL",
+                    "valid": true
+                }
+            ],
+            "produces": [],
+            "consumes": []
+        },
+        "inputs": 0,
+        "outputs": 1,
+        "validateRequestUsingSwaggerDocs": false,
+        "category": "HTTP",
+        "x": 165,
+        "y": 220,
+        "wires": [
+            [
+                "sd_ccpTaubKER2NhCmq"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "uploadpath": {
+                "type": "str",
+                "value": "",
+                "nullable": "true",
+                "nullableValue": "",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "Product_Api",
+        "functionName": "sd_o6BZAvbeMZalJMCc"
+    },
+    {
+        "id": "sd_ccpTaubKER2NhCmq",
+        "type": "CallService",
+        "z": "SSD_SERVICE_ID_sd_rFjTuCN6ChFSAixy",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "outputs": 1,
+        "isValidNode": true,
+        "noerr": 0,
+        "service": {
+            "id": "SSD_SERVICE_ID_sd_NhyriMJXPMVob3jo",
+            "type": "tab",
+            "createdDate": "2023-04-27T14:17:35.347Z",
+            "label": "Product_Service",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_eul4V8JXk5s1Mh7B",
+            "flowName": "getProduct_start"
+        },
+        "inputVariables": [],
+        "bhVariables": [],
+        "outputMapping": [],
+        "callService": "./Product_Service",
+        "startName": "getProduct_start",
+        "inputParams": [
+            "bh"
+        ],
+        "accept_bh": true,
+        "functionName": "sd_ccpTaubKER2NhCmq",
+        "category": "General",
+        "x": 320,
+        "y": 220,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Product_Api",
+        "generated": true
+    },
+    {
+        "id": "sd_FyslH4YgNvCzB0HH",
+        "type": "HttpIn",
+        "z": "SSD_SERVICE_ID_sd_rFjTuCN6ChFSAixy",
+        "viewType": "server",
+        "nodeType": "start",
+        "name": "productNameSearch_HttpIn",
+        "path": "/product/search",
+        "uploadpath": "",
+        "summary": "",
+        "description": "",
+        "method": "get",
+        "sequenceId": "",
+        "consumes": "",
+        "produces": "",
+        "filetype": "path",
+        "acceptFileUpload": false,
+        "useDataModel": false,
+        "dataModelIsArray": false,
+        "erd": "",
+        "erdName": "",
+        "entity": "",
+        "ref": "",
+        "editableListData": {
+            "responses": [],
+            "params": [
+                {
+                    "key": "name",
+                    "desc": "product Name",
+                    "type": "query",
+                    "required": true,
+                    "rowId": "sd_OO1MKu73bsE9fAt7",
+                    "valid": true
+                }
+            ],
+            "produces": [],
+            "consumes": []
+        },
+        "inputs": 0,
+        "outputs": 1,
+        "validateRequestUsingSwaggerDocs": false,
+        "category": "HTTP",
+        "x": 485,
+        "y": 80,
+        "wires": [
+            [
+                "sd_hdJ6towm0nJ7nBrp"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "uploadpath": {
+                "type": "str",
+                "value": "",
+                "nullable": "true",
+                "nullableValue": "",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "Product_Api",
+        "functionName": "sd_FyslH4YgNvCzB0HH"
+    },
+    {
+        "id": "sd_hdJ6towm0nJ7nBrp",
+        "type": "CallService",
+        "z": "SSD_SERVICE_ID_sd_rFjTuCN6ChFSAixy",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "productNameSearch_Call",
+        "outputs": 1,
+        "isValidNode": true,
+        "noerr": 0,
+        "service": {
+            "id": "SSD_SERVICE_ID_sd_NhyriMJXPMVob3jo",
+            "type": "tab",
+            "createdDate": "2023-04-27T14:17:35.347Z",
+            "label": "Product_Service",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_pSk5A5O392e6OUtX",
+            "flowName": "productNameSearch_Start"
+        },
+        "inputVariables": [],
+        "bhVariables": [],
+        "outputMapping": [],
+        "callService": "./Product_Service",
+        "startName": "productNameSearch_Start",
+        "inputParams": [
+            "bh"
+        ],
+        "accept_bh": true,
+        "functionName": "productNameSearch_Call",
+        "category": "General",
+        "x": 644,
+        "y": 80,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Product_Api",
+        "generated": true
+    },
+    {
+        "id": "sd_AARRXBzElNrx85Mc",
+        "type": "HttpIn",
+        "z": "SSD_SERVICE_ID_sd_rFjTuCN6ChFSAixy",
+        "viewType": "server",
+        "nodeType": "start",
+        "name": "allProduct_Httpin",
+        "path": "/product/all",
+        "uploadpath": "",
+        "summary": "",
+        "description": "",
+        "method": "get",
+        "sequenceId": "",
+        "consumes": "",
+        "produces": "",
+        "filetype": "path",
+        "acceptFileUpload": false,
+        "useDataModel": false,
+        "dataModelIsArray": false,
+        "erd": "",
+        "erdName": "",
+        "entity": "",
+        "ref": "",
+        "editableListData": {
+            "responses": [],
+            "params": [],
+            "produces": [],
+            "consumes": []
+        },
+        "inputs": 0,
+        "outputs": 1,
+        "validateRequestUsingSwaggerDocs": false,
+        "category": "HTTP",
+        "x": 485,
+        "y": 217,
+        "wires": [
+            [
+                "sd_eRi7j0PlEugZiM6z"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "uploadpath": {
+                "type": "str",
+                "value": "",
+                "nullable": "true",
+                "nullableValue": "",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "Product_Api",
+        "functionName": "sd_AARRXBzElNrx85Mc"
+    },
+    {
+        "id": "sd_eRi7j0PlEugZiM6z",
+        "type": "CallService",
+        "z": "SSD_SERVICE_ID_sd_rFjTuCN6ChFSAixy",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "AllProduct_Call",
+        "outputs": 1,
+        "isValidNode": true,
+        "noerr": 0,
+        "service": {
+            "id": "SSD_SERVICE_ID_sd_NhyriMJXPMVob3jo",
+            "type": "tab",
+            "createdDate": "2023-04-27T14:17:35.347Z",
+            "label": "Product_Service",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_EIYvBUrFxBrUrHUf",
+            "flowName": "allProduct_Start"
+        },
+        "inputVariables": [],
+        "bhVariables": [],
+        "outputMapping": [],
+        "callService": "./Product_Service",
+        "startName": "allProduct_Start",
+        "inputParams": [
+            "bh"
+        ],
+        "accept_bh": true,
+        "functionName": "allProduct_Call",
+        "category": "General",
+        "x": 645,
+        "y": 218,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Product_Api",
+        "generated": true
+    }
+]

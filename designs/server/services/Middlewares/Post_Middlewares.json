@@ -1,0 +1,90 @@
+[
+    {
+        "id": "SSD_SERVICE_ID_sd_OQYJSSTIEwN2nkED",
+        "type": "tab",
+        "createdDate": "2023-04-27T11:41:14.198Z",
+        "label": "Post_Middlewares",
+        "disabled": false,
+        "info": "",
+        "functionSeq": 0,
+        "generateNext": true,
+        "serviceName": "Post_Middlewares",
+        "relativeParentPath": "Middlewares"
+    },
+    {
+        "id": "sd_eva1cbamE2ymKj38",
+        "type": "Start",
+        "z": "SSD_SERVICE_ID_sd_OQYJSSTIEwN2nkED",
+        "viewType": "client-server",
+        "nodeType": "start",
+        "name": "HttpOut_Start",
+        "outputs": 1,
+        "inputVariables": [],
+        "localVariables": [],
+        "accept_bh": true,
+        "functionName": "httpOut_Start",
+        "category": "General",
+        "x": 145,
+        "y": 80,
+        "wires": [
+            [
+                "sd_bYJdvDf7twTpJdpI"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "Post_Middlewares"
+    },
+    {
+        "id": "sd_bYJdvDf7twTpJdpI",
+        "type": "HttpOut",
+        "z": "SSD_SERVICE_ID_sd_OQYJSSTIEwN2nkED",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "HttpOut",
+        "headers": {},
+        "responseBody": {
+            "type": "bh.local",
+            "value": "responces",
+            "ssd_typedInputField": true
+        },
+        "httpcode": {
+            "type": "bh.local",
+            "value": "responces.statusCode",
+            "ssd_typedInputField": true
+        },
+        "responseType": "obj",
+        "swaggerResponse": {},
+        "responseMapping": {
+            "status": "bh.local.responces.statusCode",
+            "obj": "bh.local.responces",
+            "send": "bh.local.responces"
+        },
+        "dataModelIsArray": false,
+        "cookies": [],
+        "inputs": 1,
+        "outputs": 0,
+        "erd": "",
+        "entity": "",
+        "ref": "",
+        "editableListData": {
+            "headers": [],
+            "produces": [],
+            "responses": []
+        },
+        "cookiesList": {},
+        "switchStates": {
+            "headers": "Map",
+            "cookies": "Map"
+        },
+        "functionName": "httpOut",
+        "category": "HTTP",
+        "x": 345,
+        "y": 80,
+        "wires": [],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Post_Middlewares",
+        "generated": true
+    }
+]

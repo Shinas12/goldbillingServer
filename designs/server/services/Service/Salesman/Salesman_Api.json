@@ -1,0 +1,112 @@
+[
+    {
+        "id": "SSD_SERVICE_ID_sd_JFRFGRFMZVItzach",
+        "type": "tab",
+        "createdDate": "2023-04-28T08:00:55.638Z",
+        "label": "Salesman_Api",
+        "disabled": false,
+        "info": "",
+        "functionSeq": 0,
+        "generateNext": true,
+        "serviceName": "Salesman_Api",
+        "relativeParentPath": "Service/Salesman"
+    },
+    {
+        "id": "sd_MntrkyaVCKrtBj2E",
+        "type": "CallService",
+        "z": "SSD_SERVICE_ID_sd_JFRFGRFMZVItzach",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "AddSalesman_Call",
+        "outputs": 1,
+        "isValidNode": true,
+        "noerr": 0,
+        "service": {
+            "id": "SSD_SERVICE_ID_sd_KssgBRdFQZcQsfFL",
+            "type": "tab",
+            "createdDate": "2023-04-28T08:01:21.904Z",
+            "label": "Salesman_Service",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_7xkOtcdYnAM7jsq7",
+            "flowName": "addSalesman_Start"
+        },
+        "inputVariables": [],
+        "bhVariables": [],
+        "outputMapping": [],
+        "callService": "./Salesman_Service",
+        "startName": "addSalesman_Start",
+        "inputParams": [
+            "bh"
+        ],
+        "accept_bh": true,
+        "functionName": "addSalesman_Call",
+        "category": "General",
+        "x": 265,
+        "y": 101,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Salesman_Api",
+        "generated": true
+    },
+    {
+        "id": "sd_PpgqJ6H62dDkRUF7",
+        "type": "HttpIn",
+        "z": "SSD_SERVICE_ID_sd_JFRFGRFMZVItzach",
+        "viewType": "server",
+        "nodeType": "start",
+        "name": "AddSalesman_HttpIn",
+        "path": "/Salesman",
+        "uploadpath": "",
+        "summary": "Api for Add AddSalesman",
+        "description": "This api uses for add user.",
+        "method": "post",
+        "sequenceId": "",
+        "consumes": "",
+        "produces": "",
+        "filetype": "path",
+        "acceptFileUpload": false,
+        "useDataModel": false,
+        "dataModelIsArray": false,
+        "erd": "",
+        "erdName": "",
+        "entity": "",
+        "ref": "",
+        "editableListData": {
+            "responses": [],
+            "params": [],
+            "produces": [],
+            "consumes": []
+        },
+        "inputs": 0,
+        "outputs": 1,
+        "validateRequestUsingSwaggerDocs": false,
+        "category": "HTTP",
+        "x": 80,
+        "y": 100,
+        "wires": [
+            [
+                "sd_MntrkyaVCKrtBj2E"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "uploadpath": {
+                "type": "str",
+                "value": "",
+                "nullable": "true",
+                "nullableValue": "",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "Salesman_Api",
+        "functionName": "sd_PpgqJ6H62dDkRUF7"
+    }
+]

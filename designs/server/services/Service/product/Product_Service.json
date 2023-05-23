@@ -1,0 +1,1046 @@
+[
+    {
+        "id": "SSD_SERVICE_ID_sd_NhyriMJXPMVob3jo",
+        "type": "tab",
+        "createdDate": "2023-04-27T14:17:35.347Z",
+        "label": "Product_Service",
+        "disabled": false,
+        "info": "",
+        "functionSeq": 0,
+        "generateNext": true,
+        "serviceName": "Product_Service",
+        "relativeParentPath": "Service/product"
+    },
+    {
+        "id": "sd_7CRGTCYHhXUEL41V",
+        "type": "Start",
+        "z": "SSD_SERVICE_ID_sd_NhyriMJXPMVob3jo",
+        "viewType": "client-server",
+        "nodeType": "start",
+        "name": "AddProduct_Start",
+        "outputs": 1,
+        "inputVariables": [],
+        "localVariables": [],
+        "accept_bh": true,
+        "functionName": "addProduct_Start",
+        "category": "General",
+        "x": 105,
+        "y": 60,
+        "wires": [
+            [
+                "sd_Yh6eKzRHGjwWyl1W",
+                "sd_NMhVbGJsi8QhC1oJ"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "Product_Service"
+    },
+    {
+        "id": "sd_PnUUxGHsHdeHdR46",
+        "type": "Mongodb",
+        "z": "SSD_SERVICE_ID_sd_NhyriMJXPMVob3jo",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "AddProduct_Mongodb",
+        "databaseConfig": "sd_rgjA4nOniJAL9Rgn",
+        "collection": "__ssd__env__process.env.PRODUCT_COLLECTION__ssd__env__end",
+        "options": "",
+        "resultMapping": "bh.local.result",
+        "operation": "insertOne",
+        "argumentArray": [
+            "document"
+        ],
+        "aggregate": "",
+        "operations": "",
+        "query": "bh",
+        "fieldOrSpec": "",
+        "filter": "",
+        "key": "",
+        "docId": "",
+        "indexName": "",
+        "replacement": "",
+        "update": "",
+        "xAxis": "",
+        "yAxis": "",
+        "indexes": "",
+        "docs": "",
+        "document": "bh.input.body",
+        "newName": "",
+        "doc": "",
+        "filePath": "",
+        "fileName": "",
+        "pipeline": "",
+        "functionName": "addProduct_Mongodb",
+        "category": "Storage",
+        "x": 365,
+        "y": 60,
+        "wires": [
+            [
+                "sd_ZtoA4FSTB4sLKKfS"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "collection": {
+                "type": "process.env",
+                "value": "PRODUCT_COLLECTION",
+                "constant": false
+            },
+            "options": {
+                "type": "bh",
+                "value": "",
+                "nullable": "true",
+                "constant": false
+            },
+            "resultMapping": {
+                "type": "bh.local",
+                "value": "result",
+                "constant": false
+            },
+            "query": {
+                "type": "bh",
+                "value": "",
+                "constant": false
+            },
+            "document": {
+                "type": "bh.input",
+                "value": "body",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Product_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_ZtoA4FSTB4sLKKfS",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_NhyriMJXPMVob3jo",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "AddProduct_Script",
+        "script": "\nbh.local.responces = {\n    statusCode: 200,\n    result: {\n        id: bh.local.result.insertedId\n    }\n}",
+        "functionName": "addProduct_Script",
+        "category": "Function",
+        "x": 545,
+        "y": 60,
+        "wires": [
+            [
+                "sd_QYRrOAtngBuJl79k"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Product_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_QYRrOAtngBuJl79k",
+        "type": "CallService",
+        "z": "SSD_SERVICE_ID_sd_NhyriMJXPMVob3jo",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "AddProduct_HttpOut_Callservice",
+        "outputs": 1,
+        "isValidNode": true,
+        "noerr": 0,
+        "service": {
+            "id": "SSD_SERVICE_ID_sd_OQYJSSTIEwN2nkED",
+            "type": "tab",
+            "createdDate": "2023-04-27T11:41:14.198Z",
+            "label": "Post_Middlewares",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_eva1cbamE2ymKj38",
+            "flowName": "httpOut_Start"
+        },
+        "inputVariables": [],
+        "bhVariables": [],
+        "outputMapping": [],
+        "callService": "../../Middlewares/Post_Middlewares",
+        "startName": "httpOut_Start",
+        "inputParams": [
+            "bh"
+        ],
+        "accept_bh": true,
+        "functionName": "addProduct_HttpOut_Callservice",
+        "category": "General",
+        "x": 725,
+        "y": 160,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Product_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_XTTH6x5QHcUGGMEa",
+        "type": "Catch",
+        "z": "SSD_SERVICE_ID_sd_NhyriMJXPMVob3jo",
+        "viewType": "common",
+        "nodeType": "start",
+        "name": "AddProduct_Catch",
+        "selectedNodes": "all-nodes",
+        "selectCatchType": "allnodes",
+        "masternodeList": "",
+        "ignoreList": [
+            "sd_KE6ocgzyWYMXyjTe",
+            "sd_QYRrOAtngBuJl79k"
+        ],
+        "functionName": "addProduct_Catch",
+        "category": "General",
+        "x": 385,
+        "y": 160,
+        "wires": [
+            [
+                "sd_KE6ocgzyWYMXyjTe"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "Product_Service"
+    },
+    {
+        "id": "sd_KE6ocgzyWYMXyjTe",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_NhyriMJXPMVob3jo",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "AddProduct_Catch_Script",
+        "script": "\nbh.local.responces = {\n    statusCode: 404,\n    message: bh.error.message\n}",
+        "functionName": "addProduct_Catch_Script",
+        "category": "Function",
+        "x": 545,
+        "y": 160,
+        "wires": [
+            [
+                "sd_QYRrOAtngBuJl79k"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Product_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_pd0A9nH566tjRqYq",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_NhyriMJXPMVob3jo",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "getproduct_query_script",
+        "script": "let ObjectID = require('mongodb').ObjectID\n\nif(bh.input.query?.id){\nbh.findquery = {\"_id\":ObjectID(bh.input.query)}\n}else{\n    throw Error(\"document id is not found Please provide a _id\")\n}\n",
+        "functionName": "getproduct_query_script",
+        "category": "Function",
+        "x": 245,
+        "y": 320,
+        "wires": [
+            [
+                "sd_C7JDb75KMY1KZtwp"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Product_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_C7JDb75KMY1KZtwp",
+        "type": "Mongodb",
+        "z": "SSD_SERVICE_ID_sd_NhyriMJXPMVob3jo",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "getproduct_Mongodb",
+        "databaseConfig": "sd_rgjA4nOniJAL9Rgn",
+        "collection": "__ssd__env__process.env.PRODUCT_COLLECTION__ssd__env__end",
+        "options": "",
+        "resultMapping": "bh.result",
+        "operation": "find",
+        "argumentArray": [
+            "query"
+        ],
+        "aggregate": "",
+        "operations": "",
+        "query": "bh.findquery",
+        "fieldOrSpec": "",
+        "filter": "",
+        "key": "",
+        "docId": "",
+        "indexName": "",
+        "replacement": "",
+        "update": "",
+        "xAxis": "",
+        "yAxis": "",
+        "indexes": "",
+        "docs": "",
+        "document": "",
+        "newName": "",
+        "doc": "",
+        "filePath": "",
+        "fileName": "",
+        "pipeline": "",
+        "functionName": "getproduct_Mongodb",
+        "category": "Storage",
+        "x": 385,
+        "y": 320,
+        "wires": [
+            [
+                "sd_yWb7eHCnNjp8mZUV"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "collection": {
+                "type": "process.env",
+                "value": "PRODUCT_COLLECTION",
+                "constant": false
+            },
+            "options": {
+                "type": "bh",
+                "value": "",
+                "nullable": "true",
+                "constant": false
+            },
+            "resultMapping": {
+                "type": "bh",
+                "value": "result",
+                "constant": false
+            },
+            "query": {
+                "type": "bh",
+                "value": "findquery",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Product_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_eul4V8JXk5s1Mh7B",
+        "type": "Start",
+        "z": "SSD_SERVICE_ID_sd_NhyriMJXPMVob3jo",
+        "viewType": "client-server",
+        "nodeType": "start",
+        "name": "getProduct_start",
+        "outputs": 1,
+        "inputVariables": [],
+        "localVariables": [],
+        "accept_bh": true,
+        "functionName": "getProduct_start",
+        "category": "General",
+        "x": 120,
+        "y": 320,
+        "wires": [
+            [
+                "sd_pd0A9nH566tjRqYq"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "Product_Service"
+    },
+    {
+        "id": "sd_yWb7eHCnNjp8mZUV",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_NhyriMJXPMVob3jo",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "getproduct_response_script",
+        "script": "if(bh.result.length === 0){\n\nbh.local.responces = {\n    statusCode:404 ,\n    message:\"This _id is not exist in database\"\n}\n\n}else{\n\nbh.local.responces = {\n    statusCode: 200,\n    product:bh.result[0]\n}\n}",
+        "functionName": "getproduct_response_script",
+        "category": "Function",
+        "x": 545,
+        "y": 320,
+        "wires": [
+            [
+                "sd_HRJAoE1RNohBeepr"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Product_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_HRJAoE1RNohBeepr",
+        "type": "CallService",
+        "z": "SSD_SERVICE_ID_sd_NhyriMJXPMVob3jo",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "GetProduct_HttpOut_Callservice",
+        "outputs": 1,
+        "isValidNode": true,
+        "noerr": 0,
+        "service": {
+            "id": "SSD_SERVICE_ID_sd_OQYJSSTIEwN2nkED",
+            "type": "tab",
+            "createdDate": "2023-04-27T11:41:14.198Z",
+            "label": "Post_Middlewares",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_eva1cbamE2ymKj38",
+            "flowName": "httpOut_Start"
+        },
+        "inputVariables": [],
+        "bhVariables": [],
+        "outputMapping": [],
+        "callService": "../../Middlewares/Post_Middlewares",
+        "startName": "httpOut_Start",
+        "inputParams": [
+            "bh"
+        ],
+        "accept_bh": true,
+        "functionName": "getProduct_HttpOut_Callservice",
+        "category": "General",
+        "x": 760,
+        "y": 380,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Product_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_I2qrYD1XG2KQSTJl",
+        "type": "Catch",
+        "z": "SSD_SERVICE_ID_sd_NhyriMJXPMVob3jo",
+        "viewType": "common",
+        "nodeType": "start",
+        "name": "getproduct_catch",
+        "selectedNodes": [
+            "sd_PnUUxGHsHdeHdR46"
+        ],
+        "selectCatchType": "selectednodes",
+        "masternodeList": "",
+        "ignoreList": "",
+        "functionName": "getproduct_catch",
+        "category": "General",
+        "x": 280,
+        "y": 440,
+        "wires": [
+            [
+                "sd_mIhZJ8AzqSoUtl5z"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "Product_Service"
+    },
+    {
+        "id": "sd_mIhZJ8AzqSoUtl5z",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_NhyriMJXPMVob3jo",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "getproduct_catch_script",
+        "script": "bh.local.responces = {\n    statusCode: 404,\n    message: bh.error.message\n}",
+        "functionName": "getproduct_catch_script",
+        "category": "Function",
+        "x": 465,
+        "y": 440,
+        "wires": [
+            [
+                "sd_HRJAoE1RNohBeepr"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Product_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_Yh6eKzRHGjwWyl1W",
+        "type": "validate",
+        "z": "SSD_SERVICE_ID_sd_NhyriMJXPMVob3jo",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "Product_Validation",
+        "erd": "_DM_ss0gqlaj8",
+        "entityId": "_EN_vwyalqhzqt",
+        "_UI_entityName": "entity_1",
+        "dbConfigId": "",
+        "validateObject": "bh.input.body",
+        "checkboxThrowError": true,
+        "resultMapping": "",
+        "functionName": "product_Validation",
+        "category": "Data Model",
+        "x": 225,
+        "y": 60,
+        "wires": [
+            [
+                "sd_PnUUxGHsHdeHdR46"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "validateObject": {
+                "type": "bh.input",
+                "value": "body",
+                "constant": false
+            },
+            "resultMapping": {
+                "type": "bh",
+                "value": "",
+                "nullable": "true",
+                "nullableValue": "",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {
+            "resultMapping": true
+        },
+        "generateNext": false,
+        "serviceName": "Product_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_pSk5A5O392e6OUtX",
+        "type": "Start",
+        "z": "SSD_SERVICE_ID_sd_NhyriMJXPMVob3jo",
+        "viewType": "client-server",
+        "nodeType": "start",
+        "name": "productNameSearch_Start",
+        "outputs": 1,
+        "inputVariables": [],
+        "localVariables": [],
+        "accept_bh": true,
+        "functionName": "productNameSearch_Start",
+        "category": "General",
+        "x": 85,
+        "y": 760,
+        "wires": [
+            [
+                "sd_xu3qaIx9GiQ5vT4o"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "Product_Service"
+    },
+    {
+        "id": "sd_xu3qaIx9GiQ5vT4o",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_NhyriMJXPMVob3jo",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "productNameSearch_Script",
+        "script": "console.log(bh.input.query);\nconsole.log(\"here\");\nif(bh.input.query?.name){\nbh.local.query={ name: new RegExp(bh.input.query.name, \"i\") }\n}else{\n    throw Error(\"document id is not found Please provide a _id\")\n}\n\n\n\n",
+        "functionName": "productNameSearch_Script",
+        "category": "Function",
+        "x": 245,
+        "y": 760,
+        "wires": [
+            [
+                "sd_WDqonnQtXDIc72Ta"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Product_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_WDqonnQtXDIc72Ta",
+        "type": "Mongodb",
+        "z": "SSD_SERVICE_ID_sd_NhyriMJXPMVob3jo",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "productNameSearch_Mongodb",
+        "databaseConfig": "sd_rgjA4nOniJAL9Rgn",
+        "collection": "__ssd__env__process.env.PRODUCT_COLLECTION__ssd__env__end",
+        "options": "",
+        "resultMapping": "bh.local.product",
+        "operation": "find",
+        "argumentArray": [
+            "query"
+        ],
+        "aggregate": "",
+        "operations": "",
+        "query": "bh.local.query",
+        "fieldOrSpec": "",
+        "filter": "",
+        "key": "",
+        "docId": "",
+        "indexName": "",
+        "replacement": "",
+        "update": "",
+        "xAxis": "",
+        "yAxis": "",
+        "indexes": "",
+        "docs": "",
+        "document": "",
+        "newName": "",
+        "doc": "",
+        "filePath": "",
+        "fileName": "",
+        "pipeline": "",
+        "functionName": "productNameSearch_Mongodb",
+        "category": "Storage",
+        "x": 425,
+        "y": 760,
+        "wires": [
+            [
+                "sd_4ddkxlA2KkvAMYW3"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "collection": {
+                "type": "process.env",
+                "value": "PRODUCT_COLLECTION",
+                "constant": false
+            },
+            "options": {
+                "type": "bh",
+                "value": "",
+                "nullable": "true",
+                "constant": false
+            },
+            "resultMapping": {
+                "type": "bh.local",
+                "value": "product",
+                "constant": false
+            },
+            "query": {
+                "type": "bh.local",
+                "value": "query",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Product_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_IARxb3HmHH2IOtk2",
+        "type": "Catch",
+        "z": "SSD_SERVICE_ID_sd_NhyriMJXPMVob3jo",
+        "viewType": "common",
+        "nodeType": "start",
+        "name": "productNameSearch_catch",
+        "selectedNodes": [
+            "sd_pSk5A5O392e6OUtX",
+            "sd_xu3qaIx9GiQ5vT4o",
+            "sd_WDqonnQtXDIc72Ta",
+            "sd_IZVusSWdFzcFlDCn",
+            "sd_h86vDSZ5OsYPeyMX",
+            "sd_4ddkxlA2KkvAMYW3"
+        ],
+        "selectCatchType": "selectednodes",
+        "masternodeList": "",
+        "ignoreList": "",
+        "functionName": "productNameSearch_catch",
+        "category": "General",
+        "x": 825,
+        "y": 760,
+        "wires": [
+            [
+                "sd_g3BGNaLB7AxUPZmb"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "Product_Service"
+    },
+    {
+        "id": "sd_g3BGNaLB7AxUPZmb",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_NhyriMJXPMVob3jo",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "productNameSearch_catch_script",
+        "script": "bh.local.responces = {\n    statusCode: 404,\n    message: bh.error.message\n}",
+        "functionName": "productNameSearch_catch_script",
+        "category": "Function",
+        "x": 1025,
+        "y": 760,
+        "wires": [
+            [
+                "sd_JrAJXVWqjYn6KBAF"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Product_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_IZVusSWdFzcFlDCn",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_NhyriMJXPMVob3jo",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "productNameSearch_respons_script",
+        "script": "console.log(bh.local.product.length)\nbh.local.responces = {\n    statusCode: 200,\n    result: {\n        product: bh.local.product\n    }\n\n}",
+        "functionName": "productNameSearch_respons_script",
+        "category": "Function",
+        "x": 885,
+        "y": 640,
+        "wires": [
+            [
+                "sd_JrAJXVWqjYn6KBAF"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Product_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_JrAJXVWqjYn6KBAF",
+        "type": "CallService",
+        "z": "SSD_SERVICE_ID_sd_NhyriMJXPMVob3jo",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "productNameSearch_HttpOut_Callservice",
+        "outputs": 1,
+        "isValidNode": true,
+        "noerr": 0,
+        "service": {
+            "id": "SSD_SERVICE_ID_sd_OQYJSSTIEwN2nkED",
+            "type": "tab",
+            "createdDate": "2023-04-27T11:41:14.198Z",
+            "label": "Post_Middlewares",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_eva1cbamE2ymKj38",
+            "flowName": "httpOut_Start"
+        },
+        "inputVariables": [],
+        "bhVariables": [],
+        "outputMapping": [],
+        "callService": "../../Middlewares/Post_Middlewares",
+        "startName": "httpOut_Start",
+        "inputParams": [
+            "bh"
+        ],
+        "accept_bh": true,
+        "functionName": "productNameSearch_HttpOut_Callservice",
+        "category": "General",
+        "x": 1285,
+        "y": 760,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Product_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_h86vDSZ5OsYPeyMX",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_NhyriMJXPMVob3jo",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "Noproduct_respons_script",
+        "script": "\nbh.local.responces = {\n    statusCode: 200,\n    result: {\n        message: \"No product Found.\"\n    }\n}",
+        "functionName": "noproduct_respons_script",
+        "category": "Function",
+        "x": 905,
+        "y": 860,
+        "wires": [
+            [
+                "sd_JrAJXVWqjYn6KBAF"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Product_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_4ddkxlA2KkvAMYW3",
+        "type": "Switch",
+        "z": "SSD_SERVICE_ID_sd_NhyriMJXPMVob3jo",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "productFound_switch",
+        "property": "product.length",
+        "propertyType": "bh.local",
+        "propertyGv": "bh.local.product.length",
+        "rules": [
+            {
+                "t": "neq",
+                "v": "0",
+                "vt": "num",
+                "gv": "0"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "functionName": "productFound_switch",
+        "category": "Function",
+        "x": 585,
+        "y": 760,
+        "wires": [
+            [
+                "sd_IZVusSWdFzcFlDCn"
+            ],
+            [
+                "sd_h86vDSZ5OsYPeyMX"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Product_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_EIYvBUrFxBrUrHUf",
+        "type": "Start",
+        "z": "SSD_SERVICE_ID_sd_NhyriMJXPMVob3jo",
+        "viewType": "client-server",
+        "nodeType": "start",
+        "name": "AllProduct_Start",
+        "outputs": 1,
+        "inputVariables": [],
+        "localVariables": [],
+        "accept_bh": true,
+        "functionName": "allProduct_Start",
+        "category": "General",
+        "x": 80,
+        "y": 1040,
+        "wires": [
+            [
+                "sd_4tA848R9aVSVV5HW"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "Product_Service"
+    },
+    {
+        "id": "sd_eOBkJqhXSYiIi1eH",
+        "type": "CallService",
+        "z": "SSD_SERVICE_ID_sd_NhyriMJXPMVob3jo",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "AllProduct_HttpOut_Callservice",
+        "outputs": 1,
+        "isValidNode": true,
+        "noerr": 0,
+        "service": {
+            "id": "SSD_SERVICE_ID_sd_OQYJSSTIEwN2nkED",
+            "type": "tab",
+            "createdDate": "2023-04-27T11:41:14.198Z",
+            "label": "Post_Middlewares",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_eva1cbamE2ymKj38",
+            "flowName": "httpOut_Start"
+        },
+        "inputVariables": [],
+        "bhVariables": [],
+        "outputMapping": [],
+        "callService": "../../Middlewares/Post_Middlewares",
+        "startName": "httpOut_Start",
+        "inputParams": [
+            "bh"
+        ],
+        "accept_bh": true,
+        "functionName": "allProduct_HttpOut_Callservice",
+        "category": "General",
+        "x": 785,
+        "y": 1100,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Product_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_orLTuyO5U3n7avK9",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_NhyriMJXPMVob3jo",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "AllProduct_response_script",
+        "script": "\n\nbh.local.responces = {\n    statusCode: 200,\n    result: {\n        product: bh.local.product\n\n    }\n}\n",
+        "functionName": "allProduct_response_script",
+        "category": "Function",
+        "x": 525,
+        "y": 1040,
+        "wires": [
+            [
+                "sd_eOBkJqhXSYiIi1eH"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Product_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_1fyzzr6WIoVYWRwb",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_NhyriMJXPMVob3jo",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "AllProduct_catch_script",
+        "script": "bh.local.responces = {\n    statusCode: 404,\n    message: bh.error.message\n}",
+        "functionName": "allProduct_catch_script",
+        "category": "Function",
+        "x": 525,
+        "y": 1160,
+        "wires": [
+            [
+                "sd_eOBkJqhXSYiIi1eH"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Product_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_4tA848R9aVSVV5HW",
+        "type": "Mongodb",
+        "z": "SSD_SERVICE_ID_sd_NhyriMJXPMVob3jo",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "AllProduct_Mongodb",
+        "databaseConfig": "sd_rgjA4nOniJAL9Rgn",
+        "collection": "__ssd__env__process.env.PRODUCT_COLLECTION__ssd__env__end",
+        "options": "",
+        "resultMapping": "bh.local.product",
+        "operation": "find",
+        "argumentArray": [
+            "query"
+        ],
+        "aggregate": "",
+        "operations": "",
+        "query": "bh.local.query",
+        "fieldOrSpec": "",
+        "filter": "",
+        "key": "",
+        "docId": "",
+        "indexName": "",
+        "replacement": "",
+        "update": "",
+        "xAxis": "",
+        "yAxis": "",
+        "indexes": "",
+        "docs": "",
+        "document": "",
+        "newName": "",
+        "doc": "",
+        "filePath": "",
+        "fileName": "",
+        "pipeline": "",
+        "functionName": "allProduct_Mongodb",
+        "category": "Storage",
+        "x": 303,
+        "y": 1040,
+        "wires": [
+            [
+                "sd_orLTuyO5U3n7avK9"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "collection": {
+                "type": "process.env",
+                "value": "PRODUCT_COLLECTION",
+                "constant": false
+            },
+            "options": {
+                "type": "bh",
+                "value": "",
+                "nullable": "true",
+                "constant": false
+            },
+            "resultMapping": {
+                "type": "bh.local",
+                "value": "product",
+                "constant": false
+            },
+            "query": {
+                "type": "bh.local",
+                "value": "query",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Product_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_ZqKR0BZsxZk5KMJ5",
+        "type": "Catch",
+        "z": "SSD_SERVICE_ID_sd_NhyriMJXPMVob3jo",
+        "viewType": "common",
+        "nodeType": "start",
+        "name": "AllProduct_catch",
+        "selectedNodes": [
+            "sd_EIYvBUrFxBrUrHUf",
+            "sd_orLTuyO5U3n7avK9",
+            "sd_4tA848R9aVSVV5HW"
+        ],
+        "selectCatchType": "selectednodes",
+        "masternodeList": "",
+        "ignoreList": "",
+        "functionName": "allProduct_catch",
+        "category": "General",
+        "x": 305,
+        "y": 1160,
+        "wires": [
+            [
+                "sd_1fyzzr6WIoVYWRwb"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "Product_Service"
+    },
+    {
+        "id": "sd_NMhVbGJsi8QhC1oJ",
+        "type": "ServerLog",
+        "z": "SSD_SERVICE_ID_sd_NhyriMJXPMVob3jo",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "",
+        "outputs": 0,
+        "logObject": "bh.input.body.image",
+        "logLevel": "info",
+        "functionName": "sd_NMhVbGJsi8QhC1oJ",
+        "category": "General",
+        "x": 180,
+        "y": 140,
+        "wires": [],
+        "__ssdTypeInputs__": {
+            "logObject": {
+                "type": "bh.input",
+                "value": "body.image",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Product_Service",
+        "generated": true
+    }
+]

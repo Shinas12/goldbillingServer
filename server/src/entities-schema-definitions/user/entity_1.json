@@ -1,0 +1,84 @@
+{
+    "name": "entity_1",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "description": "",
+    "type": "object",
+    "id": "_EN_yimskkiw6s",
+    "y": 50,
+    "properties": {
+        "name": {
+            "name": "name",
+            "format": "",
+            "type": "string",
+            "description": "",
+            "default": "",
+            "__n__metadata__": {
+                "id": "_Att_rnf6sbzz2q",
+                "subCategoryType": null,
+                "nullable": true
+            }
+        },
+        "email": {
+            "name": "email",
+            "format": "",
+            "type": "string",
+            "description": "",
+            "default": "",
+            "__n__metadata__": {
+                "id": "_Att_tymfmo4ceo",
+                "subCategoryType": null,
+                "nullable": false
+            }
+        },
+        "phone": {
+            "name": "phone",
+            "format": "",
+            "type": "number",
+            "description": "",
+            "default": "",
+            "__n__metadata__": {
+                "id": "_Att_4pmkziqz3v",
+                "subCategoryType": null,
+                "nullable": false,
+                "constraints": {}
+            }
+        },
+        "address": {
+            "name": "address",
+            "format": "",
+            "type": "string",
+            "description": "",
+            "default": "",
+            "__n__metadata__": {
+                "id": "_Att_lm28tqvtap",
+                "subCategoryType": null,
+                "nullable": false
+            }
+        },
+        "city": {
+            "name": "city",
+            "format": "",
+            "type": "string",
+            "description": "",
+            "default": "",
+            "__n__metadata__": {
+                "id": "_Att_0f4lt1okle",
+                "subCategoryType": null,
+                "nullable": false
+            }
+        }
+    },
+    "required": [
+        "email",
+        "phone",
+        "address",
+        "city"
+    ],
+    "value": "",
+    "x": 402,
+    "userList": {
+        "SSD_SERVICE_ID_sd_FeG0qZROkPmuLu7e": [
+            "sd_3psYpGaVvHwJUmsS"
+        ]
+    }
+}

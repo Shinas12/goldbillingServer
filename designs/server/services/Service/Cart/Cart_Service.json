@@ -1,0 +1,2106 @@
+[
+    {
+        "id": "SSD_SERVICE_ID_sd_v6D77QnOgMYLpYCV",
+        "type": "tab",
+        "createdDate": "2023-04-28T10:20:52.956Z",
+        "label": "Cart_Service",
+        "disabled": false,
+        "info": "",
+        "functionSeq": 0,
+        "generateNext": true,
+        "serviceName": "Cart_Service",
+        "relativeParentPath": "Service/Cart"
+    },
+    {
+        "id": "sd_JRStBohH0W9USyQr",
+        "type": "Start",
+        "z": "SSD_SERVICE_ID_sd_v6D77QnOgMYLpYCV",
+        "viewType": "client-server",
+        "nodeType": "start",
+        "name": "AddCart_Start",
+        "outputs": 1,
+        "inputVariables": [],
+        "localVariables": [],
+        "accept_bh": true,
+        "functionName": "addCart_Start",
+        "category": "General",
+        "x": 65,
+        "y": 200,
+        "wires": [
+            [
+                "sd_SoGCjMyFhTf18ir1"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "Cart_Service"
+    },
+    {
+        "id": "sd_0BRXKNUBtoBqgIr9",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_v6D77QnOgMYLpYCV",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "AddCart_Script",
+        "script": "const { ObjectId } = require('mongodb')\nbh.local.salesmanId = bh.local.session.data.userId\nconsole.log(bh.local.salesmanId)\n\nbh.local.proObj = {\n    iteam: ObjectId(bh.input.body.proid),\n    quantity: 1\n}\nbh.local.findCartQuery = { user: ObjectId(bh.local.clientId) }\n\n",
+        "functionName": "addCart_Script",
+        "category": "Function",
+        "x": 205,
+        "y": 200,
+        "wires": [
+            [
+                "sd_CARPa8XZKgTloI8k"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Cart_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_CARPa8XZKgTloI8k",
+        "type": "Mongodb",
+        "z": "SSD_SERVICE_ID_sd_v6D77QnOgMYLpYCV",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "AddCart_findCart",
+        "databaseConfig": "sd_rgjA4nOniJAL9Rgn",
+        "collection": "__ssd__env__process.env.CART_COLLECTION__ssd__env__end",
+        "options": "",
+        "resultMapping": "bh.local.userCart",
+        "operation": "find",
+        "argumentArray": [
+            "query"
+        ],
+        "aggregate": "",
+        "operations": "",
+        "query": "bh.local.findCartQuery",
+        "fieldOrSpec": "",
+        "filter": "",
+        "key": "",
+        "docId": "",
+        "indexName": "",
+        "replacement": "",
+        "update": "",
+        "xAxis": "",
+        "yAxis": "",
+        "indexes": "",
+        "docs": "",
+        "document": "",
+        "newName": "",
+        "doc": "",
+        "filePath": "",
+        "fileName": "",
+        "pipeline": "",
+        "functionName": "addCart_findCart",
+        "category": "Storage",
+        "x": 305,
+        "y": 200,
+        "wires": [
+            [
+                "sd_eSnPuS6N5E09PJdD"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "collection": {
+                "type": "process.env",
+                "value": "CART_COLLECTION",
+                "constant": false
+            },
+            "options": {
+                "type": "bh",
+                "value": "",
+                "nullable": "true",
+                "constant": false
+            },
+            "resultMapping": {
+                "type": "bh.local",
+                "value": "userCart",
+                "constant": false
+            },
+            "query": {
+                "type": "bh.local",
+                "value": "findCartQuery",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Cart_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_6OwIyTrhscNIxAAn",
+        "type": "CallService",
+        "z": "SSD_SERVICE_ID_sd_v6D77QnOgMYLpYCV",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "AddCart_Call",
+        "outputs": 1,
+        "isValidNode": true,
+        "noerr": 0,
+        "service": {
+            "id": "SSD_SERVICE_ID_sd_OQYJSSTIEwN2nkED",
+            "type": "tab",
+            "createdDate": "2023-04-27T11:41:14.198Z",
+            "label": "Post_Middlewares",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_eva1cbamE2ymKj38",
+            "flowName": "httpOut_Start"
+        },
+        "inputVariables": [],
+        "bhVariables": [],
+        "outputMapping": [],
+        "callService": "../../Middlewares/Post_Middlewares",
+        "startName": "httpOut_Start",
+        "inputParams": [
+            "bh"
+        ],
+        "accept_bh": true,
+        "functionName": "addCart_Call",
+        "category": "General",
+        "x": 1225,
+        "y": 180,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Cart_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_cq0PtY0ambkelKjC",
+        "type": "Catch",
+        "z": "SSD_SERVICE_ID_sd_v6D77QnOgMYLpYCV",
+        "viewType": "common",
+        "nodeType": "start",
+        "name": "AddCartCatch",
+        "selectedNodes": [
+            "sd_JRStBohH0W9USyQr",
+            "sd_0BRXKNUBtoBqgIr9",
+            "sd_CARPa8XZKgTloI8k",
+            "sd_eSnPuS6N5E09PJdD",
+            "sd_eoXYAyf4A47aeDqE",
+            "sd_Wrvq0rS0nHRCJl2J",
+            "sd_PNz9lrCMNDzyHzJO",
+            "sd_ZVjGKPrQmjLKA4Ik",
+            "sd_0TQcqbtVgju4M1CU",
+            "sd_O5kv9WL5YmDze38D",
+            "sd_rLyJH5ggXqXVEoz8",
+            "sd_InVmt6fXK8a3idZL",
+            "sd_khJicHkcuHrmi2V1",
+            "sd_8x5TleqeHpGKbj4D"
+        ],
+        "selectCatchType": "selectednodes",
+        "masternodeList": "",
+        "ignoreList": [
+            "sd_Osvmcj6lmzoYHpve",
+            "sd_6OwIyTrhscNIxAAn"
+        ],
+        "functionName": "addCartCatch",
+        "category": "General",
+        "x": 705,
+        "y": 420,
+        "wires": [
+            [
+                "sd_Osvmcj6lmzoYHpve"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "Cart_Service"
+    },
+    {
+        "id": "sd_Osvmcj6lmzoYHpve",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_v6D77QnOgMYLpYCV",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "AddCart_ChScript",
+        "script": "\nbh.local.responces = {\n    statusCode: 404,\n    message: bh.error.message\n}",
+        "functionName": "addCart_ChScript",
+        "category": "Function",
+        "x": 850,
+        "y": 420,
+        "wires": [
+            [
+                "sd_6OwIyTrhscNIxAAn"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Cart_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_eSnPuS6N5E09PJdD",
+        "type": "Switch",
+        "z": "SSD_SERVICE_ID_sd_v6D77QnOgMYLpYCV",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "AddCart_UserCart_Exist",
+        "property": "userCart.length",
+        "propertyType": "bh.local",
+        "propertyGv": "bh.local.userCart.length",
+        "rules": [
+            {
+                "t": "sne",
+                "v": "0",
+                "vt": "num",
+                "gv": "0"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "functionName": "addCart_UserCart_Exist",
+        "category": "Function",
+        "x": 465,
+        "y": 200,
+        "wires": [
+            [
+                "sd_ZVjGKPrQmjLKA4Ik"
+            ],
+            [
+                "sd_eoXYAyf4A47aeDqE"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Cart_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_eoXYAyf4A47aeDqE",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_v6D77QnOgMYLpYCV",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "AddToCart_Script",
+        "script": "const { ObjectId } = require('mongodb')\nbh.local.cartObjQuery = {\n    user: ObjectId(bh.local.clientId),\n    productId: [bh.local.proObj],\n    salesManId:ObjectId(bh.local.salesmanId)\n}",
+        "functionName": "addToCart_Script",
+        "category": "Function",
+        "x": 545,
+        "y": 280,
+        "wires": [
+            [
+                "sd_Wrvq0rS0nHRCJl2J"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Cart_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_Wrvq0rS0nHRCJl2J",
+        "type": "Mongodb",
+        "z": "SSD_SERVICE_ID_sd_v6D77QnOgMYLpYCV",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "AddToCart_Mongo",
+        "databaseConfig": "sd_rgjA4nOniJAL9Rgn",
+        "collection": "__ssd__env__process.env.CART_COLLECTION__ssd__env__end",
+        "options": "",
+        "resultMapping": "bh.local.result",
+        "operation": "insertOne",
+        "argumentArray": [
+            "document"
+        ],
+        "aggregate": "",
+        "operations": "",
+        "query": "bh.local.cartObjQuery",
+        "fieldOrSpec": "",
+        "filter": "",
+        "key": "",
+        "docId": "",
+        "indexName": "",
+        "replacement": "",
+        "update": "",
+        "xAxis": "",
+        "yAxis": "",
+        "indexes": "",
+        "docs": "",
+        "document": "bh.local.cartObjQuery",
+        "newName": "",
+        "doc": "",
+        "filePath": "",
+        "fileName": "",
+        "pipeline": "",
+        "functionName": "addToCart_Mongo",
+        "category": "Storage",
+        "x": 685,
+        "y": 280,
+        "wires": [
+            [
+                "sd_PNz9lrCMNDzyHzJO"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "collection": {
+                "type": "process.env",
+                "value": "CART_COLLECTION",
+                "constant": false
+            },
+            "options": {
+                "type": "bh",
+                "value": "",
+                "nullable": "true",
+                "constant": false
+            },
+            "resultMapping": {
+                "type": "bh.local",
+                "value": "result",
+                "constant": false
+            },
+            "query": {
+                "type": "bh.local",
+                "value": "cartObjQuery",
+                "constant": false
+            },
+            "document": {
+                "type": "bh.local",
+                "value": "cartObjQuery",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Cart_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_PNz9lrCMNDzyHzJO",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_v6D77QnOgMYLpYCV",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "AddToCart_Response_Script",
+        "script": "\nbh.local.responces = {\n    statusCode: 200,\n    result: {\n        message:\"Product added successfuly.\",\n        id: bh.local.result.insertedId\n    }\n}",
+        "functionName": "addToCart_Response_Script",
+        "category": "Function",
+        "x": 825,
+        "y": 280,
+        "wires": [
+            [
+                "sd_6OwIyTrhscNIxAAn"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Cart_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_ZVjGKPrQmjLKA4Ik",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_v6D77QnOgMYLpYCV",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "proExt_Script",
+        "script": "bh.local.proExt = bh.local.userCart[0].productId.findIndex(product => product.iteam == bh.input.body.proid)\n\n\n",
+        "functionName": "proExt_Script",
+        "category": "Function",
+        "x": 545,
+        "y": 120,
+        "wires": [
+            [
+                "sd_0TQcqbtVgju4M1CU"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Cart_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_0TQcqbtVgju4M1CU",
+        "type": "Switch",
+        "z": "SSD_SERVICE_ID_sd_v6D77QnOgMYLpYCV",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "proExt_Check",
+        "property": "proExt",
+        "propertyType": "bh.local",
+        "propertyGv": "bh.local.proExt",
+        "rules": [
+            {
+                "t": "sne",
+                "v": "-1",
+                "vt": "num",
+                "gv": "-1"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "functionName": "proExt_Check",
+        "category": "Function",
+        "x": 665,
+        "y": 120,
+        "wires": [
+            [
+                "sd_O5kv9WL5YmDze38D"
+            ],
+            [
+                "sd_khJicHkcuHrmi2V1"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Cart_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_uxc00M1b8kXePV1z",
+        "type": "Mongodb",
+        "z": "SSD_SERVICE_ID_sd_v6D77QnOgMYLpYCV",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "UpdatePro_Mongo",
+        "databaseConfig": "sd_rgjA4nOniJAL9Rgn",
+        "collection": "__ssd__env__process.env.CART_COLLECTION__ssd__env__end",
+        "options": "",
+        "resultMapping": "bh.local.result",
+        "operation": "updateOne",
+        "argumentArray": [
+            "filter",
+            "update"
+        ],
+        "aggregate": "",
+        "operations": "",
+        "query": "bh.local.cartObjQuery",
+        "fieldOrSpec": "",
+        "filter": "bh.local.quentFiltter",
+        "key": "",
+        "docId": "",
+        "indexName": "",
+        "replacement": "",
+        "update": "bh.local.quentUpdateQuery",
+        "xAxis": "",
+        "yAxis": "",
+        "indexes": "",
+        "docs": "",
+        "document": "bh.local.cartObjQuery",
+        "newName": "",
+        "doc": "",
+        "filePath": "",
+        "fileName": "",
+        "pipeline": "",
+        "functionName": "updatePro_Mongo",
+        "category": "Storage",
+        "x": 865,
+        "y": 40,
+        "wires": [
+            [
+                "sd_rLyJH5ggXqXVEoz8"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "collection": {
+                "type": "process.env",
+                "value": "CART_COLLECTION",
+                "constant": false
+            },
+            "options": {
+                "type": "bh",
+                "value": "",
+                "nullable": "true",
+                "constant": false
+            },
+            "resultMapping": {
+                "type": "bh.local",
+                "value": "result",
+                "constant": false
+            },
+            "query": {
+                "type": "bh.local",
+                "value": "cartObjQuery",
+                "constant": false
+            },
+            "document": {
+                "type": "bh.local",
+                "value": "cartObjQuery",
+                "constant": false
+            },
+            "filter": {
+                "type": "bh.local",
+                "value": "quentFiltter",
+                "constant": false
+            },
+            "update": {
+                "type": "bh.local",
+                "value": "quentUpdateQuery",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Cart_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_O5kv9WL5YmDze38D",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_v6D77QnOgMYLpYCV",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "UpdatePro_Script",
+        "script": "const { ObjectId } = require('mongodb')\n// console.log(bh.input.body.userId)\n// console.log('here')\nbh.local.quentUpdateQuery = {\n    $inc: { 'productId.$.quantity': 1 }\n}\nbh.local.quentFiltter = { user: ObjectId( bh.local.clientId), 'productId.iteam': ObjectId(bh.input.body.proid) }\n",
+        "functionName": "updatePro_Script",
+        "category": "Function",
+        "x": 745,
+        "y": 40,
+        "wires": [
+            [
+                "sd_uxc00M1b8kXePV1z"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Cart_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_rLyJH5ggXqXVEoz8",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_v6D77QnOgMYLpYCV",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "UpdatePro_Response",
+        "script": "\nbh.local.responces = {\n    statusCode: 200,\n    result: {\n        message:\"Product added successfuly.\",\n        id: bh.local.result.insertedId\n    }\n}",
+        "functionName": "updatePro_Response",
+        "category": "Function",
+        "x": 985,
+        "y": 40,
+        "wires": [
+            [
+                "sd_6OwIyTrhscNIxAAn"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Cart_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_InVmt6fXK8a3idZL",
+        "type": "Mongodb",
+        "z": "SSD_SERVICE_ID_sd_v6D77QnOgMYLpYCV",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "addPro_Mongo",
+        "databaseConfig": "sd_rgjA4nOniJAL9Rgn",
+        "collection": "__ssd__env__process.env.CART_COLLECTION__ssd__env__end",
+        "options": "",
+        "resultMapping": "bh.local.result",
+        "operation": "updateOne",
+        "argumentArray": [
+            "filter",
+            "update"
+        ],
+        "aggregate": "",
+        "operations": "",
+        "query": "bh.local.cartObjQuery",
+        "fieldOrSpec": "",
+        "filter": "bh.local.quentFiltter",
+        "key": "",
+        "docId": "",
+        "indexName": "",
+        "replacement": "",
+        "update": "bh.local.quentUpdateQuery",
+        "xAxis": "",
+        "yAxis": "",
+        "indexes": "",
+        "docs": "",
+        "document": "bh.local.cartObjQuery",
+        "newName": "",
+        "doc": "",
+        "filePath": "",
+        "fileName": "",
+        "pipeline": "",
+        "functionName": "addPro_Mongo",
+        "category": "Storage",
+        "x": 845,
+        "y": 180,
+        "wires": [
+            [
+                "sd_8x5TleqeHpGKbj4D"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "collection": {
+                "type": "process.env",
+                "value": "CART_COLLECTION",
+                "constant": false
+            },
+            "options": {
+                "type": "bh",
+                "value": "",
+                "nullable": "true",
+                "constant": false
+            },
+            "resultMapping": {
+                "type": "bh.local",
+                "value": "result",
+                "constant": false
+            },
+            "query": {
+                "type": "bh.local",
+                "value": "cartObjQuery",
+                "constant": false
+            },
+            "document": {
+                "type": "bh.local",
+                "value": "cartObjQuery",
+                "constant": false
+            },
+            "filter": {
+                "type": "bh.local",
+                "value": "quentFiltter",
+                "constant": false
+            },
+            "update": {
+                "type": "bh.local",
+                "value": "quentUpdateQuery",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Cart_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_khJicHkcuHrmi2V1",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_v6D77QnOgMYLpYCV",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "addPro_Script",
+        "script": "const { ObjectId } = require('mongodb')\nbh.local.quentUpdateQuery = {\n\n    $push: { productId: bh.local.proObj }\n\n}\n\nbh.local.quentFiltter = { user: ObjectId( bh.local.clientId) }\n",
+        "functionName": "addPro_Script",
+        "category": "Function",
+        "x": 745,
+        "y": 180,
+        "wires": [
+            [
+                "sd_InVmt6fXK8a3idZL"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Cart_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_8x5TleqeHpGKbj4D",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_v6D77QnOgMYLpYCV",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "addPro_Response",
+        "script": "\nbh.local.responces = {\n    statusCode: 200,\n    result: {\n        message:\"Product added successfuly.\",\n        id: bh.local.result.insertedId\n    }\n}",
+        "functionName": "addPro_Response",
+        "category": "Function",
+        "x": 945,
+        "y": 180,
+        "wires": [
+            [
+                "sd_6OwIyTrhscNIxAAn"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Cart_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_JXf9ip5F3hDbpQPW",
+        "type": "Start",
+        "z": "SSD_SERVICE_ID_sd_v6D77QnOgMYLpYCV",
+        "viewType": "client-server",
+        "nodeType": "start",
+        "name": "getCartDetails_Start",
+        "outputs": 1,
+        "inputVariables": [],
+        "localVariables": [],
+        "accept_bh": true,
+        "functionName": "getCartDetails_Start",
+        "category": "General",
+        "x": 65,
+        "y": 620,
+        "wires": [
+            [
+                "sd_vOvdLnWSVm30nkVe"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "Cart_Service"
+    },
+    {
+        "id": "sd_ji7lBpKQAzd9rtUB",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_v6D77QnOgMYLpYCV",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "getCartDetails_Script",
+        "script": "\nconst { ObjectId } = require('mongodb')\nif (bh.local.session.data.clientId) {\n    bh.local.pipleline = [\n        {\n            $match: { user: ObjectId(bh.local.session.data.clientId) }\n\n        },\n\n        {\n            $unwind: '$productId'\n        }, {\n            $project: {\n                iteam: '$productId.iteam',\n                quantity: '$productId.quantity'\n            }\n        },\n        {\n            //to join anothtre table fields to current table\n            $lookup: {\n                from: process.env.PRODUCT_COLLECTION,\n                localField: 'iteam',\n                foreignField: '_id',\n                as: 'product'\n            }\n        }, {\n            $project: {\n                iteam: 1, quantity: 1, product: { $arrayElemAt: ['$product', 0] }\n                //arrayElemAt userd to convert array to object\n            }\n        }\n\n    ]\n}\nelse {\n    throw Error(\"document id is not found Please provide a _id\")\n}",
+        "functionName": "getCartDetails_Script",
+        "category": "Function",
+        "x": 285,
+        "y": 620,
+        "wires": [
+            [
+                "sd_l9UA0Gydj65uH1Cz"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Cart_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_l9UA0Gydj65uH1Cz",
+        "type": "Mongodb",
+        "z": "SSD_SERVICE_ID_sd_v6D77QnOgMYLpYCV",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "getCartDetails_Mongo",
+        "databaseConfig": "sd_rgjA4nOniJAL9Rgn",
+        "collection": "__ssd__env__process.env.CART_COLLECTION__ssd__env__end",
+        "options": "",
+        "resultMapping": "bh.local.cartDetails",
+        "operation": "aggregate",
+        "argumentArray": [
+            "aggregate"
+        ],
+        "aggregate": "bh.local.pipleline",
+        "operations": "",
+        "query": "bh.local.findCartQuery",
+        "fieldOrSpec": "",
+        "filter": "",
+        "key": "",
+        "docId": "",
+        "indexName": "",
+        "replacement": "",
+        "update": "",
+        "xAxis": "",
+        "yAxis": "",
+        "indexes": "",
+        "docs": "",
+        "document": "",
+        "newName": "",
+        "doc": "",
+        "filePath": "",
+        "fileName": "",
+        "pipeline": "",
+        "functionName": "getCartDetails_Mongo",
+        "category": "Storage",
+        "x": 425,
+        "y": 620,
+        "wires": [
+            [
+                "sd_89OoHZU2zxwwB4xX"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "collection": {
+                "type": "process.env",
+                "value": "CART_COLLECTION",
+                "constant": false
+            },
+            "options": {
+                "type": "bh",
+                "value": "",
+                "nullable": "true",
+                "constant": false
+            },
+            "resultMapping": {
+                "type": "bh.local",
+                "value": "cartDetails",
+                "constant": false
+            },
+            "query": {
+                "type": "bh.local",
+                "value": "findCartQuery",
+                "constant": false
+            },
+            "aggregate": {
+                "type": "bh.local",
+                "value": "pipleline",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Cart_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_2nXimFk0AVOPOys4",
+        "type": "CallService",
+        "z": "SSD_SERVICE_ID_sd_v6D77QnOgMYLpYCV",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "outputs": 1,
+        "isValidNode": true,
+        "noerr": 0,
+        "service": {
+            "id": "SSD_SERVICE_ID_sd_OQYJSSTIEwN2nkED",
+            "type": "tab",
+            "createdDate": "2023-04-27T11:41:14.198Z",
+            "label": "Post_Middlewares",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_eva1cbamE2ymKj38",
+            "flowName": "httpOut_Start"
+        },
+        "inputVariables": [],
+        "bhVariables": [],
+        "outputMapping": [],
+        "callService": "../../Middlewares/Post_Middlewares",
+        "startName": "httpOut_Start",
+        "inputParams": [
+            "bh"
+        ],
+        "accept_bh": true,
+        "functionName": "sd_2nXimFk0AVOPOys4",
+        "category": "General",
+        "x": 740,
+        "y": 620,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Cart_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_UghLiLF0aaxHpRzW",
+        "type": "Catch",
+        "z": "SSD_SERVICE_ID_sd_v6D77QnOgMYLpYCV",
+        "viewType": "common",
+        "nodeType": "start",
+        "name": "getCartDetails_Catch",
+        "selectedNodes": [
+            "sd_JXf9ip5F3hDbpQPW",
+            "sd_ji7lBpKQAzd9rtUB",
+            "sd_l9UA0Gydj65uH1Cz",
+            "sd_iGBavQgvQSQYMSuU"
+        ],
+        "selectCatchType": "selectednodes",
+        "masternodeList": "",
+        "ignoreList": "",
+        "functionName": "getCartDetails_Catch",
+        "category": "General",
+        "x": 340,
+        "y": 760,
+        "wires": [
+            [
+                "sd_0Qkx4FpiJS7gjhuI"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "Cart_Service"
+    },
+    {
+        "id": "sd_0Qkx4FpiJS7gjhuI",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_v6D77QnOgMYLpYCV",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "getCartDetails_ChScript",
+        "script": "\nbh.local.responces = {\n    statusCode: 404,\n    message: bh.error.message\n}",
+        "functionName": "getCartDetails_ChScript",
+        "category": "Function",
+        "x": 505,
+        "y": 760,
+        "wires": [
+            [
+                "sd_2nXimFk0AVOPOys4"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Cart_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_89OoHZU2zxwwB4xX",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_v6D77QnOgMYLpYCV",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "getCartDetails_Response",
+        "script": "\nbh.local.responces = {\n    statusCode: 200,\n    result:  bh.local.cartDetails\n    \n}",
+        "functionName": "getCartDetails_Response",
+        "category": "Function",
+        "x": 565,
+        "y": 620,
+        "wires": [
+            [
+                "sd_2nXimFk0AVOPOys4"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Cart_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_E1Mcx7jBs98jMUAP",
+        "type": "Start",
+        "z": "SSD_SERVICE_ID_sd_v6D77QnOgMYLpYCV",
+        "viewType": "client-server",
+        "nodeType": "start",
+        "name": "getTotal_Start",
+        "outputs": 1,
+        "inputVariables": [],
+        "localVariables": [],
+        "accept_bh": true,
+        "functionName": "getTotal_Start",
+        "category": "General",
+        "x": 85,
+        "y": 940,
+        "wires": [
+            [
+                "sd_8MPvyEbFwO4kBR5v"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "Cart_Service"
+    },
+    {
+        "id": "sd_w70IDx7EMzhCeScn",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_v6D77QnOgMYLpYCV",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "getTotal_Script",
+        "script": "\nconst { ObjectId } = require('mongodb')\nbh.local.pipleline = [\n    {\n        $match: { user: ObjectId(bh.local.session.data.clientId) }\n\n    },\n\n    {\n        $unwind: '$productId'\n    }, {\n        $project: {\n            iteam: '$productId.iteam',\n            quantity: '$productId.quantity'\n        }\n    },\n    {\n        //to join anothtre table fields to current table\n        $lookup: {\n            from: process.env.PRODUCT_COLLECTION,\n            localField: 'iteam',\n            foreignField: '_id',\n            as: 'product'\n        }\n    }, {\n        $project: {\n            iteam: 1, quantity: 1, product: { $arrayElemAt: ['$product', 0] }\n            //arrayElemAt userd to convert array to object\n        }\n    },\n    {\n        $group: {\n            _id: null,\n            total: { $sum: { $multiply: ['$quantity', '$product.price'] } }\n            //arrayElemAt userd to convert array to object\n        }\n    }\n\n]",
+        "functionName": "getTotal_Script",
+        "category": "Function",
+        "x": 325,
+        "y": 940,
+        "wires": [
+            [
+                "sd_4r4YfpJN7Nwm2Yr6"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Cart_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_4r4YfpJN7Nwm2Yr6",
+        "type": "Mongodb",
+        "z": "SSD_SERVICE_ID_sd_v6D77QnOgMYLpYCV",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "getTotal_Mongo",
+        "databaseConfig": "sd_rgjA4nOniJAL9Rgn",
+        "collection": "__ssd__env__process.env.CART_COLLECTION__ssd__env__end",
+        "options": "",
+        "resultMapping": "bh.local.cartDetails",
+        "operation": "aggregate",
+        "argumentArray": [
+            "aggregate"
+        ],
+        "aggregate": "bh.local.pipleline",
+        "operations": "",
+        "query": "bh.local.findCartQuery",
+        "fieldOrSpec": "",
+        "filter": "",
+        "key": "",
+        "docId": "",
+        "indexName": "",
+        "replacement": "",
+        "update": "",
+        "xAxis": "",
+        "yAxis": "",
+        "indexes": "",
+        "docs": "",
+        "document": "",
+        "newName": "",
+        "doc": "",
+        "filePath": "",
+        "fileName": "",
+        "pipeline": "",
+        "functionName": "getTotal_Mongo",
+        "category": "Storage",
+        "x": 445,
+        "y": 940,
+        "wires": [
+            [
+                "sd_xkdk0oMya5jxeIjm"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "collection": {
+                "type": "process.env",
+                "value": "CART_COLLECTION",
+                "constant": false
+            },
+            "options": {
+                "type": "bh",
+                "value": "",
+                "nullable": "true",
+                "constant": false
+            },
+            "resultMapping": {
+                "type": "bh.local",
+                "value": "cartDetails",
+                "constant": false
+            },
+            "query": {
+                "type": "bh.local",
+                "value": "findCartQuery",
+                "constant": false
+            },
+            "aggregate": {
+                "type": "bh.local",
+                "value": "pipleline",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Cart_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_ZaFdxC52DQjVhKWg",
+        "type": "CallService",
+        "z": "SSD_SERVICE_ID_sd_v6D77QnOgMYLpYCV",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "getTotal_CallOut",
+        "outputs": 1,
+        "isValidNode": true,
+        "noerr": 0,
+        "service": {
+            "id": "SSD_SERVICE_ID_sd_OQYJSSTIEwN2nkED",
+            "type": "tab",
+            "createdDate": "2023-04-27T11:41:14.198Z",
+            "label": "Post_Middlewares",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_eva1cbamE2ymKj38",
+            "flowName": "httpOut_Start"
+        },
+        "inputVariables": [],
+        "bhVariables": [],
+        "outputMapping": [],
+        "callService": "../../Middlewares/Post_Middlewares",
+        "startName": "httpOut_Start",
+        "inputParams": [
+            "bh"
+        ],
+        "accept_bh": true,
+        "functionName": "getTotal_CallOut",
+        "category": "General",
+        "x": 760,
+        "y": 940,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Cart_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_Lvl8kHvSNTvYfU9x",
+        "type": "Catch",
+        "z": "SSD_SERVICE_ID_sd_v6D77QnOgMYLpYCV",
+        "viewType": "common",
+        "nodeType": "start",
+        "name": "getTotal_Catch",
+        "selectedNodes": [
+            "sd_E1Mcx7jBs98jMUAP",
+            "sd_w70IDx7EMzhCeScn",
+            "sd_4r4YfpJN7Nwm2Yr6",
+            "sd_xkdk0oMya5jxeIjm"
+        ],
+        "selectCatchType": "selectednodes",
+        "masternodeList": "",
+        "ignoreList": "",
+        "functionName": "getTotal_Catch",
+        "category": "General",
+        "x": 360,
+        "y": 1080,
+        "wires": [
+            [
+                "sd_lpEVer5Sd0pIKkNB"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "Cart_Service"
+    },
+    {
+        "id": "sd_lpEVer5Sd0pIKkNB",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_v6D77QnOgMYLpYCV",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "getTotal_ChScript",
+        "script": "\nbh.local.responces = {\n    statusCode: 404,\n    message: bh.error.message\n}",
+        "functionName": "getTotal_ChScript",
+        "category": "Function",
+        "x": 525,
+        "y": 1080,
+        "wires": [
+            [
+                "sd_ZaFdxC52DQjVhKWg"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Cart_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_xkdk0oMya5jxeIjm",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_v6D77QnOgMYLpYCV",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "getTotal_Response",
+        "script": "\nbh.local.responces = {\n    statusCode: 200,\n    result:  bh.local.cartDetails\n    \n}",
+        "functionName": "getTotal_Response",
+        "category": "Function",
+        "x": 585,
+        "y": 940,
+        "wires": [
+            [
+                "sd_ZaFdxC52DQjVhKWg"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Cart_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_r7IilBkGPIxYzgRu",
+        "type": "Start",
+        "z": "SSD_SERVICE_ID_sd_v6D77QnOgMYLpYCV",
+        "viewType": "client-server",
+        "nodeType": "start",
+        "name": "CartChangeQunty_Start",
+        "outputs": 1,
+        "inputVariables": [],
+        "localVariables": [],
+        "accept_bh": true,
+        "functionName": "cartChangeQunty_Start",
+        "category": "General",
+        "x": 85,
+        "y": 1380,
+        "wires": [
+            [
+                "sd_3geNxbeBWTa2an33"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "Cart_Service"
+    },
+    {
+        "id": "sd_tKPn2Te4r2Sk5tnm",
+        "type": "Switch",
+        "z": "SSD_SERVICE_ID_sd_v6D77QnOgMYLpYCV",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "CartChangeQunty_Switch",
+        "property": "delecting",
+        "propertyType": "bh.local",
+        "propertyGv": "bh.local.delecting",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "functionName": "cartChangeQunty_Switch",
+        "category": "Function",
+        "x": 405,
+        "y": 1380,
+        "wires": [
+            [
+                "sd_ctDTkX5x4evpNnjE"
+            ],
+            [
+                "sd_4GKWsFWgModG9TE4"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Cart_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_3geNxbeBWTa2an33",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_v6D77QnOgMYLpYCV",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "Condtion_Script",
+        "script": "bh.local.delecting = false;\nif (bh.input.body.count == -1 && bh.input.body.quantity == 1) {\n    bh.local.delecting = true;\n}",
+        "functionName": "condtion_Script",
+        "category": "Function",
+        "x": 245,
+        "y": 1380,
+        "wires": [
+            [
+                "sd_tKPn2Te4r2Sk5tnm"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Cart_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_ctDTkX5x4evpNnjE",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_v6D77QnOgMYLpYCV",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "delecting_Script",
+        "script": "const { ObjectId } = require('mongodb')\nconsole.log(\"delecting\")\nbh.local.quentUpdateQuery = {\n    //delecting that array object\n    $pull: { productId: { iteam: ObjectId(bh.input.body.productId) } }\n}\nbh.local.quentFiltter = { _id: ObjectId(bh.input.body.CartId) }",
+        "functionName": "delecting_Script",
+        "category": "Function",
+        "x": 505,
+        "y": 1500,
+        "wires": [
+            [
+                "sd_id2H7eWv2QZcWL76"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Cart_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_4GKWsFWgModG9TE4",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_v6D77QnOgMYLpYCV",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "Updation_Script",
+        "script": "const { ObjectId } = require('mongodb')\nconsole.log(\"qun update\")\nbh.local.quentUpdateQuery = {\n    $inc: { 'productId.$.quantity': bh.input.body.count }\n}\nbh.local.quentFiltter = { _id: ObjectId(bh.input.body.CartId), 'productId.iteam': ObjectId(bh.input.body.productId) }",
+        "functionName": "updation_Script",
+        "category": "Function",
+        "x": 505,
+        "y": 1280,
+        "wires": [
+            [
+                "sd_4P0yrumQM66yB6Fl"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Cart_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_id2H7eWv2QZcWL76",
+        "type": "Mongodb",
+        "z": "SSD_SERVICE_ID_sd_v6D77QnOgMYLpYCV",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "Qunty_Delete_Mongo",
+        "databaseConfig": "sd_rgjA4nOniJAL9Rgn",
+        "collection": "__ssd__env__process.env.CART_COLLECTION__ssd__env__end",
+        "options": "",
+        "resultMapping": "bh.local.result",
+        "operation": "updateOne",
+        "argumentArray": [
+            "filter",
+            "update"
+        ],
+        "aggregate": "",
+        "operations": "",
+        "query": "bh.local.cartObjQuery",
+        "fieldOrSpec": "",
+        "filter": "bh.local.quentFiltter",
+        "key": "",
+        "docId": "",
+        "indexName": "",
+        "replacement": "",
+        "update": "bh.local.quentUpdateQuery",
+        "xAxis": "",
+        "yAxis": "",
+        "indexes": "",
+        "docs": "",
+        "document": "bh.local.cartObjQuery",
+        "newName": "",
+        "doc": "",
+        "filePath": "",
+        "fileName": "",
+        "pipeline": "",
+        "functionName": "qunty_Delete_Mongo",
+        "category": "Storage",
+        "x": 645,
+        "y": 1500,
+        "wires": [
+            [
+                "sd_R7aMYfIoUPoReaOO"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "collection": {
+                "type": "process.env",
+                "value": "CART_COLLECTION",
+                "constant": false
+            },
+            "options": {
+                "type": "bh",
+                "value": "",
+                "nullable": "true",
+                "constant": false
+            },
+            "resultMapping": {
+                "type": "bh.local",
+                "value": "result",
+                "constant": false
+            },
+            "query": {
+                "type": "bh.local",
+                "value": "cartObjQuery",
+                "constant": false
+            },
+            "document": {
+                "type": "bh.local",
+                "value": "cartObjQuery",
+                "constant": false
+            },
+            "filter": {
+                "type": "bh.local",
+                "value": "quentFiltter",
+                "constant": false
+            },
+            "update": {
+                "type": "bh.local",
+                "value": "quentUpdateQuery",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Cart_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_4P0yrumQM66yB6Fl",
+        "type": "Mongodb",
+        "z": "SSD_SERVICE_ID_sd_v6D77QnOgMYLpYCV",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "CartChangeQuntY_Mongo",
+        "databaseConfig": "sd_rgjA4nOniJAL9Rgn",
+        "collection": "__ssd__env__process.env.CART_COLLECTION__ssd__env__end",
+        "options": "",
+        "resultMapping": "bh.local.result",
+        "operation": "updateOne",
+        "argumentArray": [
+            "filter",
+            "update"
+        ],
+        "aggregate": "",
+        "operations": "",
+        "query": "bh.local.cartObjQuery",
+        "fieldOrSpec": "",
+        "filter": "bh.local.quentFiltter",
+        "key": "",
+        "docId": "",
+        "indexName": "",
+        "replacement": "",
+        "update": "bh.local.quentUpdateQuery",
+        "xAxis": "",
+        "yAxis": "",
+        "indexes": "",
+        "docs": "",
+        "document": "bh.local.cartObjQuery",
+        "newName": "",
+        "doc": "",
+        "filePath": "",
+        "fileName": "",
+        "pipeline": "",
+        "functionName": "cartChangeQuntY_Mongo",
+        "category": "Storage",
+        "x": 645,
+        "y": 1280,
+        "wires": [
+            [
+                "sd_ge5VDPTYxHpO4U6H"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "collection": {
+                "type": "process.env",
+                "value": "CART_COLLECTION",
+                "constant": false
+            },
+            "options": {
+                "type": "bh",
+                "value": "",
+                "nullable": "true",
+                "constant": false
+            },
+            "resultMapping": {
+                "type": "bh.local",
+                "value": "result",
+                "constant": false
+            },
+            "query": {
+                "type": "bh.local",
+                "value": "cartObjQuery",
+                "constant": false
+            },
+            "document": {
+                "type": "bh.local",
+                "value": "cartObjQuery",
+                "constant": false
+            },
+            "filter": {
+                "type": "bh.local",
+                "value": "quentFiltter",
+                "constant": false
+            },
+            "update": {
+                "type": "bh.local",
+                "value": "quentUpdateQuery",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Cart_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_R7aMYfIoUPoReaOO",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_v6D77QnOgMYLpYCV",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "Delete_Response",
+        "script": "\nbh.local.responces = {\n    statusCode: 200,\n    result: {\n        message:\"Product removed.\",\n       \n    }\n}",
+        "functionName": "delete_Response",
+        "category": "Function",
+        "x": 805,
+        "y": 1500,
+        "wires": [
+            [
+                "sd_aoTkT7MZ8fzqzlXN"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Cart_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_ge5VDPTYxHpO4U6H",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_v6D77QnOgMYLpYCV",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "update_Response",
+        "script": "\nbh.local.responces = {\n    statusCode: 200,\n    result: {\n        message:\"Product qunty updated.\",\n       \n    }\n}",
+        "functionName": "update_Response",
+        "category": "Function",
+        "x": 805,
+        "y": 1280,
+        "wires": [
+            [
+                "sd_aoTkT7MZ8fzqzlXN"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Cart_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_aoTkT7MZ8fzqzlXN",
+        "type": "CallService",
+        "z": "SSD_SERVICE_ID_sd_v6D77QnOgMYLpYCV",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "CartChangeQunty_CallOut",
+        "outputs": 1,
+        "isValidNode": true,
+        "noerr": 0,
+        "service": {
+            "id": "SSD_SERVICE_ID_sd_OQYJSSTIEwN2nkED",
+            "type": "tab",
+            "createdDate": "2023-04-27T11:41:14.198Z",
+            "label": "Post_Middlewares",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_eva1cbamE2ymKj38",
+            "flowName": "httpOut_Start"
+        },
+        "inputVariables": [],
+        "bhVariables": [],
+        "outputMapping": [],
+        "callService": "../../Middlewares/Post_Middlewares",
+        "startName": "httpOut_Start",
+        "inputParams": [
+            "bh"
+        ],
+        "accept_bh": true,
+        "functionName": "cartChangeQunty_CallOut",
+        "category": "General",
+        "x": 925,
+        "y": 1380,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Cart_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_ZPxyPzMwUMhV8eN3",
+        "type": "Catch",
+        "z": "SSD_SERVICE_ID_sd_v6D77QnOgMYLpYCV",
+        "viewType": "common",
+        "nodeType": "start",
+        "name": "CartChangeQunty_Catch",
+        "selectedNodes": [
+            "sd_r7IilBkGPIxYzgRu",
+            "sd_tKPn2Te4r2Sk5tnm",
+            "sd_3geNxbeBWTa2an33",
+            "sd_ctDTkX5x4evpNnjE",
+            "sd_4GKWsFWgModG9TE4",
+            "sd_id2H7eWv2QZcWL76",
+            "sd_4P0yrumQM66yB6Fl",
+            "sd_R7aMYfIoUPoReaOO",
+            "sd_ge5VDPTYxHpO4U6H"
+        ],
+        "selectCatchType": "selectednodes",
+        "masternodeList": "",
+        "ignoreList": "",
+        "functionName": "cartChangeQunty_Catch",
+        "category": "General",
+        "x": 565,
+        "y": 1380,
+        "wires": [
+            [
+                "sd_D1JRCR6L6PUPcNHf"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "Cart_Service"
+    },
+    {
+        "id": "sd_D1JRCR6L6PUPcNHf",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_v6D77QnOgMYLpYCV",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "CartChangeQunty_ChScript",
+        "script": "\nbh.local.responces = {\n    statusCode: 404,\n    message: bh.error.message\n}",
+        "functionName": "cartChangeQunty_ChScript",
+        "category": "Function",
+        "x": 745,
+        "y": 1380,
+        "wires": [
+            [
+                "sd_aoTkT7MZ8fzqzlXN"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Cart_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_vOZ7s4pYUC6S6w6q",
+        "type": "Start",
+        "z": "SSD_SERVICE_ID_sd_v6D77QnOgMYLpYCV",
+        "viewType": "client-server",
+        "nodeType": "start",
+        "name": "removeCart_Start",
+        "outputs": 1,
+        "inputVariables": [],
+        "localVariables": [],
+        "accept_bh": true,
+        "functionName": "removeCart_Start",
+        "category": "General",
+        "x": 145,
+        "y": 1900,
+        "wires": [
+            [
+                "sd_gZ14wFy97JjGggZl"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "Cart_Service"
+    },
+    {
+        "id": "sd_rakfHK4EDPLhgaRF",
+        "type": "Mongodb",
+        "z": "SSD_SERVICE_ID_sd_v6D77QnOgMYLpYCV",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "removeCart_Mongo",
+        "databaseConfig": "sd_rgjA4nOniJAL9Rgn",
+        "collection": "__ssd__env__process.env.CART_COLLECTION__ssd__env__end",
+        "options": "",
+        "resultMapping": "bh.local.result",
+        "operation": "updateOne",
+        "argumentArray": [
+            "filter",
+            "update"
+        ],
+        "aggregate": "",
+        "operations": "",
+        "query": "bh.local.cartObjQuery",
+        "fieldOrSpec": "",
+        "filter": "bh.local.quentFiltter",
+        "key": "",
+        "docId": "",
+        "indexName": "",
+        "replacement": "",
+        "update": "bh.local.quentUpdateQuery",
+        "xAxis": "",
+        "yAxis": "",
+        "indexes": "",
+        "docs": "",
+        "document": "bh.local.cartObjQuery",
+        "newName": "",
+        "doc": "",
+        "filePath": "",
+        "fileName": "",
+        "pipeline": "",
+        "functionName": "removeCart_Mongo",
+        "category": "Storage",
+        "x": 450,
+        "y": 1900,
+        "wires": [
+            [
+                "sd_fyk3U0PtRkFjeKGz"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "collection": {
+                "type": "process.env",
+                "value": "CART_COLLECTION",
+                "constant": false
+            },
+            "options": {
+                "type": "bh",
+                "value": "",
+                "nullable": "true",
+                "constant": false
+            },
+            "resultMapping": {
+                "type": "bh.local",
+                "value": "result",
+                "constant": false
+            },
+            "query": {
+                "type": "bh.local",
+                "value": "cartObjQuery",
+                "constant": false
+            },
+            "document": {
+                "type": "bh.local",
+                "value": "cartObjQuery",
+                "constant": false
+            },
+            "filter": {
+                "type": "bh.local",
+                "value": "quentFiltter",
+                "constant": false
+            },
+            "update": {
+                "type": "bh.local",
+                "value": "quentUpdateQuery",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Cart_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_gZ14wFy97JjGggZl",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_v6D77QnOgMYLpYCV",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "removeCart_Script",
+        "script": "const { ObjectId } = require('mongodb')\n\nbh.local.quentUpdateQuery = {\n    //delecting that array object\n    $pull: { productId: { iteam: ObjectId(bh.input.body.productid) } }\n}\n\nbh.local.quentFiltter = { _id: ObjectId(bh.input.body.cartid) }",
+        "functionName": "removeCart_Script",
+        "category": "Function",
+        "x": 290,
+        "y": 1900,
+        "wires": [
+            [
+                "sd_rakfHK4EDPLhgaRF"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Cart_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_fyk3U0PtRkFjeKGz",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_v6D77QnOgMYLpYCV",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "removeCart_Response",
+        "script": "\nbh.local.responces = {\n    statusCode: 200,\n    result: {\n        message:\"Product removed from cart.\",\n       \n    }\n}",
+        "functionName": "removeCart_Response",
+        "category": "Function",
+        "x": 630,
+        "y": 1900,
+        "wires": [
+            [
+                "sd_nao3O0Tw3yhL37jf"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Cart_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_Kanx90kGxhQYhBCc",
+        "type": "Catch",
+        "z": "SSD_SERVICE_ID_sd_v6D77QnOgMYLpYCV",
+        "viewType": "common",
+        "nodeType": "start",
+        "name": "removeCart_Catch",
+        "selectedNodes": [
+            "sd_r7IilBkGPIxYzgRu",
+            "sd_tKPn2Te4r2Sk5tnm",
+            "sd_3geNxbeBWTa2an33",
+            "sd_ctDTkX5x4evpNnjE",
+            "sd_4GKWsFWgModG9TE4",
+            "sd_vOZ7s4pYUC6S6w6q",
+            "sd_rakfHK4EDPLhgaRF",
+            "sd_gZ14wFy97JjGggZl",
+            "sd_fyk3U0PtRkFjeKGz"
+        ],
+        "selectCatchType": "selectednodes",
+        "masternodeList": "",
+        "ignoreList": "",
+        "functionName": "removeCart_Catch",
+        "category": "General",
+        "x": 385,
+        "y": 1760,
+        "wires": [
+            [
+                "sd_Ox8pOswqATFaQ9Pp"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "Cart_Service"
+    },
+    {
+        "id": "sd_Ox8pOswqATFaQ9Pp",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_v6D77QnOgMYLpYCV",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "removeCart_ChScript",
+        "script": "\nbh.local.responces = {\n    statusCode: 404,\n    message: bh.error.message\n}",
+        "functionName": "removeCart_ChScript",
+        "category": "Function",
+        "x": 565,
+        "y": 1760,
+        "wires": [
+            [
+                "sd_nao3O0Tw3yhL37jf"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Cart_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_nao3O0Tw3yhL37jf",
+        "type": "CallService",
+        "z": "SSD_SERVICE_ID_sd_v6D77QnOgMYLpYCV",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "removeCart_CallOut",
+        "outputs": 1,
+        "isValidNode": true,
+        "noerr": 0,
+        "service": {
+            "id": "SSD_SERVICE_ID_sd_OQYJSSTIEwN2nkED",
+            "type": "tab",
+            "createdDate": "2023-04-27T11:41:14.198Z",
+            "label": "Post_Middlewares",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_eva1cbamE2ymKj38",
+            "flowName": "httpOut_Start"
+        },
+        "inputVariables": [],
+        "bhVariables": [],
+        "outputMapping": [],
+        "callService": "../../Middlewares/Post_Middlewares",
+        "startName": "httpOut_Start",
+        "inputParams": [
+            "bh"
+        ],
+        "accept_bh": true,
+        "functionName": "removeCart_CallOut",
+        "category": "General",
+        "x": 745,
+        "y": 1760,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Cart_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_SoGCjMyFhTf18ir1",
+        "type": "Session",
+        "z": "SSD_SERVICE_ID_sd_v6D77QnOgMYLpYCV",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "AddCart_Session",
+        "operationType": "get",
+        "data": "",
+        "resultMapping": "bh.local.session",
+        "dataMapping": "bh",
+        "functionName": "addCart_Session",
+        "category": "HTTP",
+        "x": 125,
+        "y": 100,
+        "wires": [
+            [
+                "sd_8NgcYZpIkVSgfFzw"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "resultMapping": {
+                "type": "bh.local",
+                "value": "session",
+                "constant": false
+            },
+            "dataMapping": {
+                "type": "bh",
+                "value": "",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Cart_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_8NgcYZpIkVSgfFzw",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_v6D77QnOgMYLpYCV",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "IfSesstion_Script",
+        "script": "console.log(\"here\", bh.local.session)\n\nif (bh.local.session.data.clientId) {\n    bh.local.clientId = bh.local.session.data.clientId\n} else {\n    bh.local.clientId = false\n}",
+        "functionName": "ifSesstion_Script",
+        "category": "Function",
+        "x": 240,
+        "y": 100,
+        "wires": [
+            [
+                "sd_BJaJKB5DnPZzmLOD"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Cart_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_BJaJKB5DnPZzmLOD",
+        "type": "Switch",
+        "z": "SSD_SERVICE_ID_sd_v6D77QnOgMYLpYCV",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "check_ClientId",
+        "property": "clientId",
+        "propertyType": "bh.local",
+        "propertyGv": "bh.local.clientId",
+        "rules": [
+            {
+                "t": "false"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "functionName": "check_ClientId",
+        "category": "Function",
+        "x": 345,
+        "y": 100,
+        "wires": [
+            [
+                "sd_Zo2ATswqjshbiabQ"
+            ],
+            [
+                "sd_0BRXKNUBtoBqgIr9"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Cart_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_Zo2ATswqjshbiabQ",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_v6D77QnOgMYLpYCV",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "Error_Responce",
+        "script": "bh.local.responces = {\n    statusCode: 200,\n   result:{\n       status:false,\n       message:\"ClientId Not Found.\"\n   }\n}",
+        "functionName": "error_Responce",
+        "category": "Function",
+        "x": 485,
+        "y": 40,
+        "wires": [
+            [
+                "sd_6OwIyTrhscNIxAAn"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Cart_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_vOvdLnWSVm30nkVe",
+        "type": "Session",
+        "z": "SSD_SERVICE_ID_sd_v6D77QnOgMYLpYCV",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "getCart_Session",
+        "operationType": "get",
+        "data": "",
+        "resultMapping": "bh.local.session",
+        "dataMapping": "bh",
+        "functionName": "getCart_Session",
+        "category": "HTTP",
+        "x": 165,
+        "y": 580,
+        "wires": [
+            [
+                "sd_ji7lBpKQAzd9rtUB"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "resultMapping": {
+                "type": "bh.local",
+                "value": "session",
+                "constant": false
+            },
+            "dataMapping": {
+                "type": "bh",
+                "value": "",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Cart_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_8MPvyEbFwO4kBR5v",
+        "type": "Session",
+        "z": "SSD_SERVICE_ID_sd_v6D77QnOgMYLpYCV",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "getCartTotal_Session",
+        "operationType": "get",
+        "data": "",
+        "resultMapping": "bh.local.session",
+        "dataMapping": "bh",
+        "functionName": "getCartTotal_Session",
+        "category": "HTTP",
+        "x": 205,
+        "y": 940,
+        "wires": [
+            [
+                "sd_w70IDx7EMzhCeScn"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "resultMapping": {
+                "type": "bh.local",
+                "value": "session",
+                "constant": false
+            },
+            "dataMapping": {
+                "type": "bh",
+                "value": "",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Cart_Service",
+        "generated": true
+    }
+]

@@ -1,0 +1,316 @@
+[
+    {
+        "id": "ssd_mw_ws",
+        "type": "tab",
+        "createdDate": "createdDate",
+        "label": "Middlewares",
+        "disabled": false,
+        "info": "",
+        "generateNext": true,
+        "serviceName": "Middlewares",
+        "relativeParentPath": ""
+    },
+    {
+        "id": "ssd_global_middleware_start_id",
+        "type": "GlobalMiddlewareStart",
+        "z": "ssd_mw_ws",
+        "viewType": "server",
+        "nodeType": "flow",
+        "inputs": 0,
+        "outputs": 1,
+        "category": "Middleware",
+        "x": 141,
+        "y": 102.8125,
+        "wires": [
+            [
+                "sd_C9VRO0iOLqxUzNzT"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true
+    },
+    {
+        "id": "ssd_global_next_id",
+        "type": "GlobalNext",
+        "z": "ssd_mw_ws",
+        "viewType": "server",
+        "nodeType": "flow",
+        "inputs": 1,
+        "outputs": 1,
+        "category": "Middleware",
+        "x": 701,
+        "y": 102.8125,
+        "wires": [
+            [
+                "ssd_global_middleware_end_id"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true
+    },
+    {
+        "id": "ssd_global_middleware_end_id",
+        "type": "GlobalMiddlewareEnd",
+        "z": "ssd_mw_ws",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "",
+        "inputs": 1,
+        "outputs": 0,
+        "category": "Middleware",
+        "x": 841,
+        "y": 102.8125,
+        "wires": [],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true
+    },
+    {
+        "id": "sd_Tp9jNbUvUZ1kJnAn",
+        "type": "CORS",
+        "z": "ssd_mw_ws",
+        "viewType": "server",
+        "nodeType": "middleware",
+        "name": "",
+        "methods": [],
+        "origin": true,
+        "editableListData": {
+            "methods": [],
+            "allowedHeaders": [],
+            "exposedHeaders": [],
+            "origin": [
+                {
+                    "key": "http://localhost:4200",
+                    "rowId": "sd_sbJctYHiKj4vHMUE",
+                    "valid": true,
+                    "type": "str"
+                }
+            ]
+        },
+        "showOriginToggleButton": false,
+        "credentials": true,
+        "maxAge": "",
+        "preflightContinue": false,
+        "optionsSuccessStatus": "",
+        "functionName": "cors",
+        "category": "Global",
+        "x": 561,
+        "y": 102.8125,
+        "wires": [
+            [
+                "ssd_global_next_id"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true
+    },
+    {
+        "id": "sd_C9VRO0iOLqxUzNzT",
+        "type": "ids:hrefstart",
+        "z": "ssd_mw_ws",
+        "name": "ids:hrefstart",
+        "inputs": 1,
+        "outputs": 1,
+        "category": "Service",
+        "x": 281,
+        "y": 102.8125,
+        "wires": [
+            [
+                "sd_SrEiPHykyy4xT9nm"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true
+    },
+    {
+        "id": "sd_SrEiPHykyy4xT9nm",
+        "type": "GlobalMongoSession",
+        "z": "ssd_mw_ws",
+        "viewType": "server",
+        "nodeType": "middleware",
+        "name": "Global Session",
+        "cookieDomain": "",
+        "cookieSecure": false,
+        "cookieExpires": "",
+        "cookieHttpOnly": true,
+        "cookieMaxAge": "1000 * 60 * 60 * 60 * 24",
+        "cookiePath": "/",
+        "cookieSameSite": "\"lax\"",
+        "proxy": false,
+        "resave": false,
+        "rolling": false,
+        "saveUninitialized": false,
+        "secret": "\"djdnicjnc,vmlfkldem493ed\"",
+        "dbConnectionName": "Mongodb",
+        "unset": "keep",
+        "autoremove": "destroy",
+        "db": "sd_rgjA4nOniJAL9Rgn",
+        "store": "db",
+        "autoremoveInterval": "",
+        "functionName": "globalSession",
+        "category": "Global",
+        "x": 425,
+        "y": 103,
+        "wires": [
+            [
+                "sd_Tp9jNbUvUZ1kJnAn"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "secret": {
+                "type": "str",
+                "value": "djdnicjnc,vmlfkldem493ed",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": true
+    },
+    {
+        "id": "sd_Y0u5dPK915nPiE7V",
+        "type": "RouteMiddlewareStart",
+        "z": "ssd_mw_ws",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "ADMIN_AuthroizedAPIS",
+        "inputs": 0,
+        "outputs": 1,
+        "category": "Middleware",
+        "x": 145,
+        "y": 320,
+        "wires": [
+            [
+                "sd_zTqtjvXWhjTh6M42"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true
+    },
+    {
+        "id": "sd_m5iW6W0fxqYKlKQp",
+        "type": "Next",
+        "z": "ssd_mw_ws",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "",
+        "inputs": 1,
+        "outputs": 1,
+        "category": "Middleware",
+        "x": 485,
+        "y": 320,
+        "wires": [
+            [
+                "sd_X1o4FBLD1Jju2uQc"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true
+    },
+    {
+        "id": "sd_X1o4FBLD1Jju2uQc",
+        "type": "RouteMiddlewareEnd",
+        "z": "ssd_mw_ws",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "",
+        "inputs": 1,
+        "outputs": 0,
+        "category": "Middleware",
+        "x": 625,
+        "y": 320,
+        "wires": [],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true
+    },
+    {
+        "id": "sd_zTqtjvXWhjTh6M42",
+        "type": "Pre_Middlewares:Admin_authorization",
+        "z": "ssd_mw_ws",
+        "name": "Pre_Middlewares:Admin_authorization",
+        "inputs": 1,
+        "outputs": 1,
+        "category": "Service",
+        "x": 325,
+        "y": 320,
+        "wires": [
+            [
+                "sd_m5iW6W0fxqYKlKQp"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true
+    },
+    {
+        "id": "sd_KbKfJ0y8ptCpk0ZN",
+        "type": "RouteMiddlewareStart",
+        "z": "ssd_mw_ws",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "sequence_3385406398",
+        "inputs": 0,
+        "outputs": 1,
+        "category": "Middleware",
+        "x": 65,
+        "y": 220,
+        "wires": [
+            [
+                "sd_b3BsaqbbxpXsyJZ4"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true
+    },
+    {
+        "id": "sd_3IaI0YCds7QcXas2",
+        "type": "Next",
+        "z": "ssd_mw_ws",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "",
+        "inputs": 1,
+        "outputs": 1,
+        "category": "Middleware",
+        "x": 305,
+        "y": 220,
+        "wires": [
+            [
+                "sd_jgMjLgBTsDu6ZUMN"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true
+    },
+    {
+        "id": "sd_jgMjLgBTsDu6ZUMN",
+        "type": "RouteMiddlewareEnd",
+        "z": "ssd_mw_ws",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "",
+        "inputs": 1,
+        "outputs": 0,
+        "category": "Middleware",
+        "x": 445,
+        "y": 220,
+        "wires": [],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true
+    },
+    {
+        "id": "sd_b3BsaqbbxpXsyJZ4",
+        "type": "Pre_Middlewares:authorizationClientId",
+        "z": "ssd_mw_ws",
+        "name": "Pre_Middlewares:authorizationClientId",
+        "inputs": 1,
+        "outputs": 1,
+        "category": "Service",
+        "x": 180,
+        "y": 220,
+        "wires": [
+            [
+                "sd_3IaI0YCds7QcXas2"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true
+    }
+]

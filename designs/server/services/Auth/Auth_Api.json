@@ -1,0 +1,734 @@
+[
+    {
+        "id": "SSD_SERVICE_ID_sd_qZQcYEnf1JwBZT4K",
+        "type": "tab",
+        "createdDate": "2023-04-29T18:59:19.618Z",
+        "label": "Auth_Api",
+        "disabled": false,
+        "info": "",
+        "functionSeq": 0,
+        "generateNext": true,
+        "serviceName": "Auth_Api",
+        "relativeParentPath": "Auth"
+    },
+    {
+        "id": "sd_RU6mm5FfNmqBRRbb",
+        "type": "HttpIn",
+        "z": "SSD_SERVICE_ID_sd_qZQcYEnf1JwBZT4K",
+        "viewType": "server",
+        "nodeType": "start",
+        "name": "salsman_login_HttpIn",
+        "path": "/login",
+        "uploadpath": "",
+        "summary": "",
+        "description": "",
+        "method": "post",
+        "sequenceId": "",
+        "consumes": "",
+        "produces": "",
+        "filetype": "path",
+        "acceptFileUpload": false,
+        "useDataModel": false,
+        "dataModelIsArray": true,
+        "uploadFileOptions": "",
+        "erd": "_DM_032kzttfv",
+        "erdName": "salesman",
+        "entity": "salesmanlogin",
+        "ref": "#/definitions/salesman ~ salesmanlogin",
+        "editableListData": {
+            "responses": [],
+            "params": [],
+            "produces": [],
+            "consumes": []
+        },
+        "inputs": 0,
+        "outputs": 1,
+        "validateRequestUsingSwaggerDocs": false,
+        "category": "HTTP",
+        "x": 165,
+        "y": 80,
+        "wires": [
+            [
+                "sd_muVofkx9qE69LhSn"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "uploadpath": {
+                "type": "str",
+                "value": "",
+                "nullable": "true",
+                "nullableValue": "",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "Auth_Api",
+        "functionName": "sd_RU6mm5FfNmqBRRbb"
+    },
+    {
+        "id": "sd_muVofkx9qE69LhSn",
+        "type": "CallService",
+        "z": "SSD_SERVICE_ID_sd_qZQcYEnf1JwBZT4K",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "outputs": 1,
+        "isValidNode": true,
+        "noerr": 0,
+        "service": {
+            "id": "SSD_SERVICE_ID_sd_FRvfiH6V1AZoTDKz",
+            "type": "tab",
+            "createdDate": "2023-04-29T18:59:34.633Z",
+            "label": "Auth_Service",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_FmadbpBK1GIe5FO7",
+            "flowName": "salsman_login_start"
+        },
+        "inputVariables": [],
+        "bhVariables": [],
+        "outputMapping": [],
+        "callService": "./Auth_Service",
+        "startName": "salsman_login_start",
+        "inputParams": [
+            "bh"
+        ],
+        "accept_bh": true,
+        "functionName": "sd_muVofkx9qE69LhSn",
+        "category": "General",
+        "x": 345,
+        "y": 80,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Auth_Api",
+        "generated": true
+    },
+    {
+        "id": "sd_bAOsmsogPKRQEzE2",
+        "type": "HttpIn",
+        "z": "SSD_SERVICE_ID_sd_qZQcYEnf1JwBZT4K",
+        "viewType": "server",
+        "nodeType": "start",
+        "name": "routesCheck",
+        "path": "/check",
+        "uploadpath": "",
+        "summary": "",
+        "description": "",
+        "method": "get",
+        "sequenceId": "IDSAuthroizedAPIs",
+        "consumes": "",
+        "produces": "",
+        "filetype": "path",
+        "acceptFileUpload": false,
+        "useDataModel": false,
+        "dataModelIsArray": true,
+        "uploadFileOptions": "",
+        "erd": "_DM_032kzttfv",
+        "erdName": "salesman",
+        "entity": "salesmanlogin",
+        "ref": "#/definitions/salesman ~ salesmanlogin",
+        "editableListData": {
+            "responses": [],
+            "params": [],
+            "produces": [],
+            "consumes": []
+        },
+        "inputs": 0,
+        "outputs": 1,
+        "validateRequestUsingSwaggerDocs": false,
+        "category": "HTTP",
+        "x": 165,
+        "y": 200,
+        "wires": [
+            [
+                "sd_jE6vIlotsOCiOWlu"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "uploadpath": {
+                "type": "str",
+                "value": "",
+                "nullable": "true",
+                "nullableValue": "",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "Auth_Api",
+        "functionName": "sd_bAOsmsogPKRQEzE2"
+    },
+    {
+        "id": "sd_jE6vIlotsOCiOWlu",
+        "type": "CallService",
+        "z": "SSD_SERVICE_ID_sd_qZQcYEnf1JwBZT4K",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "outputs": 1,
+        "isValidNode": true,
+        "noerr": 0,
+        "service": {
+            "id": "SSD_SERVICE_ID_sd_FRvfiH6V1AZoTDKz",
+            "type": "tab",
+            "createdDate": "2023-04-29T18:59:34.633Z",
+            "label": "Auth_Service",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_qDy5LWoMUqrajFtP",
+            "flowName": "authCheckSession"
+        },
+        "inputVariables": [],
+        "bhVariables": [],
+        "outputMapping": [],
+        "callService": "./Auth_Service",
+        "startName": "authCheckSession",
+        "inputParams": [
+            "bh"
+        ],
+        "accept_bh": true,
+        "functionName": "sd_jE6vIlotsOCiOWlu",
+        "category": "General",
+        "x": 345,
+        "y": 200,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Auth_Api",
+        "generated": true
+    },
+    {
+        "id": "sd_QMvla9vTCoa7bcbQ",
+        "type": "Catch",
+        "z": "SSD_SERVICE_ID_sd_qZQcYEnf1JwBZT4K",
+        "viewType": "common",
+        "nodeType": "start",
+        "name": "",
+        "selectedNodes": "all-nodes",
+        "selectCatchType": "allnodes",
+        "masternodeList": "",
+        "ignoreList": [
+            "sd_YLVATfvPzOHPk5to"
+        ],
+        "functionName": "sd_QMvla9vTCoa7bcbQ",
+        "category": "General",
+        "x": 325,
+        "y": 680,
+        "wires": [
+            [
+                "sd_YLVATfvPzOHPk5to"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "Auth_Api"
+    },
+    {
+        "id": "sd_YLVATfvPzOHPk5to",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_qZQcYEnf1JwBZT4K",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "console.log(bh.error)",
+        "functionName": "sd_YLVATfvPzOHPk5to",
+        "category": "Function",
+        "x": 505,
+        "y": 680,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Auth_Api",
+        "generated": true
+    },
+    {
+        "id": "sd_NQD08ComEak6udV4",
+        "type": "HttpIn",
+        "z": "SSD_SERVICE_ID_sd_qZQcYEnf1JwBZT4K",
+        "viewType": "server",
+        "nodeType": "start",
+        "name": "Admin Login_HttpIn",
+        "path": "/admin/login",
+        "uploadpath": "",
+        "summary": "",
+        "description": "",
+        "method": "post",
+        "sequenceId": "",
+        "consumes": "",
+        "produces": "",
+        "filetype": "path",
+        "acceptFileUpload": false,
+        "useDataModel": false,
+        "dataModelIsArray": false,
+        "uploadFileOptions": "",
+        "erd": "",
+        "erdName": "",
+        "entity": "",
+        "ref": "",
+        "editableListData": {
+            "responses": [],
+            "params": [],
+            "produces": [],
+            "consumes": []
+        },
+        "inputs": 0,
+        "outputs": 1,
+        "validateRequestUsingSwaggerDocs": false,
+        "category": "HTTP",
+        "x": 165,
+        "y": 320,
+        "wires": [
+            [
+                "sd_LrMSBGWaEs7aNxfk"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "uploadpath": {
+                "type": "str",
+                "value": "",
+                "nullable": "true",
+                "nullableValue": "",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "Auth_Api",
+        "functionName": "sd_NQD08ComEak6udV4"
+    },
+    {
+        "id": "sd_LrMSBGWaEs7aNxfk",
+        "type": "CallService",
+        "z": "SSD_SERVICE_ID_sd_qZQcYEnf1JwBZT4K",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "outputs": 1,
+        "isValidNode": true,
+        "noerr": 0,
+        "service": {
+            "id": "SSD_SERVICE_ID_sd_FRvfiH6V1AZoTDKz",
+            "type": "tab",
+            "createdDate": "2023-04-29T18:59:34.633Z",
+            "label": "Auth_Service",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_GYaHrpDhMY7v0Ksv",
+            "flowName": "admin_login_start"
+        },
+        "inputVariables": [],
+        "bhVariables": [],
+        "outputMapping": [],
+        "callService": "./Auth_Service",
+        "startName": "admin_login_start",
+        "inputParams": [
+            "bh"
+        ],
+        "accept_bh": true,
+        "functionName": "sd_LrMSBGWaEs7aNxfk",
+        "category": "General",
+        "x": 360,
+        "y": 320,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Auth_Api",
+        "generated": true
+    },
+    {
+        "id": "sd_h9omO4bcMw5Uh3bf",
+        "type": "HttpIn",
+        "z": "SSD_SERVICE_ID_sd_qZQcYEnf1JwBZT4K",
+        "viewType": "server",
+        "nodeType": "start",
+        "name": "Admin_route_Check",
+        "path": "/admin",
+        "uploadpath": "",
+        "summary": "",
+        "description": "",
+        "method": "get",
+        "sequenceId": "ADMIN_AuthroizedAPIS",
+        "consumes": "",
+        "produces": "",
+        "filetype": "path",
+        "acceptFileUpload": false,
+        "useDataModel": false,
+        "dataModelIsArray": false,
+        "uploadFileOptions": "",
+        "erd": "",
+        "erdName": "",
+        "entity": "",
+        "ref": "",
+        "editableListData": {
+            "responses": [],
+            "params": [],
+            "produces": [],
+            "consumes": []
+        },
+        "inputs": 0,
+        "outputs": 1,
+        "validateRequestUsingSwaggerDocs": false,
+        "category": "HTTP",
+        "x": 165,
+        "y": 440,
+        "wires": [
+            [
+                "sd_mX11gA0gIMyQlWdG"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "uploadpath": {
+                "type": "str",
+                "value": "",
+                "nullable": "true",
+                "nullableValue": "",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "Auth_Api",
+        "functionName": "sd_h9omO4bcMw5Uh3bf"
+    },
+    {
+        "id": "sd_mX11gA0gIMyQlWdG",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_qZQcYEnf1JwBZT4K",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "bh.local.responces = {\n    statusCode: 200,\n    message: \"admin verify\"\n}",
+        "functionName": "sd_mX11gA0gIMyQlWdG",
+        "category": "Function",
+        "x": 325,
+        "y": 440,
+        "wires": [
+            [
+                "sd_HBV9aOFyWQdXuzAn"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Auth_Api",
+        "generated": true
+    },
+    {
+        "id": "sd_HBV9aOFyWQdXuzAn",
+        "type": "CallService",
+        "z": "SSD_SERVICE_ID_sd_qZQcYEnf1JwBZT4K",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "outputs": 1,
+        "isValidNode": true,
+        "noerr": 0,
+        "service": {
+            "id": "SSD_SERVICE_ID_sd_OQYJSSTIEwN2nkED",
+            "type": "tab",
+            "createdDate": "2023-04-27T11:41:14.198Z",
+            "label": "Post_Middlewares",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_eva1cbamE2ymKj38",
+            "flowName": "httpOut_Start"
+        },
+        "inputVariables": [],
+        "bhVariables": [],
+        "outputMapping": [],
+        "callService": "../Middlewares/Post_Middlewares",
+        "startName": "httpOut_Start",
+        "inputParams": [
+            "bh"
+        ],
+        "accept_bh": true,
+        "functionName": "sd_HBV9aOFyWQdXuzAn",
+        "category": "General",
+        "x": 465,
+        "y": 440,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Auth_Api",
+        "generated": true
+    },
+    {
+        "id": "sd_xj3piElPc09eVW7N",
+        "type": "HttpIn",
+        "z": "SSD_SERVICE_ID_sd_qZQcYEnf1JwBZT4K",
+        "viewType": "server",
+        "nodeType": "start",
+        "name": "Admin_Logout",
+        "path": "/admin/logout",
+        "uploadpath": "",
+        "summary": "",
+        "description": "",
+        "method": "post",
+        "sequenceId": "",
+        "consumes": "",
+        "produces": "",
+        "filetype": "path",
+        "acceptFileUpload": false,
+        "useDataModel": false,
+        "dataModelIsArray": false,
+        "uploadFileOptions": "",
+        "erd": "",
+        "erdName": "",
+        "entity": "",
+        "ref": "",
+        "editableListData": {
+            "responses": [],
+            "params": [],
+            "produces": [],
+            "consumes": []
+        },
+        "inputs": 0,
+        "outputs": 1,
+        "validateRequestUsingSwaggerDocs": false,
+        "category": "HTTP",
+        "x": 165,
+        "y": 560,
+        "wires": [
+            [
+                "sd_LXXNfO10psOAERMf"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "uploadpath": {
+                "type": "str",
+                "value": "",
+                "nullable": "true",
+                "nullableValue": "",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "Auth_Api",
+        "functionName": "sd_xj3piElPc09eVW7N"
+    },
+    {
+        "id": "sd_LXXNfO10psOAERMf",
+        "type": "CallService",
+        "z": "SSD_SERVICE_ID_sd_qZQcYEnf1JwBZT4K",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "outputs": 1,
+        "isValidNode": true,
+        "noerr": 0,
+        "service": {
+            "id": "SSD_SERVICE_ID_sd_FRvfiH6V1AZoTDKz",
+            "type": "tab",
+            "createdDate": "2023-04-29T18:59:34.633Z",
+            "label": "Auth_Service",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_vhqWbxAWiMskaGfV",
+            "flowName": "admin_logout"
+        },
+        "inputVariables": [],
+        "bhVariables": [],
+        "outputMapping": [],
+        "callService": "./Auth_Service",
+        "startName": "admin_logout",
+        "inputParams": [
+            "bh"
+        ],
+        "accept_bh": true,
+        "functionName": "sd_LXXNfO10psOAERMf",
+        "category": "General",
+        "x": 360,
+        "y": 560,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Auth_Api",
+        "generated": true
+    },
+    {
+        "id": "sd_coFdiyIJq4l3Yj3f",
+        "type": "HttpIn",
+        "z": "SSD_SERVICE_ID_sd_qZQcYEnf1JwBZT4K",
+        "viewType": "server",
+        "nodeType": "start",
+        "name": "",
+        "path": "/logout",
+        "uploadpath": "",
+        "summary": "",
+        "description": "",
+        "method": "post",
+        "sequenceId": "",
+        "consumes": "",
+        "produces": "",
+        "filetype": "path",
+        "acceptFileUpload": false,
+        "useDataModel": false,
+        "dataModelIsArray": false,
+        "erd": "",
+        "erdName": "",
+        "entity": "",
+        "ref": "",
+        "editableListData": {
+            "responses": [],
+            "params": [],
+            "produces": [],
+            "consumes": []
+        },
+        "inputs": 0,
+        "outputs": 1,
+        "validateRequestUsingSwaggerDocs": false,
+        "category": "HTTP",
+        "x": 165,
+        "y": 820,
+        "wires": [
+            [
+                "sd_YTLI7lOP48SPOCXc"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "uploadpath": {
+                "type": "str",
+                "value": "",
+                "nullable": "true",
+                "nullableValue": "",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "Auth_Api",
+        "functionName": "sd_coFdiyIJq4l3Yj3f"
+    },
+    {
+        "id": "sd_YTLI7lOP48SPOCXc",
+        "type": "Session",
+        "z": "SSD_SERVICE_ID_sd_qZQcYEnf1JwBZT4K",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "",
+        "operationType": "destroy",
+        "data": "",
+        "resultMapping": "bh",
+        "dataMapping": "bh",
+        "functionName": "sd_YTLI7lOP48SPOCXc",
+        "category": "HTTP",
+        "x": 265,
+        "y": 820,
+        "wires": [
+            [
+                "sd_4fRDaWNDU2XKwF0q"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "resultMapping": {
+                "type": "bh",
+                "value": "",
+                "constant": false
+            },
+            "dataMapping": {
+                "type": "bh",
+                "value": "",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Auth_Api",
+        "generated": true
+    },
+    {
+        "id": "sd_4fRDaWNDU2XKwF0q",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_qZQcYEnf1JwBZT4K",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "bh.local.responces = {\n    statusCode: 200,\n    message: \"successfull logout\"\n}",
+        "functionName": "sd_4fRDaWNDU2XKwF0q",
+        "category": "Function",
+        "x": 365,
+        "y": 820,
+        "wires": [
+            [
+                "sd_Vp2FOnZ3x38sPB9u"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Auth_Api",
+        "generated": true
+    },
+    {
+        "id": "sd_Vp2FOnZ3x38sPB9u",
+        "type": "CallService",
+        "z": "SSD_SERVICE_ID_sd_qZQcYEnf1JwBZT4K",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "outputs": 1,
+        "isValidNode": true,
+        "noerr": 0,
+        "service": {
+            "id": "SSD_SERVICE_ID_sd_OQYJSSTIEwN2nkED",
+            "type": "tab",
+            "createdDate": "2023-04-27T11:41:14.198Z",
+            "label": "Post_Middlewares",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_eva1cbamE2ymKj38",
+            "flowName": "httpOut_Start"
+        },
+        "inputVariables": [],
+        "bhVariables": [],
+        "outputMapping": [],
+        "callService": "../Middlewares/Post_Middlewares",
+        "startName": "httpOut_Start",
+        "inputParams": [
+            "bh"
+        ],
+        "accept_bh": true,
+        "functionName": "sd_Vp2FOnZ3x38sPB9u",
+        "category": "General",
+        "x": 505,
+        "y": 820,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Auth_Api",
+        "generated": true
+    }
+]

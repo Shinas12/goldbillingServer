@@ -1,0 +1,1191 @@
+[
+    {
+        "id": "SSD_SERVICE_ID_sd_FRvfiH6V1AZoTDKz",
+        "type": "tab",
+        "createdDate": "2023-04-29T18:59:34.633Z",
+        "label": "Auth_Service",
+        "disabled": false,
+        "info": "",
+        "functionSeq": 0,
+        "generateNext": true,
+        "serviceName": "Auth_Service",
+        "relativeParentPath": "Auth"
+    },
+    {
+        "id": "sd_FmadbpBK1GIe5FO7",
+        "type": "Start",
+        "z": "SSD_SERVICE_ID_sd_FRvfiH6V1AZoTDKz",
+        "viewType": "client-server",
+        "nodeType": "start",
+        "name": "salsman_login_start",
+        "outputs": 1,
+        "inputVariables": [],
+        "localVariables": [],
+        "accept_bh": true,
+        "functionName": "salsman_login_start",
+        "category": "General",
+        "x": 25,
+        "y": 80,
+        "wires": [
+            [
+                "sd_UPTkwl1QYMU6UQVv"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "Auth_Service"
+    },
+    {
+        "id": "sd_lUwK8o6pmfBImNRI",
+        "type": "CallService",
+        "z": "SSD_SERVICE_ID_sd_FRvfiH6V1AZoTDKz",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "unauthorized_user_Http_out",
+        "outputs": 1,
+        "isValidNode": true,
+        "noerr": 0,
+        "service": {
+            "id": "SSD_SERVICE_ID_sd_OQYJSSTIEwN2nkED",
+            "type": "tab",
+            "createdDate": "2023-04-27T11:41:14.198Z",
+            "label": "Post_Middlewares",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_eva1cbamE2ymKj38",
+            "flowName": "httpOut_Start"
+        },
+        "inputVariables": [],
+        "bhVariables": [],
+        "outputMapping": [],
+        "callService": "../Middlewares/Post_Middlewares",
+        "startName": "httpOut_Start",
+        "inputParams": [
+            "bh"
+        ],
+        "accept_bh": true,
+        "functionName": "unauthorized_user_Http_out",
+        "category": "General",
+        "x": 885,
+        "y": 40,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Auth_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_NRZEeQO57WTd1ewU",
+        "type": "validate",
+        "z": "SSD_SERVICE_ID_sd_FRvfiH6V1AZoTDKz",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "login_data_validate_entity",
+        "erd": "_DM_032kzttfv",
+        "entityId": "_EN_f7leu7hlyc",
+        "_UI_entityName": "salesmanlogin",
+        "dbConfigId": "",
+        "validateObject": "bh.input.body",
+        "checkboxThrowError": true,
+        "resultMapping": "",
+        "functionName": "login_data_validate_entity",
+        "category": "Data Model",
+        "x": 245,
+        "y": 80,
+        "wires": [
+            [
+                "sd_ljZctLttt1P1OEuQ"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "validateObject": {
+                "type": "bh.input",
+                "value": "body",
+                "constant": false
+            },
+            "resultMapping": {
+                "type": "bh",
+                "value": "",
+                "nullable": "true",
+                "nullableValue": "",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {
+            "resultMapping": true
+        },
+        "generateNext": false,
+        "serviceName": "Auth_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_eZSNouItStvu92Cr",
+        "type": "Mongodb",
+        "z": "SSD_SERVICE_ID_sd_FRvfiH6V1AZoTDKz",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "check_user_exist",
+        "databaseConfig": "sd_rgjA4nOniJAL9Rgn",
+        "collection": "__ssd__env__process.env.SALESMAN_COLLECTION__ssd__env__end",
+        "options": "",
+        "resultMapping": "bh.result",
+        "operation": "find",
+        "argumentArray": [
+            "query"
+        ],
+        "aggregate": "",
+        "operations": "",
+        "query": "bh.findquery",
+        "fieldOrSpec": "",
+        "filter": "",
+        "key": "",
+        "docId": "",
+        "indexName": "",
+        "replacement": "",
+        "update": "",
+        "xAxis": "",
+        "yAxis": "",
+        "indexes": "",
+        "docs": "",
+        "document": "",
+        "newName": "",
+        "doc": "",
+        "filePath": "",
+        "fileName": "",
+        "pipeline": "",
+        "functionName": "check_user_exist",
+        "category": "Storage",
+        "x": 505,
+        "y": 80,
+        "wires": [
+            [
+                "sd_ZXlUCTQVUZiN4VWf"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "collection": {
+                "type": "process.env",
+                "value": "SALESMAN_COLLECTION",
+                "constant": false
+            },
+            "options": {
+                "type": "bh",
+                "value": "",
+                "nullable": "true",
+                "constant": false
+            },
+            "resultMapping": {
+                "type": "bh",
+                "value": "result",
+                "constant": false
+            },
+            "query": {
+                "type": "bh",
+                "value": "findquery",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Auth_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_ljZctLttt1P1OEuQ",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_FRvfiH6V1AZoTDKz",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "findquery_script",
+        "script": "bh.findquery = {\"email\" : bh.input.body.email}",
+        "functionName": "findquery_script",
+        "category": "Function",
+        "x": 365,
+        "y": 80,
+        "wires": [
+            [
+                "sd_eZSNouItStvu92Cr"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Auth_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_L6UJylgv61a4d6fT",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_FRvfiH6V1AZoTDKz",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "var jwt = require('jsonwebtoken');\n\nconst accessToken = await jwt.sign({\n  data: bh.result\n}, process.env.JWT_PRIVET_KEY , { expiresIn: '10m' });\n\nconst refreshToken = await jwt.sign({\n  data: bh.result\n}, process.env.JWT_PRIVET_KEY , { expiresIn: '1D' });\n\n\nbh.local.cookie_data = {\n\naccessToken: {\nvalue: accessToken,\noptions: {\nexpires: new Date(Date.now()+1000),\nhttpOnly: 'true',\npath: '/',\nsecure: 'false',\nsameSite: 'lx',\n}\n},\n\nrefreshToken: {\nvalue: refreshToken,\noptions: {\nexpires: new Date(Date.now()+1000),\nhttpOnly: 'true',\npath: '/',\nsecure: 'false',\nsameSite: 'lx',\n}\n}\n\n}\n\nbh.local.responces = {\n    statusCode: 200,\n    message: \"Login successfuly completed\"\n}",
+        "functionName": "sd_L6UJylgv61a4d6fT",
+        "category": "Function",
+        "x": 885,
+        "y": 300,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "Auth_Service"
+    },
+    {
+        "id": "sd_ZXlUCTQVUZiN4VWf",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_FRvfiH6V1AZoTDKz",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "const bcrypt = require('bcrypt');\n\nbh. unauthorized = false;\n\nif(bh.result.length === 0){\n\n\n    bh.local.responces = {\n    statusCode:401 ,\n    message: \"This email is not found\"\n    }\n\n    bh.unauthorized = true;\n\n}else{\n\n    bh.result = bh.result[0]\n   const password_checking = await bcrypt.compare(bh.input.body.password, bh.result.password)\n\n   if(password_checking === false){\n     bh.local.responces = {\n     statusCode:401 ,\n     message: \"Password is not correct Please try again\"\n      }  \n\n      bh.unauthorized = true;\n\n   }\n\n}",
+        "functionName": "sd_ZXlUCTQVUZiN4VWf",
+        "category": "Function",
+        "x": 625,
+        "y": 80,
+        "wires": [
+            [
+                "sd_3dIT2LHUM5k8VFws"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Auth_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_3dIT2LHUM5k8VFws",
+        "type": "Switch",
+        "z": "SSD_SERVICE_ID_sd_FRvfiH6V1AZoTDKz",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "property": "unauthorized",
+        "propertyType": "bh",
+        "propertyGv": "bh.unauthorized",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "functionName": "sd_3dIT2LHUM5k8VFws",
+        "category": "Function",
+        "x": 745,
+        "y": 80,
+        "wires": [
+            [
+                "sd_lUwK8o6pmfBImNRI"
+            ],
+            [
+                "sd_beGU03ZgdGuROcDa"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Auth_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_W0OUXbxWjuDlV3f3",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_FRvfiH6V1AZoTDKz",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "Set_Response",
+        "script": "  bh.local.responces = {\n    statusCode: 200,\n    message: \"Login successfully complited\"\n    }",
+        "functionName": "set_Response",
+        "category": "Function",
+        "x": 525,
+        "y": 340,
+        "wires": [
+            [
+                "sd_n1JfFK5LJSnzPuti"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "Auth_Service"
+    },
+    {
+        "id": "sd_n1JfFK5LJSnzPuti",
+        "type": "CallService",
+        "z": "SSD_SERVICE_ID_sd_FRvfiH6V1AZoTDKz",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "outputs": 1,
+        "isValidNode": true,
+        "noerr": 0,
+        "service": {
+            "id": "SSD_SERVICE_ID_sd_OQYJSSTIEwN2nkED",
+            "type": "tab",
+            "createdDate": "2023-04-27T11:41:14.198Z",
+            "label": "Post_Middlewares",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_eva1cbamE2ymKj38",
+            "flowName": "httpOut_Start"
+        },
+        "inputVariables": [],
+        "bhVariables": [],
+        "outputMapping": [],
+        "callService": "../Middlewares/Post_Middlewares",
+        "startName": "httpOut_Start",
+        "inputParams": [
+            "bh"
+        ],
+        "accept_bh": true,
+        "functionName": "sd_n1JfFK5LJSnzPuti",
+        "category": "General",
+        "x": 640,
+        "y": 340,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "Auth_Service"
+    },
+    {
+        "id": "sd_9L5hh5tHTHYMQd2g",
+        "type": "Start",
+        "z": "SSD_SERVICE_ID_sd_FRvfiH6V1AZoTDKz",
+        "viewType": "client-server",
+        "nodeType": "start",
+        "name": "Refresh_Token_Start",
+        "outputs": 1,
+        "inputVariables": [],
+        "localVariables": [],
+        "accept_bh": true,
+        "functionName": "refresh_Token_Start",
+        "category": "General",
+        "x": 105,
+        "y": 480,
+        "wires": [
+            [
+                "sd_ENxU5mjOsQDaDADj"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "Auth_Service"
+    },
+    {
+        "id": "sd_ENxU5mjOsQDaDADj",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_FRvfiH6V1AZoTDKz",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "cookie_exist_check_script",
+        "script": "",
+        "functionName": "cookie_exist_check_script",
+        "category": "Function",
+        "x": 250,
+        "y": 480,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Auth_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_dFPhLDf1qWGaZwUO",
+        "type": "Catch",
+        "z": "SSD_SERVICE_ID_sd_FRvfiH6V1AZoTDKz",
+        "viewType": "common",
+        "nodeType": "start",
+        "name": "login_catch",
+        "selectedNodes": [
+            "sd_NRZEeQO57WTd1ewU",
+            "sd_eZSNouItStvu92Cr"
+        ],
+        "selectCatchType": "selectednodes",
+        "masternodeList": "",
+        "ignoreList": "",
+        "functionName": "login_catch",
+        "category": "General",
+        "x": 385,
+        "y": 200,
+        "wires": [
+            [
+                "sd_1nFGZEfIBEfVNHGo"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "Auth_Service"
+    },
+    {
+        "id": "sd_1nFGZEfIBEfVNHGo",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_FRvfiH6V1AZoTDKz",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "login_catch_script",
+        "script": "console.log(bh.error)\n\nbh.local.responces = {\n    statusCode: 404,\n    message: bh.error.message\n}",
+        "functionName": "login_catch_script",
+        "category": "Function",
+        "x": 525,
+        "y": 200,
+        "wires": [
+            [
+                "sd_nSiOXIqkzd6u3Vxo"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Auth_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_nSiOXIqkzd6u3Vxo",
+        "type": "CallService",
+        "z": "SSD_SERVICE_ID_sd_FRvfiH6V1AZoTDKz",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "outputs": 1,
+        "isValidNode": true,
+        "noerr": 0,
+        "service": {
+            "id": "SSD_SERVICE_ID_sd_OQYJSSTIEwN2nkED",
+            "type": "tab",
+            "createdDate": "2023-04-27T11:41:14.198Z",
+            "label": "Post_Middlewares",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_eva1cbamE2ymKj38",
+            "flowName": "httpOut_Start"
+        },
+        "inputVariables": [],
+        "bhVariables": [],
+        "outputMapping": [],
+        "callService": "../Middlewares/Post_Middlewares",
+        "startName": "httpOut_Start",
+        "inputParams": [
+            "bh"
+        ],
+        "accept_bh": true,
+        "functionName": "sd_nSiOXIqkzd6u3Vxo",
+        "category": "General",
+        "x": 680,
+        "y": 200,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Auth_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_qDy5LWoMUqrajFtP",
+        "type": "Start",
+        "z": "SSD_SERVICE_ID_sd_FRvfiH6V1AZoTDKz",
+        "viewType": "client-server",
+        "nodeType": "start",
+        "name": "authCheckSession",
+        "outputs": 1,
+        "inputVariables": [],
+        "localVariables": [],
+        "accept_bh": true,
+        "functionName": "authCheckSession",
+        "category": "General",
+        "x": 105,
+        "y": 620,
+        "wires": [
+            [
+                "sd_wfX5pNCmQ7F5HbBH"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "Auth_Service"
+    },
+    {
+        "id": "sd_wfX5pNCmQ7F5HbBH",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_FRvfiH6V1AZoTDKz",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "sessionExistCheck",
+        "script": "bh.local.responces = {\n    statusCode: 200,\n    result:  \"Checked\"\n    \n}",
+        "functionName": "sessionExistCheck",
+        "category": "Function",
+        "x": 245,
+        "y": 620,
+        "wires": [
+            [
+                "sd_E7EAEYxyllfXVY0v"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Auth_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_E7EAEYxyllfXVY0v",
+        "type": "CallService",
+        "z": "SSD_SERVICE_ID_sd_FRvfiH6V1AZoTDKz",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "outputs": 1,
+        "isValidNode": true,
+        "noerr": 0,
+        "service": {
+            "id": "SSD_SERVICE_ID_sd_OQYJSSTIEwN2nkED",
+            "type": "tab",
+            "createdDate": "2023-04-27T11:41:14.198Z",
+            "label": "Post_Middlewares",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_eva1cbamE2ymKj38",
+            "flowName": "httpOut_Start"
+        },
+        "inputVariables": [],
+        "bhVariables": [],
+        "outputMapping": [],
+        "callService": "../Middlewares/Post_Middlewares",
+        "startName": "httpOut_Start",
+        "inputParams": [
+            "bh"
+        ],
+        "accept_bh": true,
+        "functionName": "sd_E7EAEYxyllfXVY0v",
+        "category": "General",
+        "x": 405,
+        "y": 620,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Auth_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_GYaHrpDhMY7v0Ksv",
+        "type": "Start",
+        "z": "SSD_SERVICE_ID_sd_FRvfiH6V1AZoTDKz",
+        "viewType": "client-server",
+        "nodeType": "start",
+        "name": "Admin_login_start",
+        "outputs": 1,
+        "inputVariables": [],
+        "localVariables": [],
+        "accept_bh": true,
+        "functionName": "admin_login_start",
+        "category": "General",
+        "x": 105,
+        "y": 780,
+        "wires": [
+            [
+                "sd_YEE43TSIvTwb4Dml"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "Auth_Service"
+    },
+    {
+        "id": "sd_kRaJ8XWT71Mrxc9A",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_FRvfiH6V1AZoTDKz",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "bh.local.query = {}",
+        "functionName": "sd_kRaJ8XWT71Mrxc9A",
+        "category": "Function",
+        "x": 390,
+        "y": 780,
+        "wires": [
+            [
+                "sd_Ii7sVBSXThdGKHQT"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Auth_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_Ii7sVBSXThdGKHQT",
+        "type": "Mongodb",
+        "z": "SSD_SERVICE_ID_sd_FRvfiH6V1AZoTDKz",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "Admin_Details_fatching",
+        "databaseConfig": "sd_rgjA4nOniJAL9Rgn",
+        "collection": "__ssd__env__process.env.ADMIN_COLLECTION__ssd__env__end",
+        "options": "",
+        "resultMapping": "bh.local.adminDetails",
+        "operation": "find",
+        "argumentArray": [
+            "query"
+        ],
+        "aggregate": "",
+        "operations": "",
+        "query": "bh.local.query",
+        "fieldOrSpec": "",
+        "filter": "",
+        "key": "",
+        "docId": "",
+        "indexName": "",
+        "replacement": "",
+        "update": "",
+        "xAxis": "",
+        "yAxis": "",
+        "indexes": "",
+        "docs": "",
+        "document": "bh.input.body",
+        "newName": "",
+        "doc": "",
+        "filePath": "",
+        "fileName": "",
+        "pipeline": "",
+        "functionName": "admin_Details_fatching",
+        "category": "Storage",
+        "x": 550,
+        "y": 780,
+        "wires": [
+            [
+                "sd_3GIEedfo0V9ap5KV"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "collection": {
+                "type": "process.env",
+                "value": "ADMIN_COLLECTION",
+                "constant": false
+            },
+            "options": {
+                "type": "bh",
+                "value": "",
+                "nullable": "true",
+                "constant": false
+            },
+            "resultMapping": {
+                "type": "bh.local",
+                "value": "adminDetails",
+                "constant": false
+            },
+            "query": {
+                "type": "bh.local",
+                "value": "query",
+                "constant": false
+            },
+            "document": {
+                "type": "bh.input",
+                "value": "body",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Auth_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_YEE43TSIvTwb4Dml",
+        "type": "validate",
+        "z": "SSD_SERVICE_ID_sd_FRvfiH6V1AZoTDKz",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "Admin_Login",
+        "erd": "_DM_5abqobnka",
+        "entityId": "_EN_3x39ao2y1a",
+        "_UI_entityName": "entity_1",
+        "dbConfigId": "",
+        "validateObject": "bh.input.body",
+        "checkboxThrowError": true,
+        "resultMapping": "",
+        "functionName": "admin_Login",
+        "category": "Data Model",
+        "x": 250,
+        "y": 780,
+        "wires": [
+            [
+                "sd_kRaJ8XWT71Mrxc9A"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "validateObject": {
+                "type": "bh.input",
+                "value": "body",
+                "constant": false
+            },
+            "resultMapping": {
+                "type": "bh",
+                "value": "",
+                "nullable": "true",
+                "nullableValue": "",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {
+            "resultMapping": true
+        },
+        "generateNext": false,
+        "serviceName": "Auth_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_3GIEedfo0V9ap5KV",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_FRvfiH6V1AZoTDKz",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "Admin verify",
+        "script": "const bcrypt = require(\"bcrypt\");\nconst jwt = require('jsonwebtoken');\n\n\nif(bh.local.adminDetails[0].email !== bh.input.body.email){\n    throw \"This is a invalid Email Please provied correct details\"\n}\n\nconst passwordChecking = await bcrypt.compare(bh.input.body.password,bh.local.adminDetails[0].password)\n\nif(!passwordChecking){\n  throw \"Password is incorrect please try again\"\n}\n\n\nconst accessToken = await jwt.sign({\n                                     data: \"adminLogined\"\n                                   }, process.env.JWT_PRIVET_KEY, { expiresIn: '10m' });\nconst refreshToken = await jwt.sign({\n                                     data: \"adminLogined\"\n                                   }, process.env.JWT_PRIVET_KEY, { expiresIn: '1d' });\n\n\nbh.local.cookie_data = {\n\naccessToken: {\nvalue: accessToken,\noptions: {\nexpires: new Date(Date.now()+1000),\nhttpOnly: 'true',\npath: '/',\nsecure: 'false',\nsameSite: 'lx',\n}\n},\n\nrefreshToken: {\nvalue: refreshToken,\noptions: {\nexpires: new Date(Date.now()+1000),\nhttpOnly: 'true',\npath: '/',\nsecure: 'false',\nsameSite: 'lx',\n}\n}\n\n};\n\n\nbh.local.responces = {\n    statusCode: 200,\n    message: \"Login successfuly completed\"\n}\n\n",
+        "functionName": "adminVerify",
+        "category": "Function",
+        "x": 690,
+        "y": 780,
+        "wires": [
+            [
+                "sd_fJnafSZGGvdmGdYs"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Auth_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_i5PuVvaAPM5I1m9j",
+        "type": "Catch",
+        "z": "SSD_SERVICE_ID_sd_FRvfiH6V1AZoTDKz",
+        "viewType": "common",
+        "nodeType": "start",
+        "name": "Admin_login",
+        "selectedNodes": [
+            "sd_Ii7sVBSXThdGKHQT",
+            "sd_YEE43TSIvTwb4Dml",
+            "sd_3GIEedfo0V9ap5KV"
+        ],
+        "selectCatchType": "selectednodes",
+        "masternodeList": "",
+        "ignoreList": "",
+        "functionName": "admin_login",
+        "category": "General",
+        "x": 405,
+        "y": 900,
+        "wires": [
+            [
+                "sd_XCrIydjR7jMQuQCT"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "Auth_Service"
+    },
+    {
+        "id": "sd_XCrIydjR7jMQuQCT",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_FRvfiH6V1AZoTDKz",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "admin_login_catch_script",
+        "script": "\n\nbh.local.responces = {\n    statusCode: 404,\n    message: bh.error.message || bh.error\n}",
+        "functionName": "admin_login_catch_script",
+        "category": "Function",
+        "x": 590,
+        "y": 900,
+        "wires": [
+            [
+                "sd_SZS5HcABZZkddkCQ"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Auth_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_SZS5HcABZZkddkCQ",
+        "type": "CallService",
+        "z": "SSD_SERVICE_ID_sd_FRvfiH6V1AZoTDKz",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "outputs": 1,
+        "isValidNode": true,
+        "noerr": 0,
+        "service": {
+            "id": "SSD_SERVICE_ID_sd_OQYJSSTIEwN2nkED",
+            "type": "tab",
+            "createdDate": "2023-04-27T11:41:14.198Z",
+            "label": "Post_Middlewares",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_eva1cbamE2ymKj38",
+            "flowName": "httpOut_Start"
+        },
+        "inputVariables": [],
+        "bhVariables": [],
+        "outputMapping": [],
+        "callService": "../Middlewares/Post_Middlewares",
+        "startName": "httpOut_Start",
+        "inputParams": [
+            "bh"
+        ],
+        "accept_bh": true,
+        "functionName": "sd_SZS5HcABZZkddkCQ",
+        "category": "General",
+        "x": 770,
+        "y": 900,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Auth_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_fJnafSZGGvdmGdYs",
+        "type": "CallService",
+        "z": "SSD_SERVICE_ID_sd_FRvfiH6V1AZoTDKz",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "outputs": 1,
+        "isValidNode": true,
+        "noerr": 0,
+        "service": {
+            "id": "SSD_SERVICE_ID_sd_OQYJSSTIEwN2nkED",
+            "type": "tab",
+            "createdDate": "2023-04-27T11:41:14.198Z",
+            "label": "Post_Middlewares",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_jr8kV0nrmsr3HGnV",
+            "flowName": "http_Out_And_Cookie"
+        },
+        "inputVariables": [],
+        "bhVariables": [],
+        "outputMapping": [],
+        "callService": "../Middlewares/Post_Middlewares",
+        "startName": "http_Out_And_Cookie",
+        "inputParams": [
+            "bh"
+        ],
+        "accept_bh": true,
+        "functionName": "sd_fJnafSZGGvdmGdYs",
+        "category": "General",
+        "x": 830,
+        "y": 780,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Auth_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_kAWPm25A7UToNAa0",
+        "type": "CallService",
+        "z": "SSD_SERVICE_ID_sd_FRvfiH6V1AZoTDKz",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "outputs": 1,
+        "isValidNode": true,
+        "noerr": 0,
+        "service": {
+            "id": "SSD_SERVICE_ID_sd_OQYJSSTIEwN2nkED",
+            "type": "tab",
+            "createdDate": "2023-04-27T11:41:14.198Z",
+            "label": "Post_Middlewares",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_eva1cbamE2ymKj38",
+            "flowName": "httpOut_Start"
+        },
+        "inputVariables": [],
+        "bhVariables": [],
+        "outputMapping": [],
+        "callService": "../Middlewares/Post_Middlewares",
+        "startName": "httpOut_Start",
+        "inputParams": [
+            "bh"
+        ],
+        "accept_bh": true,
+        "functionName": "sd_kAWPm25A7UToNAa0",
+        "category": "General",
+        "x": 1205,
+        "y": 140,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Auth_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_vhqWbxAWiMskaGfV",
+        "type": "Start",
+        "z": "SSD_SERVICE_ID_sd_FRvfiH6V1AZoTDKz",
+        "viewType": "client-server",
+        "nodeType": "start",
+        "name": "Admin_logout",
+        "outputs": 1,
+        "inputVariables": [],
+        "localVariables": [],
+        "accept_bh": true,
+        "functionName": "admin_logout",
+        "category": "General",
+        "x": 105,
+        "y": 1080,
+        "wires": [
+            [
+                "sd_KaWsxlIwXb8grycj"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "Auth_Service"
+    },
+    {
+        "id": "sd_KaWsxlIwXb8grycj",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_FRvfiH6V1AZoTDKz",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "bh.local.cookie_data = {\n\naccessToken: {\nvalue: \"accessToken\",\noptions: {\nexpires: Date(0),\n}\n},\n\nrefreshToken: {\nvalue: \"refreshToken\",\noptions: {\nexpires: new Date(0),\nhttpOnly: 'true',\npath: '/',\nsecure: 'false',\nsameSite: 'lx',\n}\n}\n\n};\n\nbh.local.responces = {\n    statusCode: 200,\n    message: \"Logout successfuly completed\"\n}\n",
+        "functionName": "sd_KaWsxlIwXb8grycj",
+        "category": "Function",
+        "x": 205,
+        "y": 1080,
+        "wires": [
+            [
+                "sd_csgPtNX6uN1InhAD"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Auth_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_ddAU8w5wpLyiRnpt",
+        "type": "CallService",
+        "z": "SSD_SERVICE_ID_sd_FRvfiH6V1AZoTDKz",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "outputs": 1,
+        "isValidNode": true,
+        "noerr": 0,
+        "service": {
+            "id": "SSD_SERVICE_ID_sd_OQYJSSTIEwN2nkED",
+            "type": "tab",
+            "createdDate": "2023-04-27T11:41:14.198Z",
+            "label": "Post_Middlewares",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_jr8kV0nrmsr3HGnV",
+            "flowName": "http_Out_And_Cookie"
+        },
+        "inputVariables": [],
+        "bhVariables": [],
+        "outputMapping": [],
+        "callService": "../Middlewares/Post_Middlewares",
+        "startName": "http_Out_And_Cookie",
+        "inputParams": [
+            "bh"
+        ],
+        "accept_bh": true,
+        "functionName": "sd_ddAU8w5wpLyiRnpt",
+        "category": "General",
+        "x": 400,
+        "y": 1080,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Auth_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_csgPtNX6uN1InhAD",
+        "type": "Session",
+        "z": "SSD_SERVICE_ID_sd_FRvfiH6V1AZoTDKz",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "",
+        "operationType": "destroy",
+        "data": "",
+        "resultMapping": "bh",
+        "dataMapping": "bh",
+        "functionName": "sd_csgPtNX6uN1InhAD",
+        "category": "HTTP",
+        "x": 305,
+        "y": 1080,
+        "wires": [
+            [
+                "sd_ddAU8w5wpLyiRnpt"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "resultMapping": {
+                "type": "bh",
+                "value": "",
+                "constant": false
+            },
+            "dataMapping": {
+                "type": "bh",
+                "value": "",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Auth_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_kI40xmJQeIWuX8bu",
+        "type": "Session",
+        "z": "SSD_SERVICE_ID_sd_FRvfiH6V1AZoTDKz",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "",
+        "operationType": "update",
+        "data": "",
+        "resultMapping": "bh",
+        "dataMapping": "bh.local.userDetail",
+        "functionName": "sd_kI40xmJQeIWuX8bu",
+        "category": "HTTP",
+        "x": 985,
+        "y": 140,
+        "wires": [
+            [
+                "sd_cnBbnyuPt0opOB17"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "resultMapping": {
+                "type": "bh",
+                "value": "",
+                "constant": false
+            },
+            "dataMapping": {
+                "type": "bh.local",
+                "value": "userDetail",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Auth_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_cnBbnyuPt0opOB17",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_FRvfiH6V1AZoTDKz",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": " bh.local.responces = {\n    statusCode:200,\n    message: \"loggedin\"\n    }",
+        "functionName": "sd_cnBbnyuPt0opOB17",
+        "category": "Function",
+        "x": 1105,
+        "y": 140,
+        "wires": [
+            [
+                "sd_kAWPm25A7UToNAa0"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Auth_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_beGU03ZgdGuROcDa",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_FRvfiH6V1AZoTDKz",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "\n\n\nconst {password,_id,...others}= bh.result\nothers.userId = _id\n\nbh.local.userDetail = others",
+        "functionName": "sd_beGU03ZgdGuROcDa",
+        "category": "Function",
+        "x": 845,
+        "y": 140,
+        "wires": [
+            [
+                "sd_kI40xmJQeIWuX8bu"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Auth_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_UPTkwl1QYMU6UQVv",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_FRvfiH6V1AZoTDKz",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "console.log(bh.input.body)",
+        "functionName": "sd_UPTkwl1QYMU6UQVv",
+        "category": "Function",
+        "x": 145,
+        "y": 80,
+        "wires": [
+            [
+                "sd_NRZEeQO57WTd1ewU"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Auth_Service",
+        "generated": true
+    }
+]

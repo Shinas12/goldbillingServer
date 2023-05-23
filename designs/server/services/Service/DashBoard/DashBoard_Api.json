@@ -1,0 +1,112 @@
+[
+    {
+        "id": "SSD_SERVICE_ID_sd_b936VOCyrl15eYsI",
+        "type": "tab",
+        "createdDate": "2023-05-04T11:28:45.976Z",
+        "label": "DashBoard_Api",
+        "disabled": false,
+        "info": "",
+        "functionSeq": 0,
+        "generateNext": true,
+        "serviceName": "DashBoard_Api",
+        "relativeParentPath": "Service/DashBoard"
+    },
+    {
+        "id": "sd_JmclCBsEJIZRE26C",
+        "type": "HttpIn",
+        "z": "SSD_SERVICE_ID_sd_b936VOCyrl15eYsI",
+        "viewType": "server",
+        "nodeType": "start",
+        "name": "SalesMan_HttpIn",
+        "path": "/salesMan/dashBoard",
+        "uploadpath": "",
+        "summary": "",
+        "description": "",
+        "method": "get",
+        "sequenceId": "",
+        "consumes": "",
+        "produces": "",
+        "filetype": "path",
+        "acceptFileUpload": false,
+        "useDataModel": false,
+        "dataModelIsArray": false,
+        "erd": "",
+        "erdName": "",
+        "entity": "",
+        "ref": "",
+        "editableListData": {
+            "responses": [],
+            "params": [],
+            "produces": [],
+            "consumes": []
+        },
+        "inputs": 0,
+        "outputs": 1,
+        "validateRequestUsingSwaggerDocs": false,
+        "category": "HTTP",
+        "x": 125,
+        "y": 200,
+        "wires": [
+            [
+                "sd_uTfeWum6oK9wef2I"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "uploadpath": {
+                "type": "str",
+                "value": "",
+                "nullable": "true",
+                "nullableValue": "",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "DashBoard_Api",
+        "functionName": "sd_JmclCBsEJIZRE26C"
+    },
+    {
+        "id": "sd_uTfeWum6oK9wef2I",
+        "type": "CallService",
+        "z": "SSD_SERVICE_ID_sd_b936VOCyrl15eYsI",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "SalesMan_DashBoard_Call",
+        "outputs": 1,
+        "isValidNode": true,
+        "noerr": 0,
+        "service": {
+            "id": "SSD_SERVICE_ID_sd_vVuq2AvtnTjhXlpb",
+            "type": "tab",
+            "createdDate": "2023-05-04T11:29:00.254Z",
+            "label": "DashBoard_Service",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_93tVkzJOtOJliNnl",
+            "flowName": "salesMan_DashBoard_Start"
+        },
+        "inputVariables": [],
+        "bhVariables": [],
+        "outputMapping": [],
+        "callService": "./DashBoard_Service",
+        "startName": "salesMan_DashBoard_Start",
+        "inputParams": [
+            "bh"
+        ],
+        "accept_bh": true,
+        "functionName": "salesMan_DashBoard_Call",
+        "category": "General",
+        "x": 265,
+        "y": 200,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "DashBoard_Api",
+        "generated": true
+    }
+]

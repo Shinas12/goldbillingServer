@@ -1,0 +1,8 @@
+{
+    "/login": {},
+    "/check": {},
+    "/admin/login": {},
+    "/admin": {},
+    "/admin/logout": {},
+    "/logout": {}
+}

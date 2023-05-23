@@ -1,0 +1,70 @@
+{
+    "name": "entity_1",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "description": "",
+    "type": "object",
+    "id": "_EN_vwyalqhzqt",
+    "y": 106,
+    "properties": {
+        "name": {
+            "name": "name",
+            "format": "",
+            "type": "string",
+            "description": "",
+            "default": "",
+            "__n__metadata__": {
+                "id": "_Att_vegu8gwoe",
+                "subCategoryType": null,
+                "nullable": false
+            }
+        },
+        "price": {
+            "name": "price",
+            "format": "",
+            "type": "number",
+            "description": "",
+            "default": "",
+            "__n__metadata__": {
+                "id": "_Att_5i8u83m536",
+                "nullable": false
+            }
+        },
+        "description": {
+            "name": "description",
+            "format": "",
+            "type": "string",
+            "description": "",
+            "default": "",
+            "__n__metadata__": {
+                "id": "_Att_40pwpwspr8",
+                "subCategoryType": null,
+                "nullable": false
+            }
+        },
+        "image": {
+            "name": "image",
+            "format": "",
+            "type": "string",
+            "description": "",
+            "default": "",
+            "__n__metadata__": {
+                "id": "_Att_a2ihld0izy",
+                "subCategoryType": null,
+                "nullable": false
+            }
+        }
+    },
+    "required": [
+        "name",
+        "price",
+        "description",
+        "image"
+    ],
+    "value": "",
+    "x": 396.375,
+    "userList": {
+        "SSD_SERVICE_ID_sd_NhyriMJXPMVob3jo": [
+            "sd_Yh6eKzRHGjwWyl1W"
+        ]
+    }
+}

@@ -1,0 +1,96 @@
+{
+    "name": "entity_1",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "description": "",
+    "type": "object",
+    "id": "_EN_q2wasl4tdd",
+    "y": 51,
+    "properties": {
+        "name": {
+            "name": "name",
+            "format": "",
+            "type": "string",
+            "description": "",
+            "default": "",
+            "__n__metadata__": {
+                "id": "_Att_d8fjztl1o4",
+                "subCategoryType": null,
+                "nullable": false
+            }
+        },
+        "email": {
+            "name": "email",
+            "format": "",
+            "type": "string",
+            "description": "",
+            "default": "",
+            "__n__metadata__": {
+                "id": "_Att_117svccqoc",
+                "subCategoryType": null,
+                "nullable": false
+            }
+        },
+        "phone": {
+            "name": "phone",
+            "format": "",
+            "type": "number",
+            "description": "",
+            "default": "",
+            "__n__metadata__": {
+                "id": "_Att_p6gbrsdhqi",
+                "nullable": false
+            }
+        },
+        "dob": {
+            "name": "dob",
+            "format": "date-time",
+            "type": "string",
+            "description": "",
+            "default": "",
+            "__n__metadata__": {
+                "id": "_Att_mq1x6srtic",
+                "subCategoryType": "date",
+                "nullable": false
+            }
+        },
+        "password": {
+            "name": "password",
+            "format": "",
+            "type": "string",
+            "description": "",
+            "default": "",
+            "__n__metadata__": {
+                "id": "_Att_a7ddgbn9dj",
+                "subCategoryType": null,
+                "nullable": false
+            }
+        },
+        "role": {
+            "name": "role",
+            "format": "",
+            "type": "string",
+            "description": "",
+            "default": "",
+            "__n__metadata__": {
+                "id": "_Att_cxupd07mxw",
+                "subCategoryType": null,
+                "nullable": false
+            }
+        }
+    },
+    "required": [
+        "name",
+        "email",
+        "phone",
+        "dob",
+        "password",
+        "role"
+    ],
+    "value": "",
+    "x": 369.375,
+    "userList": {
+        "SSD_SERVICE_ID_sd_KssgBRdFQZcQsfFL": [
+            "sd_z0ZMejkRtwnVing8"
+        ]
+    }
+}

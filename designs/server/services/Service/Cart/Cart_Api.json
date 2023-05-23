@@ -1,0 +1,513 @@
+[
+    {
+        "id": "SSD_SERVICE_ID_sd_xkZW2yDLImwp2j1c",
+        "type": "tab",
+        "createdDate": "2023-04-28T10:20:38.964Z",
+        "label": "Cart_Api",
+        "disabled": false,
+        "info": "",
+        "functionSeq": 0,
+        "generateNext": true,
+        "serviceName": "Cart_Api",
+        "relativeParentPath": "Service/Cart"
+    },
+    {
+        "id": "sd_PLoEMvsKSjiJ5Ptv",
+        "type": "HttpIn",
+        "z": "SSD_SERVICE_ID_sd_xkZW2yDLImwp2j1c",
+        "viewType": "server",
+        "nodeType": "start",
+        "name": "AddCart_HttpIn",
+        "path": "/cart",
+        "uploadpath": "",
+        "summary": "Add cart",
+        "description": "This api is for Add cart",
+        "method": "post",
+        "sequenceId": "",
+        "consumes": "",
+        "produces": "",
+        "filetype": "path",
+        "acceptFileUpload": false,
+        "useDataModel": false,
+        "dataModelIsArray": false,
+        "erd": "",
+        "erdName": "",
+        "entity": "",
+        "ref": "",
+        "editableListData": {
+            "responses": [],
+            "params": [],
+            "produces": [],
+            "consumes": []
+        },
+        "inputs": 0,
+        "outputs": 1,
+        "validateRequestUsingSwaggerDocs": false,
+        "category": "HTTP",
+        "x": 120,
+        "y": 80,
+        "wires": [
+            [
+                "sd_nuPBHeTNaaHuOpDu"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "uploadpath": {
+                "type": "str",
+                "value": "",
+                "nullable": "true",
+                "nullableValue": "",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "Cart_Api",
+        "functionName": "sd_PLoEMvsKSjiJ5Ptv"
+    },
+    {
+        "id": "sd_nuPBHeTNaaHuOpDu",
+        "type": "CallService",
+        "z": "SSD_SERVICE_ID_sd_xkZW2yDLImwp2j1c",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "AddCart_Call",
+        "outputs": 1,
+        "isValidNode": true,
+        "noerr": 0,
+        "service": {
+            "id": "SSD_SERVICE_ID_sd_v6D77QnOgMYLpYCV",
+            "type": "tab",
+            "createdDate": "2023-04-28T10:20:52.956Z",
+            "label": "Cart_Service",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_JRStBohH0W9USyQr",
+            "flowName": "addCart_Start"
+        },
+        "inputVariables": [],
+        "bhVariables": [],
+        "outputMapping": [],
+        "callService": "./Cart_Service",
+        "startName": "addCart_Start",
+        "inputParams": [
+            "bh"
+        ],
+        "accept_bh": true,
+        "functionName": "addCart_Call",
+        "category": "General",
+        "x": 260,
+        "y": 80,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Cart_Api",
+        "generated": true
+    },
+    {
+        "id": "sd_oEbD6kRMVw6B6tlc",
+        "type": "HttpIn",
+        "z": "SSD_SERVICE_ID_sd_xkZW2yDLImwp2j1c",
+        "viewType": "server",
+        "nodeType": "start",
+        "name": "getCartDetails_HttpIn",
+        "path": "/cart",
+        "uploadpath": "",
+        "summary": "get  cart",
+        "description": "This api is for get cart",
+        "method": "get",
+        "sequenceId": "",
+        "consumes": "",
+        "produces": "",
+        "filetype": "path",
+        "acceptFileUpload": false,
+        "useDataModel": false,
+        "dataModelIsArray": false,
+        "erd": "",
+        "erdName": "",
+        "entity": "",
+        "ref": "",
+        "editableListData": {
+            "responses": [],
+            "params": [
+                {
+                    "key": "uid",
+                    "desc": "userId",
+                    "type": "query",
+                    "required": true,
+                    "rowId": "sd_vWJRqeqtB9sTRO9d",
+                    "valid": true
+                }
+            ],
+            "produces": [],
+            "consumes": []
+        },
+        "inputs": 0,
+        "outputs": 1,
+        "validateRequestUsingSwaggerDocs": false,
+        "category": "HTTP",
+        "x": 114,
+        "y": 200,
+        "wires": [
+            [
+                "sd_0FE3BgcTV9ozImQq"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "uploadpath": {
+                "type": "str",
+                "value": "",
+                "nullable": "true",
+                "nullableValue": "",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "Cart_Api",
+        "functionName": "sd_oEbD6kRMVw6B6tlc"
+    },
+    {
+        "id": "sd_0FE3BgcTV9ozImQq",
+        "type": "CallService",
+        "z": "SSD_SERVICE_ID_sd_xkZW2yDLImwp2j1c",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "getCartDetails_Call",
+        "outputs": 1,
+        "isValidNode": true,
+        "noerr": 0,
+        "service": {
+            "id": "SSD_SERVICE_ID_sd_v6D77QnOgMYLpYCV",
+            "type": "tab",
+            "createdDate": "2023-04-28T10:20:52.956Z",
+            "label": "Cart_Service",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_JXf9ip5F3hDbpQPW",
+            "flowName": "getCartDetails_Start"
+        },
+        "inputVariables": [],
+        "bhVariables": [],
+        "outputMapping": [],
+        "callService": "./Cart_Service",
+        "startName": "getCartDetails_Start",
+        "inputParams": [
+            "bh"
+        ],
+        "accept_bh": true,
+        "functionName": "getCartDetails_Call",
+        "category": "General",
+        "x": 253,
+        "y": 200,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Cart_Api",
+        "generated": true
+    },
+    {
+        "id": "sd_Gldqxg5hX3VluTUs",
+        "type": "HttpIn",
+        "z": "SSD_SERVICE_ID_sd_xkZW2yDLImwp2j1c",
+        "viewType": "server",
+        "nodeType": "start",
+        "name": "getCartTotal_HttpIn",
+        "path": "/cartTotal",
+        "uploadpath": "",
+        "summary": "get  cart total",
+        "description": "tis api for user cart total",
+        "method": "get",
+        "sequenceId": "IDSAuthroizedAPIs",
+        "consumes": "",
+        "produces": "",
+        "filetype": "path",
+        "acceptFileUpload": false,
+        "useDataModel": false,
+        "dataModelIsArray": false,
+        "erd": "",
+        "erdName": "",
+        "entity": "",
+        "ref": "",
+        "editableListData": {
+            "responses": [],
+            "params": [],
+            "produces": [],
+            "consumes": []
+        },
+        "inputs": 0,
+        "outputs": 1,
+        "validateRequestUsingSwaggerDocs": false,
+        "category": "HTTP",
+        "x": 425,
+        "y": 80,
+        "wires": [
+            [
+                "sd_JOfrHagg4zy4zis9"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "uploadpath": {
+                "type": "str",
+                "value": "",
+                "nullable": "true",
+                "nullableValue": "",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "Cart_Api",
+        "functionName": "sd_Gldqxg5hX3VluTUs"
+    },
+    {
+        "id": "sd_JOfrHagg4zy4zis9",
+        "type": "CallService",
+        "z": "SSD_SERVICE_ID_sd_xkZW2yDLImwp2j1c",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "getCartTotal_Call",
+        "outputs": 1,
+        "isValidNode": true,
+        "noerr": 0,
+        "service": {
+            "id": "SSD_SERVICE_ID_sd_v6D77QnOgMYLpYCV",
+            "type": "tab",
+            "createdDate": "2023-04-28T10:20:52.956Z",
+            "label": "Cart_Service",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_E1Mcx7jBs98jMUAP",
+            "flowName": "getTotal_Start"
+        },
+        "inputVariables": [],
+        "bhVariables": [],
+        "outputMapping": [],
+        "callService": "./Cart_Service",
+        "startName": "getTotal_Start",
+        "inputParams": [
+            "bh"
+        ],
+        "accept_bh": true,
+        "functionName": "getCartTotal_Call",
+        "category": "General",
+        "x": 565,
+        "y": 80,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Cart_Api",
+        "generated": true
+    },
+    {
+        "id": "sd_HrPQOyZvvESkFtey",
+        "type": "HttpIn",
+        "z": "SSD_SERVICE_ID_sd_xkZW2yDLImwp2j1c",
+        "viewType": "server",
+        "nodeType": "start",
+        "name": "CartChangeQunty_Httpin",
+        "path": "/cart",
+        "uploadpath": "",
+        "summary": "",
+        "description": "",
+        "method": "put",
+        "sequenceId": "IDSAuthroizedAPIs",
+        "consumes": "",
+        "produces": "",
+        "filetype": "path",
+        "acceptFileUpload": false,
+        "useDataModel": false,
+        "dataModelIsArray": false,
+        "erd": "",
+        "erdName": "",
+        "entity": "",
+        "ref": "",
+        "editableListData": {
+            "responses": [],
+            "params": [],
+            "produces": [],
+            "consumes": []
+        },
+        "inputs": 0,
+        "outputs": 1,
+        "validateRequestUsingSwaggerDocs": false,
+        "category": "HTTP",
+        "x": 424,
+        "y": 200,
+        "wires": [
+            [
+                "sd_AvvrKWNM6hUMJJUX"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "uploadpath": {
+                "type": "str",
+                "value": "",
+                "nullable": "true",
+                "nullableValue": "",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "Cart_Api",
+        "functionName": "sd_HrPQOyZvvESkFtey"
+    },
+    {
+        "id": "sd_AvvrKWNM6hUMJJUX",
+        "type": "CallService",
+        "z": "SSD_SERVICE_ID_sd_xkZW2yDLImwp2j1c",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "CartChangeQunty_Call",
+        "outputs": 1,
+        "isValidNode": true,
+        "noerr": 0,
+        "service": {
+            "id": "SSD_SERVICE_ID_sd_v6D77QnOgMYLpYCV",
+            "type": "tab",
+            "createdDate": "2023-04-28T10:20:52.956Z",
+            "label": "Cart_Service",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_r7IilBkGPIxYzgRu",
+            "flowName": "cartChangeQunty_Start"
+        },
+        "inputVariables": [],
+        "bhVariables": [],
+        "outputMapping": [],
+        "callService": "./Cart_Service",
+        "startName": "cartChangeQunty_Start",
+        "inputParams": [
+            "bh"
+        ],
+        "accept_bh": true,
+        "functionName": "cartChangeQunty_Call",
+        "category": "General",
+        "x": 572,
+        "y": 200,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Cart_Api",
+        "generated": true
+    },
+    {
+        "id": "sd_dxhuVc3wlxyoyLYf",
+        "type": "HttpIn",
+        "z": "SSD_SERVICE_ID_sd_xkZW2yDLImwp2j1c",
+        "viewType": "server",
+        "nodeType": "start",
+        "name": "removeProduct_HttpIn",
+        "path": "/cart",
+        "uploadpath": "",
+        "summary": "",
+        "description": "",
+        "method": "delete",
+        "sequenceId": "IDSAuthroizedAPIs",
+        "consumes": "",
+        "produces": "",
+        "filetype": "path",
+        "acceptFileUpload": false,
+        "useDataModel": false,
+        "dataModelIsArray": false,
+        "erd": "",
+        "erdName": "",
+        "entity": "",
+        "ref": "",
+        "editableListData": {
+            "responses": [],
+            "params": [],
+            "produces": [],
+            "consumes": []
+        },
+        "inputs": 0,
+        "outputs": 1,
+        "validateRequestUsingSwaggerDocs": false,
+        "category": "HTTP",
+        "x": 745,
+        "y": 80,
+        "wires": [
+            [
+                "sd_qg360wPO47BXSBO8"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "uploadpath": {
+                "type": "str",
+                "value": "",
+                "nullable": "true",
+                "nullableValue": "",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "Cart_Api",
+        "functionName": "sd_dxhuVc3wlxyoyLYf"
+    },
+    {
+        "id": "sd_qg360wPO47BXSBO8",
+        "type": "CallService",
+        "z": "SSD_SERVICE_ID_sd_xkZW2yDLImwp2j1c",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "outputs": 1,
+        "isValidNode": true,
+        "noerr": 0,
+        "service": {
+            "id": "SSD_SERVICE_ID_sd_v6D77QnOgMYLpYCV",
+            "type": "tab",
+            "createdDate": "2023-04-28T10:20:52.956Z",
+            "label": "Cart_Service",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_vOZ7s4pYUC6S6w6q",
+            "flowName": "removeCart_Start"
+        },
+        "inputVariables": [],
+        "bhVariables": [],
+        "outputMapping": [],
+        "callService": "./Cart_Service",
+        "startName": "removeCart_Start",
+        "inputParams": [
+            "bh"
+        ],
+        "accept_bh": true,
+        "functionName": "sd_qg360wPO47BXSBO8",
+        "category": "General",
+        "x": 885,
+        "y": 80,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Cart_Api",
+        "generated": true
+    }
+]

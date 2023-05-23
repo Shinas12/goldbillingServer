@@ -1,0 +1,439 @@
+[
+    {
+        "id": "SSD_SERVICE_ID_sd_KssgBRdFQZcQsfFL",
+        "type": "tab",
+        "createdDate": "2023-04-28T08:01:21.904Z",
+        "label": "Salesman_Service",
+        "disabled": false,
+        "info": "",
+        "functionSeq": 0,
+        "generateNext": true,
+        "serviceName": "Salesman_Service",
+        "relativeParentPath": "Service/Salesman"
+    },
+    {
+        "id": "sd_7xkOtcdYnAM7jsq7",
+        "type": "Start",
+        "z": "SSD_SERVICE_ID_sd_KssgBRdFQZcQsfFL",
+        "viewType": "client-server",
+        "nodeType": "start",
+        "name": "AddSalesman_Start",
+        "outputs": 1,
+        "inputVariables": [],
+        "localVariables": [],
+        "accept_bh": true,
+        "functionName": "addSalesman_Start",
+        "category": "General",
+        "x": 85,
+        "y": 140,
+        "wires": [
+            [
+                "sd_z0ZMejkRtwnVing8"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "Salesman_Service",
+        "generated": false
+    },
+    {
+        "id": "sd_xCbvd7njrGG5NWLn",
+        "type": "Mongodb",
+        "z": "SSD_SERVICE_ID_sd_KssgBRdFQZcQsfFL",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "AddSalesman_Mongodb",
+        "databaseConfig": "sd_rgjA4nOniJAL9Rgn",
+        "collection": "__ssd__env__process.env.SALESMAN_COLLECTION__ssd__env__end",
+        "options": "",
+        "resultMapping": "bh.local.result",
+        "operation": "insertOne",
+        "argumentArray": [
+            "document"
+        ],
+        "aggregate": "",
+        "operations": "",
+        "query": "bh",
+        "fieldOrSpec": "",
+        "filter": "",
+        "key": "",
+        "docId": "",
+        "indexName": "",
+        "replacement": "",
+        "update": "",
+        "xAxis": "",
+        "yAxis": "",
+        "indexes": "",
+        "docs": "",
+        "document": "bh.input.body",
+        "newName": "",
+        "doc": "",
+        "filePath": "",
+        "fileName": "",
+        "pipeline": "",
+        "functionName": "addSalesman_Mongodb",
+        "category": "Storage",
+        "x": 605,
+        "y": 40,
+        "wires": [
+            [
+                "sd_WMwk4yH2j9wjWGRa"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "collection": {
+                "type": "process.env",
+                "value": "SALESMAN_COLLECTION",
+                "constant": false
+            },
+            "options": {
+                "type": "bh",
+                "value": "",
+                "nullable": "true",
+                "constant": false
+            },
+            "resultMapping": {
+                "type": "bh.local",
+                "value": "result",
+                "constant": false
+            },
+            "query": {
+                "type": "bh",
+                "value": "",
+                "constant": false
+            },
+            "document": {
+                "type": "bh.input",
+                "value": "body",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Salesman_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_WMwk4yH2j9wjWGRa",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_KssgBRdFQZcQsfFL",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "AddSalesman_Script",
+        "script": "\nbh.local.responces = {\n    statusCode: 200,\n    result: {\n          message:'Registration completed successfully',\n        id: bh.local.result.insertedId\n    }\n}",
+        "functionName": "addSalesman_Script",
+        "category": "Function",
+        "x": 745,
+        "y": 40,
+        "wires": [
+            [
+                "sd_N4s4ppFfFPfXI7iB"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Salesman_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_N4s4ppFfFPfXI7iB",
+        "type": "CallService",
+        "z": "SSD_SERVICE_ID_sd_KssgBRdFQZcQsfFL",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "HttpOut_Call",
+        "outputs": 1,
+        "isValidNode": true,
+        "noerr": 0,
+        "service": {
+            "id": "SSD_SERVICE_ID_sd_OQYJSSTIEwN2nkED",
+            "type": "tab",
+            "createdDate": "2023-04-27T11:41:14.198Z",
+            "label": "Post_Middlewares",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_eva1cbamE2ymKj38",
+            "flowName": "httpOut_Start"
+        },
+        "inputVariables": [],
+        "bhVariables": [],
+        "outputMapping": [],
+        "callService": "../../Middlewares/Post_Middlewares",
+        "startName": "httpOut_Start",
+        "inputParams": [
+            "bh"
+        ],
+        "accept_bh": true,
+        "functionName": "httpOut_Call",
+        "category": "General",
+        "x": 854,
+        "y": 242,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generated": true,
+        "generateNext": false,
+        "serviceName": "Salesman_Service"
+    },
+    {
+        "id": "sd_hXIKHMTm6LBrqQwb",
+        "type": "Catch",
+        "z": "SSD_SERVICE_ID_sd_KssgBRdFQZcQsfFL",
+        "viewType": "common",
+        "nodeType": "start",
+        "name": "Catch_Node",
+        "selectedNodes": [
+            "sd_7xkOtcdYnAM7jsq7",
+            "sd_xCbvd7njrGG5NWLn",
+            "sd_WMwk4yH2j9wjWGRa",
+            "sd_4s1JLXiefqCQhyO9",
+            "sd_erRyUudqETOYwFvj",
+            "sd_z0ZMejkRtwnVing8"
+        ],
+        "selectCatchType": "selectednodes",
+        "masternodeList": "",
+        "ignoreList": "",
+        "functionName": "catch_Node",
+        "category": "General",
+        "x": 474,
+        "y": 243,
+        "wires": [
+            [
+                "sd_GGqiMLNPglTMd0WD"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "Salesman_Service",
+        "generated": false
+    },
+    {
+        "id": "sd_GGqiMLNPglTMd0WD",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_KssgBRdFQZcQsfFL",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "Catch_Script",
+        "script": "\nbh.local.responces = {\n    statusCode: 404,\n    message: bh.error.message\n}",
+        "functionName": "catch_Script",
+        "category": "Function",
+        "x": 625,
+        "y": 240,
+        "wires": [
+            [
+                "sd_N4s4ppFfFPfXI7iB"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Salesman_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_4s1JLXiefqCQhyO9",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_KssgBRdFQZcQsfFL",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "Qurery",
+        "script": "const bcrypt = require('bcrypt')\n\nbh.input.body.password = await bcrypt.hash(bh.input.body.password, 10)\n\n\nbh.local.qurery = {\n  $or: [{ email: bh.input.body.email }, { phone: bh.input.body.phone }],\n}\nbh.input.body.block = false;",
+        "functionName": "qurery",
+        "category": "Function",
+        "x": 305,
+        "y": 140,
+        "wires": [
+            [
+                "sd_erRyUudqETOYwFvj"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Salesman_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_erRyUudqETOYwFvj",
+        "type": "Mongodb",
+        "z": "SSD_SERVICE_ID_sd_KssgBRdFQZcQsfFL",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "GetSalesman_Mongodb",
+        "databaseConfig": "sd_rgjA4nOniJAL9Rgn",
+        "collection": "__ssd__env__process.env.SALESMAN_COLLECTION__ssd__env__end",
+        "options": "",
+        "resultMapping": "bh.local.Salesman",
+        "operation": "find",
+        "argumentArray": [
+            "query"
+        ],
+        "aggregate": "",
+        "operations": "",
+        "query": "bh.local.qurery",
+        "fieldOrSpec": "",
+        "filter": "",
+        "key": "",
+        "docId": "",
+        "indexName": "",
+        "replacement": "",
+        "update": "",
+        "xAxis": "",
+        "yAxis": "",
+        "indexes": "",
+        "docs": "",
+        "document": "bh.input.body",
+        "newName": "",
+        "doc": "",
+        "filePath": "",
+        "fileName": "",
+        "pipeline": "",
+        "functionName": "getSalesman_Mongodb",
+        "category": "Storage",
+        "x": 405,
+        "y": 140,
+        "wires": [
+            [
+                "sd_eQvUFhAN1zRm2Jqx"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "collection": {
+                "type": "process.env",
+                "value": "SALESMAN_COLLECTION",
+                "constant": false
+            },
+            "options": {
+                "type": "bh",
+                "value": "",
+                "nullable": "true",
+                "constant": false
+            },
+            "resultMapping": {
+                "type": "bh.local",
+                "value": "Salesman",
+                "constant": false
+            },
+            "query": {
+                "type": "bh.local",
+                "value": "qurery",
+                "constant": false
+            },
+            "document": {
+                "type": "bh.input",
+                "value": "body",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Salesman_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_eQvUFhAN1zRm2Jqx",
+        "type": "Switch",
+        "z": "SSD_SERVICE_ID_sd_KssgBRdFQZcQsfFL",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "Salesman_Exist",
+        "property": "Salesman",
+        "propertyType": "bh.local",
+        "propertyGv": "bh.local.Salesman",
+        "rules": [
+            {
+                "t": "empty"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "functionName": "salesman_Exist",
+        "category": "Function",
+        "x": 525,
+        "y": 140,
+        "wires": [
+            [
+                "sd_xCbvd7njrGG5NWLn"
+            ],
+            [
+                "sd_a3V3fJbx9SPn0pTG"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Salesman_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_a3V3fJbx9SPn0pTG",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_KssgBRdFQZcQsfFL",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "Salesman_Existing_Script",
+        "script": "\nbh.local.responces={\n   statusCode:404,\n   result:{\n       status:false,\n       message:'Existing user. '\n   }\n}",
+        "functionName": "salesman_Existing_Script",
+        "category": "Function",
+        "x": 745,
+        "y": 146,
+        "wires": [
+            [
+                "sd_N4s4ppFfFPfXI7iB"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "Salesman_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_z0ZMejkRtwnVing8",
+        "type": "validate",
+        "z": "SSD_SERVICE_ID_sd_KssgBRdFQZcQsfFL",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "salesman_Validate",
+        "erd": "_DM_032kzttfv",
+        "entityId": "_EN_q2wasl4tdd",
+        "_UI_entityName": "entity_1",
+        "dbConfigId": "",
+        "validateObject": "bh.input.body",
+        "checkboxThrowError": true,
+        "resultMapping": "",
+        "functionName": "salesman_Validate",
+        "category": "Data Model",
+        "x": 205,
+        "y": 140,
+        "wires": [
+            [
+                "sd_4s1JLXiefqCQhyO9"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "validateObject": {
+                "type": "bh.input",
+                "value": "body",
+                "constant": false
+            },
+            "resultMapping": {
+                "type": "bh",
+                "value": "",
+                "nullable": "true",
+                "nullableValue": "",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {
+            "resultMapping": true
+        },
+        "generateNext": false,
+        "serviceName": "Salesman_Service",
+        "generated": true
+    }
+]

@@ -1,0 +1,291 @@
+[
+    {
+        "id": "SSD_SERVICE_ID_sd_vVuq2AvtnTjhXlpb",
+        "type": "tab",
+        "createdDate": "2023-05-04T11:29:00.254Z",
+        "label": "DashBoard_Service",
+        "disabled": false,
+        "info": "",
+        "functionSeq": 0,
+        "generateNext": true,
+        "serviceName": "DashBoard_Service",
+        "relativeParentPath": "Service/DashBoard"
+    },
+    {
+        "id": "sd_93tVkzJOtOJliNnl",
+        "type": "Start",
+        "z": "SSD_SERVICE_ID_sd_vVuq2AvtnTjhXlpb",
+        "viewType": "client-server",
+        "nodeType": "start",
+        "name": "SalesMan_DashBoard_Start",
+        "outputs": 1,
+        "inputVariables": [],
+        "localVariables": [],
+        "accept_bh": true,
+        "functionName": "salesMan_DashBoard_Start",
+        "category": "General",
+        "x": 85,
+        "y": 140,
+        "wires": [
+            [
+                "sd_73Rfz1ffRlOwrR9I"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "DashBoard_Service"
+    },
+    {
+        "id": "sd_xnxFjQ5W6wTwnv4E",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_vVuq2AvtnTjhXlpb",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "SalesMan_DashBoard_Scrit",
+        "script": "console.log(bh.local.session.data.clientId);\nconst { ObjectId } = require('mongodb')\nbh.local.pipeline = [{ $match: { salesManId: ObjectId(bh.local.session.data.clientId) } },\n{\n    $group:\n    {\n        _id: '$status',\n        count: { \"$sum\": 1 }\n\n    }\n}]",
+        "functionName": "salesMan_DashBoard_Scrit",
+        "category": "Function",
+        "x": 405,
+        "y": 140,
+        "wires": [
+            [
+                "sd_e42NYHHQcF9pVERZ"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "DashBoard_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_s90qbLdWDtYC9V9z",
+        "type": "CallService",
+        "z": "SSD_SERVICE_ID_sd_vVuq2AvtnTjhXlpb",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "SalesMan_DashBoard_HttpOut",
+        "outputs": 1,
+        "isValidNode": true,
+        "noerr": 0,
+        "service": {
+            "id": "SSD_SERVICE_ID_sd_OQYJSSTIEwN2nkED",
+            "type": "tab",
+            "createdDate": "2023-04-27T11:41:14.198Z",
+            "label": "Post_Middlewares",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_eva1cbamE2ymKj38",
+            "flowName": "httpOut_Start"
+        },
+        "inputVariables": [],
+        "bhVariables": [],
+        "outputMapping": [],
+        "callService": "../../Middlewares/Post_Middlewares",
+        "startName": "httpOut_Start",
+        "inputParams": [
+            "bh"
+        ],
+        "accept_bh": true,
+        "functionName": "salesMan_DashBoard_HttpOut",
+        "category": "General",
+        "x": 625,
+        "y": 300,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "DashBoard_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_lDIxLynqC37jWdTt",
+        "type": "Catch",
+        "z": "SSD_SERVICE_ID_sd_vVuq2AvtnTjhXlpb",
+        "viewType": "common",
+        "nodeType": "start",
+        "name": "SalesMan_DashBoard_Catch",
+        "selectedNodes": [
+            "sd_93tVkzJOtOJliNnl",
+            "sd_xnxFjQ5W6wTwnv4E",
+            "sd_ScOnffFLtfE1zdxR",
+            "sd_e42NYHHQcF9pVERZ"
+        ],
+        "selectCatchType": "selectednodes",
+        "masternodeList": "",
+        "ignoreList": "",
+        "functionName": "salesMan_DashBoard_Catch",
+        "category": "General",
+        "x": 220,
+        "y": 300,
+        "wires": [
+            [
+                "sd_4QG9Td2WlVh9OtVL"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "DashBoard_Service"
+    },
+    {
+        "id": "sd_4QG9Td2WlVh9OtVL",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_vVuq2AvtnTjhXlpb",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "SalesMan_DashBoard_Error_Response",
+        "script": "\nbh.local.responces = {\n    statusCode: 404,\n    message: bh.error.message\n}",
+        "functionName": "salesMan_DashBoard_Error_Response",
+        "category": "Function",
+        "x": 420,
+        "y": 300,
+        "wires": [
+            [
+                "sd_s90qbLdWDtYC9V9z"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "DashBoard_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_ScOnffFLtfE1zdxR",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_vVuq2AvtnTjhXlpb",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "SalesMan_DashBoard_Response_Script",
+        "script": "// bh.local.output={\n//     Pending:bh.local\n// }\n\nbh.local.responces = {\n    statusCode: 200,\n    result: {\n        DashBoard: bh.local.result\n    }\n}",
+        "functionName": "salesMan_DashBoard_Response_Script",
+        "category": "Function",
+        "x": 785,
+        "y": 140,
+        "wires": [
+            [
+                "sd_s90qbLdWDtYC9V9z"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "DashBoard_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_e42NYHHQcF9pVERZ",
+        "type": "Mongodb",
+        "z": "SSD_SERVICE_ID_sd_vVuq2AvtnTjhXlpb",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "SalesMan_DashBoard_Mongo",
+        "databaseConfig": "sd_rgjA4nOniJAL9Rgn",
+        "collection": "__ssd__env__process.env.ORDER_COLLECTION__ssd__env__end",
+        "options": "",
+        "resultMapping": "bh.local.result",
+        "operation": "aggregate",
+        "argumentArray": [
+            "aggregate"
+        ],
+        "aggregate": "bh.local.pipeline",
+        "operations": "",
+        "query": "bh",
+        "fieldOrSpec": "",
+        "filter": "",
+        "key": "",
+        "docId": "",
+        "indexName": "",
+        "replacement": "",
+        "update": "",
+        "xAxis": "",
+        "yAxis": "",
+        "indexes": "",
+        "docs": "",
+        "document": "",
+        "newName": "",
+        "doc": "",
+        "filePath": "",
+        "fileName": "",
+        "pipeline": "",
+        "functionName": "salesMan_DashBoard_Mongo",
+        "category": "Storage",
+        "x": 585,
+        "y": 140,
+        "wires": [
+            [
+                "sd_ScOnffFLtfE1zdxR"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "collection": {
+                "type": "process.env",
+                "value": "ORDER_COLLECTION",
+                "constant": false
+            },
+            "options": {
+                "type": "bh",
+                "value": "",
+                "nullable": "true",
+                "constant": false
+            },
+            "resultMapping": {
+                "type": "bh.local",
+                "value": "result",
+                "constant": false
+            },
+            "query": {
+                "type": "bh",
+                "value": "",
+                "constant": false
+            },
+            "aggregate": {
+                "type": "bh.local",
+                "value": "pipeline",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "DashBoard_Service",
+        "generated": true
+    },
+    {
+        "id": "sd_73Rfz1ffRlOwrR9I",
+        "type": "Session",
+        "z": "SSD_SERVICE_ID_sd_vVuq2AvtnTjhXlpb",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "",
+        "operationType": "get",
+        "data": "",
+        "resultMapping": "bh.local.session",
+        "dataMapping": "bh",
+        "functionName": "sd_73Rfz1ffRlOwrR9I",
+        "category": "HTTP",
+        "x": 245,
+        "y": 140,
+        "wires": [
+            [
+                "sd_xnxFjQ5W6wTwnv4E"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "resultMapping": {
+                "type": "bh.local",
+                "value": "session",
+                "constant": false
+            },
+            "dataMapping": {
+                "type": "bh",
+                "value": "",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "DashBoard_Service",
+        "generated": true
+    }
+]

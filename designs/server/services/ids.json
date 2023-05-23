@@ -1,0 +1,2813 @@
+[
+    {
+        "id": "sd_Fw3wKgGdAy9sM9UI",
+        "type": "tab",
+        "createdDate": "2019-12-04T10:42:13.097Z",
+        "label": "ids",
+        "disabled": false,
+        "info": "",
+        "generateNext": true,
+        "serviceName": "ids",
+        "relativeParentPath": ""
+    },
+    {
+        "id": "sd_fykHrmDh4jfYhMEC",
+        "type": "HttpIn",
+        "z": "sd_Fw3wKgGdAy9sM9UI",
+        "viewType": "server",
+        "nodeType": "start",
+        "name": "Login API",
+        "path": "/login",
+        "uploadpath": "",
+        "summary": "",
+        "description": "",
+        "method": "get",
+        "sequenceId": "",
+        "consumes": "",
+        "produces": "",
+        "filetype": "path",
+        "acceptFileUpload": false,
+        "useDataModel": false,
+        "dataModelIsArray": false,
+        "uploadFileOptions": {},
+        "erd": "",
+        "erdName": "",
+        "entity": "",
+        "ref": "",
+        "editableListData": {
+            "responses": [],
+            "params": [],
+            "produces": [],
+            "consumes": []
+        },
+        "inputs": 0,
+        "outputs": 1,
+        "validateRequestUsingSwaggerDocs": false,
+        "category": "HTTP",
+        "x": 92,
+        "y": 286.953125,
+        "wires": [
+            [
+                "sd_fpJd7sReoZIf9RUa"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "ids",
+        "functionName": "sd_fykHrmDh4jfYhMEC"
+    },
+    {
+        "id": "sd_AA48jen4kd7TRIbd",
+        "type": "Script",
+        "z": "sd_Fw3wKgGdAy9sM9UI",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "Create session details",
+        "script": "bh.local.reqParams = {\n    state : crypto.randomBytes(16).toString('hex'),\n    nonce : crypto.randomBytes(16).toString('hex'),\n    isMobile : bh.input.query.isMobile,\n    redirectTo : bh.input.query.redirectTo\n};",
+        "functionName": "sd_AA48jen4kd7TRIbd",
+        "category": "Function",
+        "x": 618,
+        "y": 168.21875,
+        "wires": [
+            [
+                "sd_wd4parpTNVuyIa6z"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "ids",
+        "generated": true
+    },
+    {
+        "id": "sd_wd4parpTNVuyIa6z",
+        "type": "Session",
+        "z": "sd_Fw3wKgGdAy9sM9UI",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "",
+        "operationType": "update",
+        "data": "",
+        "resultMapping": "bh.input",
+        "dataMapping": "bh.local.reqParams",
+        "functionName": "sd_wd4parpTNVuyIa6z",
+        "category": "HTTP",
+        "x": 763,
+        "y": 410,
+        "wires": [
+            [
+                "sd_OkHEv13AkwFIa0Vr"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "resultMapping": {
+                "type": "bh.input",
+                "value": "",
+                "constant": false
+            },
+            "dataMapping": {
+                "type": "bh.local",
+                "value": "reqParams",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "ids",
+        "generated": true
+    },
+    {
+        "id": "sd_Xt1b77YpuFklXpoE",
+        "type": "Script",
+        "z": "sd_Fw3wKgGdAy9sM9UI",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "Calculate IDS login redirect URL",
+        "script": "const authorizationRequest = Object.assign({\n    redirect_uri: url.resolve(bh.web.req.href, '/api/login/cb'),\n    scope: 'openid profile email address phone user',\n    state: bh.local.reqParams.state,\n    nonce: bh.local.reqParams.nonce,\n    response_type: bh.input.client.response_types[0],\n}, bh.input.authParams);\n\nbh.local.redirectHeaders = {\n    location: bh.input.client.authorizationUrl(authorizationRequest)\n};\n",
+        "functionName": "sd_Xt1b77YpuFklXpoE",
+        "category": "Function",
+        "x": 1194,
+        "y": 160,
+        "wires": [
+            [
+                "sd_2g4co2RCeBAbFgu4"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "ids",
+        "generated": true
+    },
+    {
+        "id": "sd_OkHEv13AkwFIa0Vr",
+        "type": "CallService",
+        "z": "sd_Fw3wKgGdAy9sM9UI",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "Get IDS client instance",
+        "outputs": 1,
+        "isValidNode": true,
+        "noerr": 0,
+        "service": {
+            "serviceId": "sd_Zjp7u8ludeGig6i7",
+            "serviceName": "idsutil",
+            "id": "sd_Zjp7u8ludeGig6i7",
+            "label": "idsutil"
+        },
+        "flow": {
+            "flowId": "sd_51bpmleYd2mNdFjB",
+            "flowName": "getIDSClientInstance"
+        },
+        "inputVariables": [
+            {
+                "key": "clientInstance",
+                "map": true,
+                "valueType": "bh.input",
+                "value": ""
+            }
+        ],
+        "outputMapping": [
+            {
+                "mapVarType": "input",
+                "key": "clientInstance",
+                "valueType": "bh.input",
+                "value": "client",
+                "mapVarName": "clientInstance",
+                "localVar": "bh.input.client"
+            }
+        ],
+        "callService": "./idsutil",
+        "startName": "getIDSClientInstance",
+        "inputParams": [
+            null
+        ],
+        "accept_bh": false,
+        "functionName": "sd_OkHEv13AkwFIa0Vr",
+        "category": "General",
+        "x": 903.8125,
+        "y": 173.984375,
+        "wires": [
+            [
+                "sd_705LJKA59eHpNYuy"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "ids",
+        "generated": true
+    },
+    {
+        "id": "sd_2g4co2RCeBAbFgu4",
+        "type": "HttpOut",
+        "z": "sd_Fw3wKgGdAy9sM9UI",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "Redirect to IDS",
+        "headers": {
+            "type": "bh.local",
+            "value": "redirectHeaders",
+            "ssd_typedInputField": true
+        },
+        "responseBody": {
+            "type": "literal",
+            "value": "'redirecting'",
+            "ssd_typedInputField": true
+        },
+        "httpcode": {
+            "type": "num",
+            "value": 302,
+            "ssd_typedInputField": true
+        },
+        "responseType": "obj",
+        "swaggerResponse": {},
+        "responseMapping": {
+            "status": 302,
+            "obj": "'redirecting'",
+            "send": "'redirecting'"
+        },
+        "dataModelIsArray": false,
+        "cookies": [],
+        "inputs": 1,
+        "outputs": 0,
+        "erd": "",
+        "entity": "",
+        "ref": "",
+        "editableListData": {
+            "headers": [],
+            "produces": [],
+            "responses": []
+        },
+        "cookiesList": {},
+        "switchStates": {
+            "headers": "Value",
+            "cookies": "Map"
+        },
+        "functionName": "sd_2g4co2RCeBAbFgu4",
+        "category": "HTTP",
+        "x": 1343,
+        "y": 408,
+        "wires": [],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "ids",
+        "generated": true
+    },
+    {
+        "id": "sd_A9HHsWl8VRViBIgV",
+        "type": "Switch",
+        "z": "sd_Fw3wKgGdAy9sM9UI",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "Check if client is registered",
+        "property": "idsConfigured",
+        "propertyType": "bh.local",
+        "propertyGv": "bh.local.idsConfigured",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "functionName": "sd_A9HHsWl8VRViBIgV",
+        "category": "Function",
+        "x": 388,
+        "y": 286,
+        "wires": [
+            [
+                "sd_AA48jen4kd7TRIbd"
+            ],
+            [
+                "sd_r4jRYGoqXO08Sjxr"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "ids",
+        "generated": true
+    },
+    {
+        "id": "sd_fpJd7sReoZIf9RUa",
+        "type": "Script",
+        "z": "sd_Fw3wKgGdAy9sM9UI",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "Assert IDS config",
+        "script": "bh.local.idsConfigured = false;\nif (settings.default.hasOwnProperty('ids') && settings.default['ids'].hasOwnProperty('client_id') &&\n    settings.default['ids'].hasOwnProperty('client_secret')) {\n    bh.local.idsConfigured = true;\n}",
+        "functionName": "sd_fpJd7sReoZIf9RUa",
+        "category": "Function",
+        "x": 234,
+        "y": 287,
+        "wires": [
+            [
+                "sd_A9HHsWl8VRViBIgV"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "ids",
+        "generated": true
+    },
+    {
+        "id": "sd_qKz7TdXPkGiuhMqS",
+        "type": "HttpOut",
+        "z": "sd_Fw3wKgGdAy9sM9UI",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "Send client not registered response",
+        "headers": {},
+        "responseBody": {
+            "type": "literal",
+            "value": "bh.local.res.message",
+            "ssd_typedInputField": true
+        },
+        "httpcode": {
+            "type": "num",
+            "value": 404,
+            "ssd_typedInputField": true
+        },
+        "responseType": "obj",
+        "swaggerResponse": {},
+        "responseMapping": {
+            "status": 404,
+            "obj": "bh.local.res.message",
+            "send": "bh.local.res.message"
+        },
+        "dataModelIsArray": false,
+        "cookies": [],
+        "inputs": 1,
+        "outputs": 0,
+        "erd": "",
+        "entity": "",
+        "ref": "",
+        "editableListData": {
+            "headers": [],
+            "produces": [],
+            "responses": []
+        },
+        "cookiesList": {},
+        "switchStates": {
+            "headers": "Map",
+            "cookies": "Map"
+        },
+        "functionName": "sd_qKz7TdXPkGiuhMqS",
+        "category": "HTTP",
+        "x": 1341,
+        "y": 286,
+        "wires": [],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "ids",
+        "generated": true
+    },
+    {
+        "id": "sd_r4jRYGoqXO08Sjxr",
+        "type": "Script",
+        "z": "sd_Fw3wKgGdAy9sM9UI",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "Client not registered object",
+        "script": "bh.local.res = {\n    message: 'IDS client not registered. Register on the Neutrinos Stuido and try again'\n}",
+        "functionName": "sd_r4jRYGoqXO08Sjxr",
+        "category": "Function",
+        "x": 617,
+        "y": 291,
+        "wires": [
+            [
+                "sd_qKz7TdXPkGiuhMqS"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "ids",
+        "generated": true
+    },
+    {
+        "id": "sd_mPBdf03EQ30nteYF",
+        "type": "MiddlewareStart",
+        "z": "sd_Fw3wKgGdAy9sM9UI",
+        "viewType": "server",
+        "nodeType": "start",
+        "name": "hrefstart",
+        "inputs": 0,
+        "outputs": 1,
+        "category": "HTTP",
+        "x": 517,
+        "y": 691.796875,
+        "wires": [
+            [
+                "sd_yKbkoygYfygBdvcg"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "ids",
+        "functionName": "sd_mPBdf03EQ30nteYF"
+    },
+    {
+        "id": "sd_0BW1cKgp24PVpaUR",
+        "type": "MiddlewareEnd",
+        "z": "sd_Fw3wKgGdAy9sM9UI",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "Href end",
+        "headers": {},
+        "responseBody": {
+            "type": "literal",
+            "value": "'end'",
+            "ssd_typedInputField": true
+        },
+        "httpcode": {
+            "type": "num",
+            "value": "200",
+            "ssd_typedInputField": true
+        },
+        "responseType": "next",
+        "responseMapping": {
+            "status": 200,
+            "next": "'end'"
+        },
+        "cookies": [],
+        "inputs": 1,
+        "outputs": 0,
+        "editableListData": {
+            "headers": []
+        },
+        "cookiesList": {},
+        "switchStates": {
+            "headers": "Map",
+            "cookies": "Map"
+        },
+        "functionName": "sd_0BW1cKgp24PVpaUR",
+        "category": "HTTP",
+        "x": 819.890625,
+        "y": 692.796875,
+        "wires": [],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "ids",
+        "generated": true
+    },
+    {
+        "id": "sd_yKbkoygYfygBdvcg",
+        "type": "Script",
+        "z": "sd_Fw3wKgGdAy9sM9UI",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "Calculate href",
+        "script": "const protocol = bh.input.headers['x-forwarded-proto'] || bh.web.req.protocol;\nconst href = protocol + \"://\" + bh.web.req.get('Host') + bh.web.req.originalUrl;\nbh.web.req.href = href;",
+        "functionName": "sd_yKbkoygYfygBdvcg",
+        "category": "Function",
+        "x": 665,
+        "y": 692.78125,
+        "wires": [
+            [
+                "sd_0BW1cKgp24PVpaUR"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "ids",
+        "generated": true
+    },
+    {
+        "id": "sd_705LJKA59eHpNYuy",
+        "type": "CallService",
+        "z": "sd_Fw3wKgGdAy9sM9UI",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "Get Scope and consent values",
+        "outputs": 1,
+        "isValidNode": true,
+        "noerr": 0,
+        "service": {
+            "serviceId": "sd_Zjp7u8ludeGig6i7",
+            "serviceName": "idsutil",
+            "id": "sd_Zjp7u8ludeGig6i7",
+            "label": "idsutil"
+        },
+        "flow": {
+            "flowId": "sd_uNgBRDl56KecBhjR",
+            "flowName": "Get Authorization Params"
+        },
+        "inputVariables": [
+            {
+                "key": "authParams",
+                "map": false,
+                "value": ""
+            }
+        ],
+        "outputMapping": [
+            {
+                "mapVarType": "input",
+                "key": "authParams",
+                "valueType": "bh.input",
+                "value": "authParams",
+                "mapVarName": "authParams",
+                "localVar": "bh.input.authParams"
+            }
+        ],
+        "callService": "./idsutil",
+        "startName": "getAuthorizationParams",
+        "inputParams": [
+            ""
+        ],
+        "accept_bh": false,
+        "functionName": "sd_705LJKA59eHpNYuy",
+        "category": "General",
+        "x": 1051,
+        "y": 415.78125,
+        "wires": [
+            [
+                "sd_Xt1b77YpuFklXpoE"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "ids",
+        "generated": true
+    },
+    {
+        "id": "sd_R6mFBJspwSHbebl7",
+        "type": "HttpIn",
+        "z": "sd_Fw3wKgGdAy9sM9UI",
+        "viewType": "server",
+        "nodeType": "start",
+        "name": "Login Callback API",
+        "path": "/login/cb",
+        "uploadpath": "",
+        "summary": "",
+        "description": "",
+        "method": "get",
+        "sequenceId": "",
+        "consumes": "",
+        "produces": "",
+        "filetype": "path",
+        "acceptFileUpload": false,
+        "useDataModel": false,
+        "dataModelIsArray": false,
+        "uploadFileOptions": "",
+        "erd": "",
+        "erdName": "",
+        "entity": "",
+        "ref": "",
+        "editableListData": {
+            "responses": [],
+            "params": [],
+            "produces": [],
+            "consumes": []
+        },
+        "inputs": 0,
+        "outputs": 1,
+        "validateRequestUsingSwaggerDocs": false,
+        "category": "HTTP",
+        "x": 88.890625,
+        "y": 1038.796875,
+        "wires": [
+            [
+                "sd_N8BlCPYQxTQnvk53"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "uploadpath": {
+                "type": "str",
+                "value": "",
+                "nullable": "true",
+                "nullableValue": "",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "ids",
+        "functionName": "sd_R6mFBJspwSHbebl7"
+    },
+    {
+        "id": "sd_9aJip5hx1vJRIVmq",
+        "type": "CallService",
+        "z": "sd_Fw3wKgGdAy9sM9UI",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "Get IDS client instance",
+        "outputs": 1,
+        "isValidNode": true,
+        "noerr": 0,
+        "service": {
+            "id": "sd_Zjp7u8ludeGig6i7",
+            "type": "tab",
+            "createdDate": "2019-12-04T13:37:05.418Z",
+            "label": "idsutil",
+            "disabled": false,
+            "info": ""
+        },
+        "flow": {
+            "flowId": "sd_51bpmleYd2mNdFjB",
+            "flowName": "getIDSClientInstance"
+        },
+        "inputVariables": [
+            {
+                "key": "clientInstance",
+                "map": true,
+                "valueType": "bh.input",
+                "value": ""
+            }
+        ],
+        "bhVariables": [],
+        "outputMapping": [
+            {
+                "mapVarType": "input",
+                "key": "clientInstance",
+                "valueType": "bh.input",
+                "value": "client",
+                "mapVarName": "clientInstance",
+                "localVar": "bh.input.client"
+            }
+        ],
+        "callService": "./idsutil",
+        "startName": "getIDSClientInstance",
+        "inputParams": [
+            null
+        ],
+        "accept_bh": "",
+        "functionName": "sd_9aJip5hx1vJRIVmq",
+        "category": "General",
+        "x": 453,
+        "y": 1036.8125,
+        "wires": [
+            [
+                "sd_HAZjIh4Y9ASdNJTk"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "ids",
+        "generated": true
+    },
+    {
+        "id": "sd_N8BlCPYQxTQnvk53",
+        "type": "Session",
+        "z": "sd_Fw3wKgGdAy9sM9UI",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "",
+        "operationType": "get",
+        "data": "",
+        "resultMapping": "bh.input.sessionParams",
+        "dataMapping": "bh.input",
+        "functionName": "sd_N8BlCPYQxTQnvk53",
+        "category": "HTTP",
+        "x": 262,
+        "y": 1038.796875,
+        "wires": [
+            [
+                "sd_9aJip5hx1vJRIVmq"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "resultMapping": {
+                "type": "bh.input",
+                "value": "sessionParams",
+                "constant": false
+            },
+            "dataMapping": {
+                "type": "bh.input",
+                "value": "",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "ids",
+        "generated": true
+    },
+    {
+        "id": "sd_JxlCtjj4oQQ4vwVG",
+        "type": "Switch",
+        "z": "sd_Fw3wKgGdAy9sM9UI",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "Send response based on device type",
+        "property": "sessionParams.data.isMobile",
+        "propertyType": "bh.input",
+        "propertyGv": "bh.input.sessionParams.data.isMobile",
+        "rules": [
+            {
+                "t": "se",
+                "v": "true",
+                "vt": "str",
+                "gv": "\"true\""
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "functionName": "sd_JxlCtjj4oQQ4vwVG",
+        "category": "Function",
+        "x": 1285,
+        "y": 1240,
+        "wires": [
+            [
+                "sd_JIKC7Ft5ud3cE5U9"
+            ],
+            [
+                "sd_cmCEr6RA8oVg7Psj"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "ids",
+        "generated": true
+    },
+    {
+        "id": "sd_JIKC7Ft5ud3cE5U9",
+        "type": "Script",
+        "z": "sd_Fw3wKgGdAy9sM9UI",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "Mobile html response",
+        "script": "bh.local.htmlResponse = `\n <html>\n   <script>\n      let _timer;\n      _timer = setInterval(() => {\n                  if(window.webkit) {\n                      window.webkit.messageHandlers.cordova_iab.postMessage(JSON.stringify({'auth': 'success'}));\n                      clearInterval(_timer);\n                  }\n              }, 250);\n      \n   </script>\n</html>`;",
+        "functionName": "sd_JIKC7Ft5ud3cE5U9",
+        "category": "Function",
+        "x": 1525,
+        "y": 1100,
+        "wires": [
+            [
+                "sd_0SQEM44TE4cG0roK"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "ids",
+        "generated": true
+    },
+    {
+        "id": "sd_cmCEr6RA8oVg7Psj",
+        "type": "Script",
+        "z": "sd_Fw3wKgGdAy9sM9UI",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "Add location in headers obj",
+        "script": "bh.local.redirectHeaders = {\n    location: bh.local.redirectTo\n}",
+        "functionName": "sd_cmCEr6RA8oVg7Psj",
+        "category": "Function",
+        "x": 1525,
+        "y": 1340,
+        "wires": [
+            [
+                "sd_tk57ZpG0wWNy9uCI"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "ids",
+        "generated": true
+    },
+    {
+        "id": "sd_0SQEM44TE4cG0roK",
+        "type": "HttpOut",
+        "z": "sd_Fw3wKgGdAy9sM9UI",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "Html response to close in app browser",
+        "headers": {
+            "Content-Security-Policy": "script-src 'sha256-wcX+PzUovy0uNFqMGCbbbzuT5v4aAxU9obFNyt6BHAQ='"
+        },
+        "responseBody": {
+            "type": "bh.local",
+            "value": "htmlResponse",
+            "ssd_typedInputField": true
+        },
+        "httpcode": {
+            "type": "num",
+            "value": 200,
+            "ssd_typedInputField": true
+        },
+        "responseType": "txt",
+        "swaggerResponse": {},
+        "responseMapping": {
+            "status": 200,
+            "txt": "bh.local.htmlResponse",
+            "send": "bh.local.htmlResponse"
+        },
+        "dataModelIsArray": false,
+        "cookies": [],
+        "inputs": 1,
+        "outputs": 0,
+        "erd": "",
+        "entity": "",
+        "ref": "",
+        "editableListData": {
+            "headers": [
+                {
+                    "key": "Content-Security-Policy",
+                    "value": "script-src 'sha256-wcX+PzUovy0uNFqMGCbbbzuT5v4aAxU9obFNyt6BHAQ='",
+                    "rowId": "sd_VZ8YSISw5G2Kbppv",
+                    "valid": true
+                }
+            ],
+            "produces": [],
+            "responses": []
+        },
+        "cookiesList": {},
+        "switchStates": {
+            "headers": "Map",
+            "cookies": "Map"
+        },
+        "functionName": "sd_0SQEM44TE4cG0roK",
+        "category": "HTTP",
+        "x": 1848.500020980835,
+        "y": 1344.781265258789,
+        "wires": [],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "ids",
+        "generated": true
+    },
+    {
+        "id": "sd_tk57ZpG0wWNy9uCI",
+        "type": "HttpOut",
+        "z": "sd_Fw3wKgGdAy9sM9UI",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "Redirect back to app",
+        "headers": {
+            "type": "bh.local",
+            "value": "redirectHeaders",
+            "ssd_typedInputField": true
+        },
+        "responseBody": {
+            "type": "literal",
+            "value": "'Redirecting'",
+            "ssd_typedInputField": true
+        },
+        "httpcode": {
+            "type": "num",
+            "value": 302,
+            "ssd_typedInputField": true
+        },
+        "responseType": "txt",
+        "swaggerResponse": {},
+        "responseMapping": {
+            "status": 302,
+            "txt": "'Redirecting'",
+            "send": "'Redirecting'"
+        },
+        "dataModelIsArray": false,
+        "cookies": [],
+        "inputs": 1,
+        "outputs": 0,
+        "erd": "",
+        "entity": "",
+        "ref": "",
+        "editableListData": {
+            "headers": [],
+            "produces": [],
+            "responses": []
+        },
+        "cookiesList": {},
+        "switchStates": {
+            "headers": "Value",
+            "cookies": "Map"
+        },
+        "functionName": "sd_tk57ZpG0wWNy9uCI",
+        "category": "HTTP",
+        "x": 1843.000020980835,
+        "y": 1106.2812633514404,
+        "wires": [],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "ids",
+        "generated": true
+    },
+    {
+        "id": "sd_o1OsnBtUuk8NdBfJ",
+        "type": "Session",
+        "z": "sd_Fw3wKgGdAy9sM9UI",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "",
+        "operationType": "update",
+        "data": "",
+        "resultMapping": "bh.input",
+        "dataMapping": "bh.local.userDetails",
+        "functionName": "sd_o1OsnBtUuk8NdBfJ",
+        "category": "HTTP",
+        "x": 1105,
+        "y": 1240,
+        "wires": [
+            [
+                "sd_JxlCtjj4oQQ4vwVG"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "resultMapping": {
+                "type": "bh.input",
+                "value": "",
+                "constant": false
+            },
+            "dataMapping": {
+                "type": "bh.local",
+                "value": "userDetails",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "ids",
+        "generated": true
+    },
+    {
+        "id": "sd_9p3dO8ItOP1Xe9JB",
+        "type": "HttpIn",
+        "z": "sd_Fw3wKgGdAy9sM9UI",
+        "viewType": "server",
+        "nodeType": "start",
+        "name": "Get userinfo",
+        "path": "/user/info",
+        "uploadpath": "",
+        "summary": "",
+        "description": "",
+        "method": "get",
+        "sequenceId": "IDSAuthroizedAPIs",
+        "consumes": "",
+        "produces": "",
+        "filetype": "path",
+        "acceptFileUpload": false,
+        "useDataModel": false,
+        "dataModelIsArray": false,
+        "uploadFileOptions": "",
+        "erd": "",
+        "erdName": "",
+        "entity": "",
+        "ref": "",
+        "editableListData": {
+            "responses": [],
+            "params": [],
+            "produces": [],
+            "consumes": []
+        },
+        "inputs": 0,
+        "outputs": 1,
+        "validateRequestUsingSwaggerDocs": false,
+        "category": "HTTP",
+        "x": 455.8125057220459,
+        "y": 2060.734405517578,
+        "wires": [
+            [
+                "sd_EM3WhtHkkAI4vZBa"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "uploadpath": {
+                "type": "str",
+                "value": "",
+                "nullable": "true",
+                "nullableValue": "",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "ids",
+        "functionName": "sd_9p3dO8ItOP1Xe9JB"
+    },
+    {
+        "id": "sd_EM3WhtHkkAI4vZBa",
+        "type": "Session",
+        "z": "sd_Fw3wKgGdAy9sM9UI",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "",
+        "operationType": "get",
+        "data": "",
+        "resultMapping": "bh.local.session",
+        "dataMapping": "bh.input",
+        "functionName": "sd_EM3WhtHkkAI4vZBa",
+        "category": "HTTP",
+        "x": 653.0000057220459,
+        "y": 2060.781280517578,
+        "wires": [
+            [
+                "sd_JKQEmZFAZe6kA4Gp"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "resultMapping": {
+                "type": "bh.local",
+                "value": "session",
+                "constant": false
+            },
+            "dataMapping": {
+                "type": "bh.input",
+                "value": "",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "ids",
+        "generated": true
+    },
+    {
+        "id": "sd_JKQEmZFAZe6kA4Gp",
+        "type": "HttpOut",
+        "z": "sd_Fw3wKgGdAy9sM9UI",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "",
+        "headers": {},
+        "responseBody": {
+            "type": "bh.local",
+            "value": "session.data.userInfo",
+            "ssd_typedInputField": true
+        },
+        "httpcode": {
+            "type": "num",
+            "value": "200",
+            "ssd_typedInputField": true
+        },
+        "responseType": "obj",
+        "swaggerResponse": {},
+        "responseMapping": {
+            "status": 200,
+            "obj": "bh.local.session.data.userInfo",
+            "send": "bh.local.session.data.userInfo"
+        },
+        "dataModelIsArray": false,
+        "cookies": [],
+        "inputs": 1,
+        "outputs": 0,
+        "erd": "",
+        "entity": "",
+        "ref": "",
+        "editableListData": {
+            "headers": []
+        },
+        "cookiesList": {},
+        "switchStates": {
+            "headers": "Map",
+            "cookies": "Map"
+        },
+        "functionName": "sd_JKQEmZFAZe6kA4Gp",
+        "category": "HTTP",
+        "x": 819.0000057220459,
+        "y": 2060.781280517578,
+        "wires": [],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "ids",
+        "generated": true
+    },
+    {
+        "id": "sd_Vxfj6g3j4OLrT8GM",
+        "type": "Catch",
+        "z": "sd_Fw3wKgGdAy9sM9UI",
+        "viewType": "common",
+        "nodeType": "start",
+        "name": "",
+        "selectedNodes": [
+            "sd_705LJKA59eHpNYuy",
+            "sd_R6mFBJspwSHbebl7",
+            "sd_9aJip5hx1vJRIVmq",
+            "sd_os7RMwwj6ivCBu66",
+            "sd_N8BlCPYQxTQnvk53",
+            "sd_JxlCtjj4oQQ4vwVG",
+            "sd_JIKC7Ft5ud3cE5U9",
+            "sd_cmCEr6RA8oVg7Psj",
+            "sd_0SQEM44TE4cG0roK",
+            "sd_tk57ZpG0wWNy9uCI",
+            "sd_aZPvPUTWP2hAxjRu",
+            "sd_KhCH5qq0LBYfB8Wh"
+        ],
+        "selectCatchType": "selectednodes",
+        "masternodeList": "",
+        "ignoreList": "",
+        "functionName": "sd_Vxfj6g3j4OLrT8GM",
+        "category": "General",
+        "x": 105,
+        "y": 1380,
+        "wires": [
+            [
+                "sd_gCVZmuEYb6p755Nu"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "ids"
+    },
+    {
+        "id": "sd_gCVZmuEYb6p755Nu",
+        "type": "Script",
+        "z": "sd_Fw3wKgGdAy9sM9UI",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "Redirect back to login",
+        "script": "console.log(bh.error)\n\nbh.web.res.redirect('/api/login')",
+        "functionName": "sd_gCVZmuEYb6p755Nu",
+        "category": "Function",
+        "x": 268.6093740463257,
+        "y": 1378.031234741211,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "ids",
+        "generated": true
+    },
+    {
+        "id": "sd_mLZmvYKA0SffFniw",
+        "type": "HttpIn",
+        "z": "sd_Fw3wKgGdAy9sM9UI",
+        "viewType": "server",
+        "nodeType": "start",
+        "name": "Logout API",
+        "path": "/logout",
+        "uploadpath": "",
+        "summary": "",
+        "description": "",
+        "method": "get",
+        "sequenceId": "",
+        "consumes": "",
+        "produces": "",
+        "filetype": "path",
+        "acceptFileUpload": false,
+        "useDataModel": false,
+        "dataModelIsArray": false,
+        "uploadFileOptions": {},
+        "erd": "",
+        "erdName": "",
+        "entity": "",
+        "ref": "",
+        "editableListData": {
+            "responses": [],
+            "params": [],
+            "produces": [],
+            "consumes": []
+        },
+        "inputs": 0,
+        "outputs": 1,
+        "validateRequestUsingSwaggerDocs": false,
+        "category": "HTTP",
+        "x": 79.890625,
+        "y": 1679.796875,
+        "wires": [
+            [
+                "sd_CnKbVfU9kglR60GE"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "ids",
+        "functionName": "sd_mLZmvYKA0SffFniw"
+    },
+    {
+        "id": "sd_CnKbVfU9kglR60GE",
+        "type": "Session",
+        "z": "sd_Fw3wKgGdAy9sM9UI",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "",
+        "operationType": "get",
+        "data": "",
+        "resultMapping": "bh.local.sessionData",
+        "dataMapping": "",
+        "functionName": "sd_CnKbVfU9kglR60GE",
+        "category": "HTTP",
+        "x": 249,
+        "y": 1679.78125,
+        "wires": [
+            [
+                "sd_fqHWGLd5HHUtO7JR"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "resultMapping": {
+                "type": "bh.local",
+                "value": "sessionData"
+            },
+            "dataMapping": {
+                "type": "bh.input",
+                "value": ""
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "ids",
+        "generated": true
+    },
+    {
+        "id": "sd_fqHWGLd5HHUtO7JR",
+        "type": "Script",
+        "z": "sd_Fw3wKgGdAy9sM9UI",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "\nbh.local.sessionExists = false;\nif (bh.local.sessionData && bh.local.sessionData.data && bh.local.sessionData.data.tokenset) {\n    bh.local.sessionData['data']['redirectTo'] = bh.input.query['redirectTo'];\n    bh.local.sessionData['data']['isMobile'] = bh.input.query['isMobile'];\n    bh.local.sessionExists = true;\n} else {\n    delete bh.local.sessionData['redirectTo'];\n}",
+        "functionName": "sd_fqHWGLd5HHUtO7JR",
+        "category": "Function",
+        "x": 413,
+        "y": 1678.78125,
+        "wires": [
+            [
+                "sd_UshcgYPTtOf292cv"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "ids",
+        "generated": true
+    },
+    {
+        "id": "sd_8Cy4tXyNcCyIVtxu",
+        "type": "Switch",
+        "z": "sd_Fw3wKgGdAy9sM9UI",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "Session exists ",
+        "property": "sessionExists",
+        "propertyType": "bh.local",
+        "propertyGv": "bh.local.sessionExists",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "functionName": "sd_8Cy4tXyNcCyIVtxu",
+        "category": "Function",
+        "x": 885,
+        "y": 1680,
+        "wires": [
+            [
+                "sd_oAYcRB3ScfbyeFYx"
+            ],
+            [
+                "sd_EBjA1EgMjrTSN34r"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "ids",
+        "generated": true
+    },
+    {
+        "id": "sd_oAYcRB3ScfbyeFYx",
+        "type": "Script",
+        "z": "sd_Fw3wKgGdAy9sM9UI",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "await Promise.all([\n    bh.local.sessionData.data.tokenset.access_token ? bh.input.client.revoke(bh.local.sessionData.data.tokenset.access_token, 'access_token') : undefined,\n    bh.local.sessionData.data.tokenset.refresh_token ? bh.input.client.revoke(bh.local.sessionData.data.tokenset.refresh_token, 'refresh_token') : undefined,\n]);\n\nbh.local.res = {\n        'idsURL': url.format(Object.assign(url.parse(bh.input.client.issuer.end_session_endpoint), {\n            search: null,\n            query: {\n                id_token_hint: bh.local.sessionData.data.tokenset.id_token,\n                post_logout_redirect_uri: url.resolve(bh.web.req.href, '/api/logout/cb'),\n                client_id: settings.default['ids']['client_id']\n            },\n        })),\n        'sessionExists': true,\n}\n\n// Remove user info and tokenset before login redirect\nbh.local.sessionData.data.tokenset = null;\nbh.local.sessionData.data.userInfo = null;",
+        "functionName": "sd_oAYcRB3ScfbyeFYx",
+        "category": "Function",
+        "x": 1045,
+        "y": 1560,
+        "wires": [
+            [
+                "sd_dCWCI7Lqpk6tk1KJ"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "ids",
+        "generated": true
+    },
+    {
+        "id": "sd_UshcgYPTtOf292cv",
+        "type": "CallService",
+        "z": "sd_Fw3wKgGdAy9sM9UI",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "Get IDS client instance",
+        "outputs": 1,
+        "isValidNode": true,
+        "noerr": 0,
+        "service": {
+            "id": "sd_Zjp7u8ludeGig6i7",
+            "type": "tab",
+            "createdDate": "2019-12-04T13:37:05.418Z",
+            "label": "idsutil",
+            "disabled": false,
+            "info": ""
+        },
+        "flow": {
+            "flowId": "sd_51bpmleYd2mNdFjB",
+            "flowName": "getIDSClientInstance"
+        },
+        "inputVariables": [
+            {
+                "key": "clientInstance",
+                "map": true,
+                "valueType": "bh.input",
+                "value": ""
+            }
+        ],
+        "bhVariables": [],
+        "outputMapping": [
+            {
+                "mapVarType": "input",
+                "key": "clientInstance",
+                "valueType": "bh.input",
+                "value": "client",
+                "mapVarName": "clientInstance",
+                "localVar": "bh.input.client"
+            }
+        ],
+        "callService": "./idsutil",
+        "startName": "getIDSClientInstance",
+        "inputParams": [
+            null
+        ],
+        "accept_bh": "",
+        "functionName": "sd_UshcgYPTtOf292cv",
+        "category": "General",
+        "x": 645,
+        "y": 1680,
+        "wires": [
+            [
+                "sd_8Cy4tXyNcCyIVtxu"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "ids",
+        "generated": true
+    },
+    {
+        "id": "sd_UK9LUnF8Dti2gE8M",
+        "type": "HttpOut",
+        "z": "sd_Fw3wKgGdAy9sM9UI",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "Send IDS logout Url",
+        "headers": {},
+        "responseBody": {
+            "type": "bh.local",
+            "value": "res",
+            "ssd_typedInputField": true
+        },
+        "httpcode": {
+            "type": "num",
+            "value": "200",
+            "ssd_typedInputField": true
+        },
+        "responseType": "obj",
+        "swaggerResponse": {},
+        "responseMapping": {
+            "status": 200,
+            "obj": "bh.local.res",
+            "send": "bh.local.res"
+        },
+        "dataModelIsArray": false,
+        "cookies": [],
+        "inputs": 1,
+        "outputs": 0,
+        "erd": "",
+        "entity": "",
+        "ref": "",
+        "editableListData": {
+            "headers": []
+        },
+        "cookiesList": {},
+        "switchStates": {
+            "headers": "Map",
+            "cookies": "Map"
+        },
+        "functionName": "sd_UK9LUnF8Dti2gE8M",
+        "category": "HTTP",
+        "x": 1345,
+        "y": 1680,
+        "wires": [],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "ids",
+        "generated": true
+    },
+    {
+        "id": "sd_EBjA1EgMjrTSN34r",
+        "type": "Script",
+        "z": "sd_Fw3wKgGdAy9sM9UI",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "bh.local.res = {\n        'sessionExists': false,\n}",
+        "functionName": "sd_EBjA1EgMjrTSN34r",
+        "category": "Function",
+        "x": 1113.250015258789,
+        "y": 1790.5312767028809,
+        "wires": [
+            [
+                "sd_UK9LUnF8Dti2gE8M"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "ids",
+        "generated": true
+    },
+    {
+        "id": "sd_NJQw24aMxH1sqsna",
+        "type": "HttpIn",
+        "z": "sd_Fw3wKgGdAy9sM9UI",
+        "viewType": "server",
+        "nodeType": "start",
+        "name": "Logout Callback API",
+        "path": "/logout/cb",
+        "uploadpath": "",
+        "summary": "",
+        "description": "",
+        "method": "get",
+        "sequenceId": "",
+        "consumes": "",
+        "produces": "",
+        "filetype": "path",
+        "acceptFileUpload": false,
+        "useDataModel": false,
+        "dataModelIsArray": false,
+        "uploadFileOptions": "",
+        "erd": "",
+        "erdName": "",
+        "entity": "",
+        "ref": "",
+        "editableListData": {
+            "responses": [],
+            "params": [],
+            "produces": [],
+            "consumes": []
+        },
+        "inputs": 0,
+        "outputs": 1,
+        "validateRequestUsingSwaggerDocs": false,
+        "category": "HTTP",
+        "x": 163.1406421661377,
+        "y": 2441.0469074249268,
+        "wires": [
+            [
+                "sd_eVkDr20HNRRY6upY"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "uploadpath": {
+                "type": "str",
+                "value": "",
+                "nullable": "true",
+                "nullableValue": "",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "ids",
+        "functionName": "sd_NJQw24aMxH1sqsna"
+    },
+    {
+        "id": "sd_eVkDr20HNRRY6upY",
+        "type": "Session",
+        "z": "sd_Fw3wKgGdAy9sM9UI",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "",
+        "operationType": "get",
+        "data": "",
+        "resultMapping": "bh.local.sessionData",
+        "dataMapping": "bh.input",
+        "functionName": "sd_eVkDr20HNRRY6upY",
+        "category": "HTTP",
+        "x": 347.2500171661377,
+        "y": 2442.0312824249268,
+        "wires": [
+            [
+                "sd_a2krK34NmfrBBmL3"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "resultMapping": {
+                "type": "bh.local",
+                "value": "sessionData",
+                "constant": false
+            },
+            "dataMapping": {
+                "type": "bh.input",
+                "value": "",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "ids",
+        "generated": true
+    },
+    {
+        "id": "sd_TAnOH8jqYneVAN0l",
+        "type": "Switch",
+        "z": "sd_Fw3wKgGdAy9sM9UI",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "Check platform type",
+        "property": "sessionData.data.isMobile",
+        "propertyType": "bh.local",
+        "propertyGv": "bh.local.sessionData.data.isMobile",
+        "rules": [
+            {
+                "t": "se",
+                "v": "true",
+                "vt": "str",
+                "gv": "\"true\""
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "functionName": "sd_TAnOH8jqYneVAN0l",
+        "category": "Function",
+        "x": 665.2500171661377,
+        "y": 2442.0312824249268,
+        "wires": [
+            [
+                "sd_fa6umyE9VEKoJ0y0"
+            ],
+            [
+                "sd_PayHse0jroIgL3RA"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "ids",
+        "generated": true
+    },
+    {
+        "id": "sd_fa6umyE9VEKoJ0y0",
+        "type": "Script",
+        "z": "sd_Fw3wKgGdAy9sM9UI",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "bh.local.res = \n`<html>\n   <script>\n      var _timer;\n      _timer = setInterval(() => {\n                  if(window.webkit) {\n                      window.webkit.messageHandlers.cordova_iab.postMessage(JSON.stringify({'auth': 'success'}));\n                      clearInterval(_timer);\n                  }\n              }, 250);\n      \n   </script>\n</html>`;",
+        "functionName": "sd_fa6umyE9VEKoJ0y0",
+        "category": "Function",
+        "x": 850.2500171661377,
+        "y": 2516.0312824249268,
+        "wires": [
+            [
+                "sd_IvstHIiPun8oiyM2"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "ids",
+        "generated": true
+    },
+    {
+        "id": "sd_IvstHIiPun8oiyM2",
+        "type": "HttpOut",
+        "z": "sd_Fw3wKgGdAy9sM9UI",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "Send html response",
+        "headers": {
+            "Content-Security-Policy": "script 'sha256-j4HHWBMKh2PoLEAu017BWktgUmmL7VVMjnHuNWUHGOg='"
+        },
+        "responseBody": {
+            "type": "bh.local",
+            "value": "res",
+            "ssd_typedInputField": true
+        },
+        "httpcode": {
+            "type": "num",
+            "value": "200",
+            "ssd_typedInputField": true
+        },
+        "responseType": "obj",
+        "swaggerResponse": {},
+        "responseMapping": {
+            "status": 200,
+            "obj": "bh.local.res",
+            "send": "bh.local.res"
+        },
+        "dataModelIsArray": false,
+        "cookies": [],
+        "inputs": 1,
+        "outputs": 0,
+        "erd": "",
+        "entity": "",
+        "ref": "",
+        "editableListData": {
+            "headers": [
+                {
+                    "key": "Content-Security-Policy",
+                    "value": "script 'sha256-j4HHWBMKh2PoLEAu017BWktgUmmL7VVMjnHuNWUHGOg='",
+                    "rowId": "sd_1rEodKaPhq3Yygas",
+                    "valid": true
+                }
+            ]
+        },
+        "cookiesList": {},
+        "switchStates": {
+            "headers": "Map",
+            "cookies": "Map"
+        },
+        "functionName": "sd_IvstHIiPun8oiyM2",
+        "category": "HTTP",
+        "x": 1083.2500171661377,
+        "y": 2315.0312824249268,
+        "wires": [],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "ids",
+        "generated": true
+    },
+    {
+        "id": "sd_PayHse0jroIgL3RA",
+        "type": "Script",
+        "z": "sd_Fw3wKgGdAy9sM9UI",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "bh.local.redirectHeaders = {\n    location: bh.local.sessionData.data.redirectTo\n}",
+        "functionName": "sd_PayHse0jroIgL3RA",
+        "category": "Function",
+        "x": 849.2500171661377,
+        "y": 2337.0312824249268,
+        "wires": [
+            [
+                "sd_VgV85qweKQvNeJ0O"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "ids",
+        "generated": true
+    },
+    {
+        "id": "sd_VgV85qweKQvNeJ0O",
+        "type": "HttpOut",
+        "z": "sd_Fw3wKgGdAy9sM9UI",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "Redirect back to app",
+        "headers": {
+            "type": "bh.local",
+            "value": "redirectHeaders",
+            "ssd_typedInputField": true
+        },
+        "responseBody": {
+            "type": "literal",
+            "value": "'redirecting'",
+            "ssd_typedInputField": true
+        },
+        "httpcode": {
+            "type": "num",
+            "value": "302",
+            "ssd_typedInputField": true
+        },
+        "responseType": "txt",
+        "swaggerResponse": {},
+        "responseMapping": {
+            "status": 302,
+            "txt": "'redirecting'",
+            "send": "'redirecting'"
+        },
+        "dataModelIsArray": false,
+        "cookies": [],
+        "inputs": 1,
+        "outputs": 0,
+        "erd": "",
+        "entity": "",
+        "ref": "",
+        "editableListData": {
+            "headers": []
+        },
+        "cookiesList": {},
+        "switchStates": {
+            "headers": "Value",
+            "cookies": "Map"
+        },
+        "functionName": "sd_VgV85qweKQvNeJ0O",
+        "category": "HTTP",
+        "x": 1089.2500171661377,
+        "y": 2516.0312824249268,
+        "wires": [],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "ids",
+        "generated": true
+    },
+    {
+        "id": "sd_a2krK34NmfrBBmL3",
+        "type": "Session",
+        "z": "sd_Fw3wKgGdAy9sM9UI",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "",
+        "operationType": "destroy",
+        "data": "",
+        "resultMapping": "bh.input",
+        "dataMapping": "bh.input",
+        "functionName": "sd_a2krK34NmfrBBmL3",
+        "category": "HTTP",
+        "x": 519.2500171661377,
+        "y": 2442.0312824249268,
+        "wires": [
+            [
+                "sd_TAnOH8jqYneVAN0l"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "resultMapping": {
+                "type": "bh.input",
+                "value": "",
+                "constant": false
+            },
+            "dataMapping": {
+                "type": "bh.input",
+                "value": "",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "ids",
+        "generated": true
+    },
+    {
+        "id": "sd_uUrHl6WRC5zSIVUi",
+        "type": "Comments",
+        "z": "sd_Fw3wKgGdAy9sM9UI",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "Idenity Server Login API",
+        "comments": "<p>API used to authenticate users.</p>",
+        "category": "General",
+        "x": 685,
+        "y": 58.78125,
+        "wires": [],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "ids",
+        "functionName": "sd_uUrHl6WRC5zSIVUi"
+    },
+    {
+        "id": "sd_MW6xBPJQhk8jm2Tj",
+        "type": "Comments",
+        "z": "sd_Fw3wKgGdAy9sM9UI",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "Flow to add href to bh of the Origin",
+        "comments": "",
+        "category": "General",
+        "x": 664,
+        "y": 590.78125,
+        "wires": [],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "ids",
+        "functionName": "sd_MW6xBPJQhk8jm2Tj"
+    },
+    {
+        "id": "sd_HrgwkfB9E84T0Vou",
+        "type": "Comments",
+        "z": "sd_Fw3wKgGdAy9sM9UI",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "Login Callback API",
+        "comments": "<p>After authentication, this is the API called by IDS to get Access token and user info</p>",
+        "category": "General",
+        "x": 685,
+        "y": 897.2265625,
+        "wires": [],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "ids",
+        "functionName": "sd_HrgwkfB9E84T0Vou"
+    },
+    {
+        "id": "sd_a8oKouRNOZGBLI0y",
+        "type": "Comments",
+        "z": "sd_Fw3wKgGdAy9sM9UI",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "IDS Logout API",
+        "comments": "<p>API to redirect the user to IDS Logout page</p>",
+        "category": "General",
+        "x": 720.0000114440918,
+        "y": 1527.226583480835,
+        "wires": [],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "ids",
+        "functionName": "sd_a8oKouRNOZGBLI0y"
+    },
+    {
+        "id": "sd_g7T2CH21FYewiF1l",
+        "type": "Comments",
+        "z": "sd_Fw3wKgGdAy9sM9UI",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "Fetch user info",
+        "comments": "The API called by neutrinos-oauth-client module internally to fetch user info.",
+        "category": "General",
+        "x": 651.2500095367432,
+        "y": 1947.2265892028809,
+        "wires": [],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "ids",
+        "functionName": "sd_g7T2CH21FYewiF1l"
+    },
+    {
+        "id": "sd_Yy27x5KXPBfpK2aK",
+        "type": "Comments",
+        "z": "sd_Fw3wKgGdAy9sM9UI",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "Redirect the user back to Login",
+        "comments": "<p>Redirect back to /login if the flow cannot fetch user info or access token.</p>",
+        "category": "General",
+        "x": 183.60937404632568,
+        "y": 1457.976547241211,
+        "wires": [],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "ids",
+        "functionName": "sd_Yy27x5KXPBfpK2aK"
+    },
+    {
+        "id": "sd_RrWzSF2k05iishfj",
+        "type": "Comments",
+        "z": "sd_Fw3wKgGdAy9sM9UI",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "Logout Callback API",
+        "comments": "<p>The API redirected by IDS to destroy the user session.</p>",
+        "category": "General",
+        "x": 581.25,
+        "y": 2288.4765625,
+        "wires": [],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "ids",
+        "functionName": "sd_RrWzSF2k05iishfj"
+    },
+    {
+        "id": "sd_dCWCI7Lqpk6tk1KJ",
+        "type": "Session",
+        "z": "sd_Fw3wKgGdAy9sM9UI",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "",
+        "operationType": "update",
+        "data": "",
+        "resultMapping": "bh.local.session",
+        "dataMapping": "bh.local.sessionData.data",
+        "functionName": "sd_dCWCI7Lqpk6tk1KJ",
+        "category": "HTTP",
+        "x": 1205,
+        "y": 1560,
+        "wires": [
+            [
+                "sd_UK9LUnF8Dti2gE8M"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "resultMapping": {
+                "type": "bh.local",
+                "value": "session",
+                "constant": false
+            },
+            "dataMapping": {
+                "type": "bh.local",
+                "value": "sessionData.data",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "ids",
+        "generated": true
+    },
+    {
+        "id": "sd_l7WHEbtuB86BAYBH",
+        "type": "Session",
+        "z": "sd_Fw3wKgGdAy9sM9UI",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "",
+        "operationType": "get",
+        "data": "",
+        "resultMapping": "bh.local.sessionData",
+        "dataMapping": "bh.input",
+        "functionName": "sd_l7WHEbtuB86BAYBH",
+        "category": "HTTP",
+        "x": 445,
+        "y": 3060,
+        "wires": [
+            [
+                "sd_QlA7TJX7Az7AUfqF"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "resultMapping": {
+                "type": "bh.local",
+                "value": "sessionData",
+                "constant": false
+            },
+            "dataMapping": {
+                "type": "bh.input",
+                "value": "",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "ids",
+        "generated": true
+    },
+    {
+        "id": "sd_kYXRtimH5DkC4nrv",
+        "type": "Switch",
+        "z": "sd_Fw3wKgGdAy9sM9UI",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "Check if session exists",
+        "property": "sessionExists",
+        "propertyType": "bh.local",
+        "propertyGv": "bh.local.sessionExists",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "functionName": "sd_kYXRtimH5DkC4nrv",
+        "category": "Function",
+        "x": 738,
+        "y": 3055,
+        "wires": [
+            [
+                "sd_4zEgDWU3AOCVVKaR"
+            ],
+            [
+                "sd_L5JpIxcz0s14yRlP"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "ids",
+        "generated": true
+    },
+    {
+        "id": "sd_L5JpIxcz0s14yRlP",
+        "type": "Switch",
+        "z": "sd_Fw3wKgGdAy9sM9UI",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "Check if it is the user info API.",
+        "property": "path",
+        "propertyType": "bh.input",
+        "propertyGv": "bh.input.path",
+        "rules": [
+            {
+                "t": "cont",
+                "v": "/user/info",
+                "vt": "str",
+                "gv": "\"/user/info\""
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "functionName": "sd_L5JpIxcz0s14yRlP",
+        "category": "Function",
+        "x": 700,
+        "y": 3270,
+        "wires": [
+            [
+                "sd_KzYFAh1s0lnQi8Ze"
+            ],
+            [
+                "sd_laDVamqyw3AFUXZf"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "ids",
+        "generated": true
+    },
+    {
+        "id": "sd_0Kikt17SzsWk2Gjw",
+        "type": "HttpOut",
+        "z": "sd_Fw3wKgGdAy9sM9UI",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "Send the session not present response",
+        "headers": {},
+        "responseBody": {
+            "type": "bh.local",
+            "value": "res",
+            "ssd_typedInputField": true
+        },
+        "httpcode": {
+            "type": "num",
+            "value": 403,
+            "ssd_typedInputField": true
+        },
+        "responseType": "obj",
+        "swaggerResponse": {},
+        "responseMapping": {
+            "status": 403,
+            "obj": "bh.local.res",
+            "send": "bh.local.res"
+        },
+        "dataModelIsArray": false,
+        "cookies": [],
+        "inputs": 1,
+        "outputs": 0,
+        "erd": "",
+        "entity": "",
+        "ref": "",
+        "editableListData": {
+            "headers": [],
+            "produces": [],
+            "responses": []
+        },
+        "cookiesList": {},
+        "switchStates": {
+            "headers": "Map",
+            "cookies": "Map"
+        },
+        "functionName": "sd_0Kikt17SzsWk2Gjw",
+        "category": "HTTP",
+        "x": 1264,
+        "y": 3248,
+        "wires": [],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "ids",
+        "generated": true
+    },
+    {
+        "id": "sd_KzYFAh1s0lnQi8Ze",
+        "type": "Script",
+        "z": "sd_Fw3wKgGdAy9sM9UI",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "bh.local.res = { message: 'Session expired' };",
+        "functionName": "sd_KzYFAh1s0lnQi8Ze",
+        "category": "Function",
+        "x": 951.890625,
+        "y": 3268,
+        "wires": [
+            [
+                "sd_0Kikt17SzsWk2Gjw"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "ids",
+        "generated": true
+    },
+    {
+        "id": "sd_laDVamqyw3AFUXZf",
+        "type": "Script",
+        "z": "sd_Fw3wKgGdAy9sM9UI",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "bh.local.res = { code: 'NO_SESSION', message: 'Session not present' };",
+        "functionName": "sd_laDVamqyw3AFUXZf",
+        "category": "Function",
+        "x": 944,
+        "y": 3404.03125,
+        "wires": [
+            [
+                "sd_0Kikt17SzsWk2Gjw"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "ids",
+        "generated": true
+    },
+    {
+        "id": "sd_bA7WsdytUH6QiZdL",
+        "type": "Switch",
+        "z": "sd_Fw3wKgGdAy9sM9UI",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "Token exists after refresh",
+        "property": "newSession",
+        "propertyType": "bh.local",
+        "propertyGv": "bh.local.newSession",
+        "rules": [
+            {
+                "t": "false"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "functionName": "sd_bA7WsdytUH6QiZdL",
+        "category": "Function",
+        "x": 905,
+        "y": 2835,
+        "wires": [
+            [
+                "sd_wCLO26d1nUoEnOaL"
+            ],
+            [
+                "sd_sJWLFMwMNfNTFxyV"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "ids",
+        "generated": true
+    },
+    {
+        "id": "sd_YQAr46bGyoS4y4od",
+        "type": "Script",
+        "z": "sd_Fw3wKgGdAy9sM9UI",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "bh.local.res = { code: 'TOKEN_EXPIRED', message: 'Token invalid or access revoked' };",
+        "functionName": "sd_YQAr46bGyoS4y4od",
+        "category": "Function",
+        "x": 943,
+        "y": 3141,
+        "wires": [
+            [
+                "sd_0Kikt17SzsWk2Gjw"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "ids",
+        "generated": true
+    },
+    {
+        "id": "sd_4zEgDWU3AOCVVKaR",
+        "type": "CallService",
+        "z": "sd_Fw3wKgGdAy9sM9UI",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "Call handleTokenExpiry",
+        "outputs": 1,
+        "isValidNode": true,
+        "noerr": 0,
+        "service": {
+            "id": "sd_Zjp7u8ludeGig6i7",
+            "type": "tab",
+            "createdDate": "2019-12-04T13:37:05.418Z",
+            "label": "idsutil",
+            "disabled": false,
+            "info": ""
+        },
+        "flow": {
+            "flowId": "sd_xHaoEA3rTAf3vGrW",
+            "flowName": "handleTokenExpiry"
+        },
+        "inputVariables": [
+            {
+                "key": "existingSession",
+                "map": true,
+                "valueType": "bh.local",
+                "value": "sessionData"
+            },
+            {
+                "key": "newSession",
+                "map": true,
+                "valueType": "bh.input",
+                "value": ""
+            }
+        ],
+        "bhVariables": [],
+        "outputMapping": [
+            {
+                "mapVarType": "input",
+                "key": "newSession",
+                "valueType": "bh.local",
+                "value": "newSession",
+                "mapVarName": "newSession",
+                "localVar": "bh.local.newSession"
+            }
+        ],
+        "callService": "./idsutil",
+        "startName": "handleTokenExpiry",
+        "inputParams": [
+            "bh.local.sessionData",
+            null
+        ],
+        "accept_bh": "",
+        "functionName": "sd_4zEgDWU3AOCVVKaR",
+        "category": "General",
+        "x": 690,
+        "y": 2833,
+        "wires": [
+            [
+                "sd_bA7WsdytUH6QiZdL"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "ids",
+        "generated": true
+    },
+    {
+        "id": "sd_o6JxpFfpo5spdjdc",
+        "type": "Script",
+        "z": "sd_Fw3wKgGdAy9sM9UI",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "bh.local = {\n    \n}",
+        "functionName": "sd_o6JxpFfpo5spdjdc",
+        "category": "Function",
+        "x": 286.890625,
+        "y": 3062,
+        "wires": [
+            [
+                "sd_l7WHEbtuB86BAYBH"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "ids",
+        "generated": true
+    },
+    {
+        "id": "sd_QlA7TJX7Az7AUfqF",
+        "type": "Script",
+        "z": "sd_Fw3wKgGdAy9sM9UI",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "bh.local.sessionExists = false;\n\nif (bh.local.sessionData && bh.local.sessionData.data && bh.local.sessionData.data.tokenset &&\n    bh.local.sessionData.data.tokenset.access_token && bh.local.sessionData.data.tokenset.refresh_token) {\n    bh.local.sessionExists = true;\n}",
+        "functionName": "sd_QlA7TJX7Az7AUfqF",
+        "category": "Function",
+        "x": 609,
+        "y": 3060,
+        "wires": [
+            [
+                "sd_kYXRtimH5DkC4nrv"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "ids",
+        "generated": true
+    },
+    {
+        "id": "sd_wCLO26d1nUoEnOaL",
+        "type": "Session",
+        "z": "sd_Fw3wKgGdAy9sM9UI",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "",
+        "operationType": "destroy",
+        "data": "",
+        "resultMapping": "",
+        "dataMapping": "",
+        "functionName": "sd_wCLO26d1nUoEnOaL",
+        "category": "HTTP",
+        "x": 946,
+        "y": 2975,
+        "wires": [
+            [
+                "sd_YQAr46bGyoS4y4od"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "resultMapping": {
+                "type": "bh.input",
+                "value": ""
+            },
+            "dataMapping": {
+                "type": "bh.input",
+                "value": ""
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "ids",
+        "generated": true
+    },
+    {
+        "id": "sd_sJWLFMwMNfNTFxyV",
+        "type": "Switch",
+        "z": "sd_Fw3wKgGdAy9sM9UI",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "Update session if token rotated",
+        "property": "newSession.rotated",
+        "propertyType": "bh.local",
+        "propertyGv": "bh.local.newSession.rotated",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "functionName": "sd_sJWLFMwMNfNTFxyV",
+        "category": "Function",
+        "x": 1110,
+        "y": 2838,
+        "wires": [
+            [
+                "sd_rGfn83YDuvJM39sI"
+            ],
+            [
+                "sd_bfVhmzphMC67yQe6"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "ids",
+        "generated": true
+    },
+    {
+        "id": "sd_0SRNI6CNvtcevYPX",
+        "type": "Session",
+        "z": "sd_Fw3wKgGdAy9sM9UI",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "",
+        "operationType": "update",
+        "data": "",
+        "resultMapping": "bh.local.newSession",
+        "dataMapping": "bh.local.newSession",
+        "functionName": "sd_0SRNI6CNvtcevYPX",
+        "category": "HTTP",
+        "x": 1390,
+        "y": 2709,
+        "wires": [
+            [
+                "sd_bfVhmzphMC67yQe6"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "resultMapping": {
+                "type": "bh.local",
+                "value": "newSession"
+            },
+            "dataMapping": {
+                "type": "bh.local",
+                "value": "newSession"
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "ids",
+        "generated": true
+    },
+    {
+        "id": "sd_rGfn83YDuvJM39sI",
+        "type": "Script",
+        "z": "sd_Fw3wKgGdAy9sM9UI",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "delete bh.local.newSession.rotated;",
+        "functionName": "sd_rGfn83YDuvJM39sI",
+        "category": "Function",
+        "x": 1251,
+        "y": 2709,
+        "wires": [
+            [
+                "sd_0SRNI6CNvtcevYPX"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "ids",
+        "generated": true
+    },
+    {
+        "id": "sd_NgjFYmerbomPqXr0",
+        "type": "Comments",
+        "z": "sd_Fw3wKgGdAy9sM9UI",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "Check Authorization",
+        "comments": "Use this middleware flow for all authorized APIs.",
+        "category": "General",
+        "x": 872.75,
+        "y": 2687.1953125,
+        "wires": [],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "ids",
+        "functionName": "sd_NgjFYmerbomPqXr0"
+    },
+    {
+        "id": "sd_WQFVawyWcUyc9fdy",
+        "type": "Catch",
+        "z": "sd_Fw3wKgGdAy9sM9UI",
+        "viewType": "common",
+        "nodeType": "start",
+        "name": "Catch HandleTokenExpiry",
+        "selectedNodes": [
+            "sd_UKm6JAMDpbBKGd7R"
+        ],
+        "selectCatchType": "selectednodes",
+        "masternodeList": "",
+        "ignoreList": "",
+        "functionName": "sd_WQFVawyWcUyc9fdy",
+        "category": "General",
+        "x": 824,
+        "y": 3141.21875,
+        "wires": [
+            [
+                "sd_YQAr46bGyoS4y4od"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "ids"
+    },
+    {
+        "id": "sd_bfVhmzphMC67yQe6",
+        "type": "MiddlewareEnd",
+        "z": "sd_Fw3wKgGdAy9sM9UI",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "",
+        "headers": {},
+        "responseBody": {
+            "type": "bh",
+            "value": "",
+            "ssd_typedInputField": true
+        },
+        "httpcode": {
+            "type": "num",
+            "value": 0,
+            "ssd_typedInputField": true
+        },
+        "responseType": "next",
+        "responseMapping": {
+            "status": 0,
+            "next": "bh"
+        },
+        "cookies": [],
+        "inputs": 1,
+        "outputs": 0,
+        "editableListData": {
+            "headers": []
+        },
+        "cookiesList": {},
+        "switchStates": {
+            "headers": "Map",
+            "cookies": "Map"
+        },
+        "functionName": "sd_bfVhmzphMC67yQe6",
+        "category": "HTTP",
+        "x": 1565,
+        "y": 2840,
+        "wires": [],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "ids",
+        "generated": true
+    },
+    {
+        "id": "sd_I9bVXcuGKcj5cxTL",
+        "type": "MiddlewareStart",
+        "z": "sd_Fw3wKgGdAy9sM9UI",
+        "viewType": "server",
+        "nodeType": "start",
+        "name": "authorize",
+        "inputs": 0,
+        "outputs": 1,
+        "category": "HTTP",
+        "x": 105,
+        "y": 3060,
+        "wires": [
+            [
+                "sd_o6JxpFfpo5spdjdc"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "ids",
+        "functionName": "sd_I9bVXcuGKcj5cxTL"
+    },
+    {
+        "id": "sd_o1VCNXP0TAeD2YOd",
+        "type": "Start",
+        "z": "sd_Fw3wKgGdAy9sM9UI",
+        "viewType": "client-server",
+        "nodeType": "start",
+        "name": "salsman_login",
+        "outputs": 1,
+        "inputVariables": [],
+        "localVariables": [],
+        "accept_bh": true,
+        "functionName": "salsman_login",
+        "category": "General",
+        "x": 105,
+        "y": 1200,
+        "wires": [
+            [
+                "sd_zYh4JaE7nXpgqXaP"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "ids"
+    },
+    {
+        "id": "sd_mU0CzWtWt3iykWoJ",
+        "type": "CallService",
+        "z": "sd_Fw3wKgGdAy9sM9UI",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "unauthorized_user_Http_out",
+        "outputs": 1,
+        "isValidNode": true,
+        "noerr": 0,
+        "service": {
+            "id": "SSD_SERVICE_ID_sd_OQYJSSTIEwN2nkED",
+            "type": "tab",
+            "createdDate": "2023-04-27T11:41:14.198Z",
+            "label": "Post_Middlewares",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_eva1cbamE2ymKj38",
+            "flowName": "httpOut_Start"
+        },
+        "inputVariables": [],
+        "bhVariables": [],
+        "outputMapping": [],
+        "callService": "./Middlewares/Post_Middlewares",
+        "startName": "httpOut_Start",
+        "inputParams": [
+            "bh"
+        ],
+        "accept_bh": true,
+        "functionName": "unauthorized_user_Http_out",
+        "category": "General",
+        "x": 925,
+        "y": 1120,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "ids",
+        "generated": true
+    },
+    {
+        "id": "sd_KhCH5qq0LBYfB8Wh",
+        "type": "Mongodb",
+        "z": "sd_Fw3wKgGdAy9sM9UI",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "check_user_exist",
+        "databaseConfig": "sd_rgjA4nOniJAL9Rgn",
+        "collection": "__ssd__env__process.env.SALESMAN_COLLECTION__ssd__env__end",
+        "options": "",
+        "resultMapping": "bh.local.result",
+        "operation": "find",
+        "argumentArray": [
+            "query"
+        ],
+        "aggregate": "",
+        "operations": "",
+        "query": "bh.findquery",
+        "fieldOrSpec": "",
+        "filter": "",
+        "key": "",
+        "docId": "",
+        "indexName": "",
+        "replacement": "",
+        "update": "",
+        "xAxis": "",
+        "yAxis": "",
+        "indexes": "",
+        "docs": "",
+        "document": "",
+        "newName": "",
+        "doc": "",
+        "filePath": "",
+        "fileName": "",
+        "pipeline": "",
+        "functionName": "check_user_exist",
+        "category": "Storage",
+        "x": 505,
+        "y": 1200,
+        "wires": [
+            [
+                "sd_KGVobaLshegAr2E6"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "collection": {
+                "type": "process.env",
+                "value": "SALESMAN_COLLECTION",
+                "constant": false
+            },
+            "options": {
+                "type": "bh",
+                "value": "",
+                "nullable": "true",
+                "constant": false
+            },
+            "resultMapping": {
+                "type": "bh.local",
+                "value": "result",
+                "constant": false
+            },
+            "query": {
+                "type": "bh",
+                "value": "findquery",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "ids",
+        "generated": true
+    },
+    {
+        "id": "sd_5CLnm3HJl5HfMONk",
+        "type": "Script",
+        "z": "sd_Fw3wKgGdAy9sM9UI",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "findquery_script",
+        "script": "console.log(bh.local.userDetails.userInfo.username)\nbh.findquery = {email : bh.local.userDetails.userInfo.username}",
+        "functionName": "findquery_script",
+        "category": "Function",
+        "x": 365,
+        "y": 1200,
+        "wires": [
+            [
+                "sd_KhCH5qq0LBYfB8Wh"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "ids",
+        "generated": true
+    },
+    {
+        "id": "sd_KGVobaLshegAr2E6",
+        "type": "Script",
+        "z": "sd_Fw3wKgGdAy9sM9UI",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "const bcrypt = require('bcrypt');\n\nbh.unauthorized = false;\n\nif (bh.local.result.length === 0) {\n\n\n    bh.local.responces = {\n        statusCode: 401,\n        message: \"Please provide salsman email and try again\"\n    }\n\n    bh.unauthorized = true;\n\n}\nelse{\n    bh.local.userDetails.userId = bh.local.result[0]._id\n    bh.local.userDetails.clientId = false\n}\n",
+        "functionName": "sd_KGVobaLshegAr2E6",
+        "category": "Function",
+        "x": 645,
+        "y": 1200,
+        "wires": [
+            [
+                "sd_atqSa6aKtF0J1yuY"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "ids",
+        "generated": true
+    },
+    {
+        "id": "sd_atqSa6aKtF0J1yuY",
+        "type": "Switch",
+        "z": "sd_Fw3wKgGdAy9sM9UI",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "property": "unauthorized",
+        "propertyType": "bh",
+        "propertyGv": "bh.unauthorized",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "functionName": "sd_atqSa6aKtF0J1yuY",
+        "category": "Function",
+        "x": 785,
+        "y": 1200,
+        "wires": [
+            [
+                "sd_mU0CzWtWt3iykWoJ"
+            ],
+            [
+                "sd_o1OsnBtUuk8NdBfJ"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "ids",
+        "generated": true
+    },
+    {
+        "id": "sd_HAZjIh4Y9ASdNJTk",
+        "type": "CallService",
+        "z": "sd_Fw3wKgGdAy9sM9UI",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "outputs": 1,
+        "isValidNode": true,
+        "noerr": 0,
+        "service": {
+            "id": "sd_Fw3wKgGdAy9sM9UI",
+            "type": "tab",
+            "createdDate": "2019-12-04T10:42:13.097Z",
+            "label": "ids",
+            "disabled": false,
+            "info": ""
+        },
+        "flow": {
+            "flowId": "sd_o1VCNXP0TAeD2YOd",
+            "flowName": "salsman_login"
+        },
+        "inputVariables": [],
+        "bhVariables": [],
+        "outputMapping": [],
+        "callService": "./ids",
+        "startName": "salsman_login",
+        "inputParams": [
+            "bh"
+        ],
+        "accept_bh": true,
+        "functionName": "sd_HAZjIh4Y9ASdNJTk",
+        "category": "General",
+        "x": 585,
+        "y": 1037,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "ids",
+        "generated": true
+    },
+    {
+        "id": "sd_zYh4JaE7nXpgqXaP",
+        "type": "Script",
+        "z": "sd_Fw3wKgGdAy9sM9UI",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "Get userinfo and tokens ",
+        "script": "const params = bh.input.client.callbackParams(bh.web.req);\nlet tokenset = await bh.input.client.callback(url.resolve(bh.web.req.href, 'cb'), params, {\n    'nonce': bh.input.sessionParams.data.nonce,\n    'state': bh.input.sessionParams.data.state\n});\n\nbh.local.redirectTo = bh.input.sessionParams.data.redirectTo\n\nbh.local.userDetails = {\n    tokenset: Object.assign({}, tokenset),\n    userInfo: await bh.input.client.userinfo(tokenset['access_token'])\n}\nbh.local.userDetails['tokenset']['claims'] = Object.assign({}, tokenset.claims());",
+        "functionName": "sd_zYh4JaE7nXpgqXaP",
+        "category": "Function",
+        "x": 225,
+        "y": 1200,
+        "wires": [
+            [
+                "sd_5CLnm3HJl5HfMONk"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "ids",
+        "generated": true
+    }
+]

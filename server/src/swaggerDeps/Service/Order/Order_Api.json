@@ -1,0 +1,8 @@
+{
+    "/ordder": {},
+    "/order": {},
+    "/order/:id": {},
+    "/order/sales/salesman": {},
+    "/razorpay/callback": {},
+    "/salesMan/order/all": {}
+}
